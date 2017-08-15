@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Experiments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../style.css" rel="stylesheet" type="text/css" />
+
+  <script src='lib/jquery.min.js'></script>
+  <script src='lib/aframe.min.js'></script>
+  <script src='lib/aframe-extras.min.js'></script>
+  <script src='lib/aframe-auto-detect-controllers-component.min.js'></script>
+  <script src='lib/aframe-text-geometry-component.min.js'></script>
+  <script src='lib/aframe-animation-component.min.js'></script>
+  <script src='lib/aframe-controller-cursor-component.min.js'></script>
+
+  <script src="js/components.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/card-stack.js"></script>
+  <script src="js/card-grid.js"></script>
+  <script src="js/card-clip.js"></script>
+</head>
+
+<body>
+  <a-scene id="scene">
+
+    <a-assets>
+      <img id="img1" src="icons/png-icons/1.png">
+      <img id="img2" src="icons/png-icons/2.png">
+      <img id="img3" src="icons/png-icons/3.png">
+      <img id="img4" src="icons/png-icons/4.png">
+      <img id="img5" src="icons/png-icons/5.png">
+      <img id="img6" src="icons/png-icons/6.png">
+      <img id="img7" src="icons/png-icons/7.png">
+      <img id="img8" src="icons/png-icons/8.png">
+      <img id="img9" src="icons/png-icons/9.png">
+      <img id="img10" src="icons/png-icons/10.png">
+      <img id="img11" src="icons/png-icons/11.png">
+      <img id="img12" src="icons/png-icons/12.png">
+      <img id="img13" src="icons/png-icons/13.png">
+      <img id="img14" src="icons/png-icons/14.png">
+      <img id="img15" src="icons/png-icons/15.png">
+      <img id="img16" src="icons/png-icons/16.png">
+      <img id="img17" src="icons/png-icons/17.png">
+      <img id="img18" src="icons/png-icons/18.png">
+      <img id="img19" src="icons/png-icons/19.png">
+      <img id="img20" src="icons/png-icons/20.png">
+      <img id="img21" src="icons/png-icons/21.png">
+      <img id="img22" src="icons/png-icons/22.png">
+      <img id="img23" src="icons/png-icons/23.png">
+      <img id="img24" src="icons/png-icons/24.png">
+      <img id="img25" src="icons/png-icons/25.png">
+      <img id="img26" src="icons/png-icons/26.png">
+      <img id="img27" src="icons/png-icons/27.png">
+      <img id="img28" src="icons/png-icons/28.png">
+      <img id="img29" src="icons/png-icons/29.png">
+      <img id="img30" src="icons/png-icons/30.png">
+      <img id="img31" src="icons/png-icons/31.png">
+      <img id="img32" src="icons/png-icons/32.png">
+      <img id="img33" src="icons/png-icons/33.png">
+      <img id="img34" src="icons/png-icons/34.png">
+      <img id="img35" src="icons/png-icons/35.png">
+      <img id="img36" src="icons/png-icons/36.png">
+      <img id="img37" src="icons/png-icons/37.png">
+      <img id="img38" src="icons/png-icons/38.png">
+      <img id="img39" src="icons/png-icons/39.png">
+      <img id="img40" src="icons/png-icons/40.png">
+      <img id="img41" src="icons/png-icons/41.png">
+      <img id="img42" src="icons/png-icons/42.png">
+      <img id="img43" src="icons/png-icons/43.png">
+      <img id="img44" src="icons/png-icons/44.png">
+      <img id="img45" src="icons/png-icons/45.png">
+      <img id="img46" src="icons/png-icons/46.png">
+      <img id="img47" src="icons/png-icons/47.png">
+      <img id="img48" src="icons/png-icons/48.png">
+      <img id="img49" src="icons/png-icons/49.png">
+      <img id="img50" src="icons/png-icons/50.png">
+
+      <img id="img51" src="icons/png-icons/51.png">
+      <img id="img52" src="icons/png-icons/52.png">
+      <img id="img53" src="icons/png-icons/53.png">
+      <img id="img54" src="icons/png-icons/54.png">
+      <img id="img55" src="icons/png-icons/55.png">
+      <img id="img56" src="icons/png-icons/56.png">
+      <img id="img57" src="icons/png-icons/57.png">
+      <img id="img58" src="icons/png-icons/58.png">
+      <img id="img59" src="icons/png-icons/59.png">
+      <img id="img60" src="icons/png-icons/60.png">
+      <img id="img61" src="icons/png-icons/61.png">
+      <img id="img62" src="icons/png-icons/62.png">
+      <img id="img63" src="icons/png-icons/63.png">
+      <img id="img64" src="icons/png-icons/64.png">
+      <img id="img65" src="icons/png-icons/65.png">
+      <img id="img66" src="icons/png-icons/66.png">
+      <img id="img67" src="icons/png-icons/67.png">
+      <img id="img68" src="icons/png-icons/68.png">
+      <img id="img69" src="icons/png-icons/69.png">
+      <img id="img70" src="icons/png-icons/70.png">
+      <img id="img71" src="icons/png-icons/71.png">
+      <img id="img72" src="icons/png-icons/72.png">
+      <img id="img73" src="icons/png-icons/73.png">
+      <img id="img74" src="icons/png-icons/74.png">
+      <img id="img75" src="icons/png-icons/75.png">
+      <img id="img76" src="icons/png-icons/76.png">
+      <img id="img77" src="icons/png-icons/77.png">
+      <img id="img78" src="icons/png-icons/78.png">
+      <img id="img79" src="icons/png-icons/79.png">
+      <img id="img80" src="icons/png-icons/80.png">
+      <img id="img81" src="icons/png-icons/81.png">
+      <img id="img82" src="icons/png-icons/82.png">
+      <img id="img83" src="icons/png-icons/83.png">
+      <img id="img84" src="icons/png-icons/84.png">
+      <img id="img85" src="icons/png-icons/85.png">
+      <img id="img86" src="icons/png-icons/86.png">
+      <img id="img87" src="icons/png-icons/87.png">
+      <img id="img88" src="icons/png-icons/88.png">
+      <img id="img89" src="icons/png-icons/89.png">
+      <img id="img90" src="icons/png-icons/90.png">
+      <img id="img91" src="icons/png-icons/91.png">
+      <img id="img92" src="icons/png-icons/92.png">
+      <img id="img93" src="icons/png-icons/93.png">
+      <img id="img94" src="icons/png-icons/94.png">
+      <img id="img95" src="icons/png-icons/95.png">
+      <img id="img96" src="icons/png-icons/96.png">
+      <img id="img97" src="icons/png-icons/97.png">
+      <img id="img98" src="icons/png-icons/98.png">
+      <img id="img99" src="icons/png-icons/99.png">
+      <img id="img100" src="icons/png-icons/100.png">
+
+      <img id="img101" src="icons/png-icons/101.png">
+      <img id="img102" src="icons/png-icons/102.png">
+      <img id="img103" src="icons/png-icons/103.png">
+      <img id="img104" src="icons/png-icons/104.png">
+      <img id="img105" src="icons/png-icons/105.png">
+      <img id="img106" src="icons/png-icons/106.png">
+      <img id="img107" src="icons/png-icons/107.png">
+      <img id="img108" src="icons/png-icons/108.png">
+      <img id="img109" src="icons/png-icons/109.png">
+      <img id="img110" src="icons/png-icons/110.png">
+      <img id="img111" src="icons/png-icons/111.png">
+      <img id="img112" src="icons/png-icons/112.png">
+      <img id="img113" src="icons/png-icons/113.png">
+      <img id="img114" src="icons/png-icons/114.png">
+      <img id="img115" src="icons/png-icons/115.png">
+      <img id="img116" src="icons/png-icons/116.png">
+      <img id="img117" src="icons/png-icons/117.png">
+      <img id="img118" src="icons/png-icons/118.png">
+      <img id="img119" src="icons/png-icons/119.png">
+      <img id="img120" src="icons/png-icons/120.png">
+      <img id="img121" src="icons/png-icons/121.png">
+      <img id="img122" src="icons/png-icons/122.png">
+      <img id="img123" src="icons/png-icons/123.png">
+      <img id="img124" src="icons/png-icons/124.png">
+      <img id="img125" src="icons/png-icons/125.png">
+      <img id="img126" src="icons/png-icons/126.png">
+      <img id="img127" src="icons/png-icons/127.png">
+      <img id="img128" src="icons/png-icons/128.png">
+      <img id="img129" src="icons/png-icons/129.png">
+      <img id="img130" src="icons/png-icons/130.png">
+      <img id="img131" src="icons/png-icons/131.png">
+      <img id="img132" src="icons/png-icons/132.png">
+      <img id="img133" src="icons/png-icons/133.png">
+      <img id="img134" src="icons/png-icons/134.png">
+      <img id="img135" src="icons/png-icons/135.png">
+      <img id="img136" src="icons/png-icons/136.png">
+      <img id="img137" src="icons/png-icons/137.png">
+      <img id="img138" src="icons/png-icons/138.png">
+      <img id="img139" src="icons/png-icons/139.png">
+      <img id="img140" src="icons/png-icons/140.png">
+      <img id="img141" src="icons/png-icons/141.png">
+      <img id="img142" src="icons/png-icons/142.png">
+      <img id="img143" src="icons/png-icons/143.png">
+      <img id="img144" src="icons/png-icons/144.png">
+      <img id="img145" src="icons/png-icons/145.png">
+      <img id="img146" src="icons/png-icons/146.png">
+      <img id="img147" src="icons/png-icons/147.png">
+      <img id="img148" src="icons/png-icons/148.png">
+      <img id="img149" src="icons/png-icons/149.png">
+      <img id="img150" src="icons/png-icons/150.png">
+
+      <img id="img151" src="icons/png-icons/151.png">
+      <img id="img152" src="icons/png-icons/152.png">
+      <img id="img153" src="icons/png-icons/153.png">
+      <img id="img154" src="icons/png-icons/154.png">
+      <img id="img155" src="icons/png-icons/155.png">
+      <img id="img156" src="icons/png-icons/156.png">
+      <img id="img157" src="icons/png-icons/157.png">
+      <img id="img158" src="icons/png-icons/158.png">
+      <img id="img159" src="icons/png-icons/159.png">
+      <img id="img160" src="icons/png-icons/160.png">
+      <img id="img161" src="icons/png-icons/161.png">
+      <img id="img162" src="icons/png-icons/162.png">
+      <img id="img163" src="icons/png-icons/163.png">
+      <img id="img164" src="icons/png-icons/164.png">
+      <img id="img165" src="icons/png-icons/165.png">
+      <img id="img166" src="icons/png-icons/166.png">
+      <img id="img167" src="icons/png-icons/167.png">
+      <img id="img168" src="icons/png-icons/168.png">
+      <img id="img169" src="icons/png-icons/169.png">
+      <img id="img170" src="icons/png-icons/170.png">
+      <img id="img171" src="icons/png-icons/171.png">
+      <img id="img172" src="icons/png-icons/172.png">
+      <img id="img173" src="icons/png-icons/173.png">
+      <img id="img174" src="icons/png-icons/174.png">
+      <img id="img175" src="icons/png-icons/175.png">
+      <img id="img176" src="icons/png-icons/176.png">
+      <img id="img177" src="icons/png-icons/177.png">
+      <img id="img178" src="icons/png-icons/178.png">
+      <img id="img179" src="icons/png-icons/179.png">
+      <img id="img180" src="icons/png-icons/180.png">
+      <img id="img181" src="icons/png-icons/181.png">
+      <img id="img182" src="icons/png-icons/182.png">
+      <img id="img183" src="icons/png-icons/183.png">
+      <img id="img184" src="icons/png-icons/184.png">
+      <img id="img185" src="icons/png-icons/185.png">
+      <img id="img186" src="icons/png-icons/186.png">
+      <img id="img187" src="icons/png-icons/187.png">
+      <img id="img188" src="icons/png-icons/188.png">
+      <img id="img189" src="icons/png-icons/189.png">
+      <img id="img190" src="icons/png-icons/190.png">
+      <img id="img191" src="icons/png-icons/191.png">
+      <img id="img192" src="icons/png-icons/192.png">
+      <img id="img193" src="icons/png-icons/193.png">
+      <img id="img194" src="icons/png-icons/194.png">
+      <img id="img195" src="icons/png-icons/195.png">
+      <img id="img196" src="icons/png-icons/196.png">
+      <img id="img197" src="icons/png-icons/197.png">
+      <img id="img198" src="icons/png-icons/198.png">
+      <img id="img199" src="icons/png-icons/199.png">
+      <img id="img200" src="icons/png-icons/200.png">
+
+      <img id="img201" src="icons/png-icons/201.png">
+      <img id="img202" src="icons/png-icons/202.png">
+      <img id="img203" src="icons/png-icons/203.png">
+      <img id="img204" src="icons/png-icons/204.png">
+      <img id="img205" src="icons/png-icons/205.png">
+      <img id="img206" src="icons/png-icons/206.png">
+      <img id="img207" src="icons/png-icons/207.png">
+      <img id="img208" src="icons/png-icons/208.png">
+      <img id="img209" src="icons/png-icons/209.png">
+      <img id="img210" src="icons/png-icons/210.png">
+      <img id="img211" src="icons/png-icons/211.png">
+      <img id="img212" src="icons/png-icons/212.png">
+      <img id="img213" src="icons/png-icons/213.png">
+      <img id="img214" src="icons/png-icons/214.png">
+      <img id="img215" src="icons/png-icons/215.png">
+      <img id="img216" src="icons/png-icons/216.png">
+      <img id="img217" src="icons/png-icons/217.png">
+      <img id="img218" src="icons/png-icons/218.png">
+      <img id="img219" src="icons/png-icons/219.png">
+      <img id="img220" src="icons/png-icons/220.png">
+      <img id="img221" src="icons/png-icons/221.png">
+      <img id="img222" src="icons/png-icons/222.png">
+      <img id="img223" src="icons/png-icons/223.png">
+      <img id="img224" src="icons/png-icons/224.png">
+      <img id="img225" src="icons/png-icons/225.png">
+      <img id="img226" src="icons/png-icons/226.png">
+      <img id="img227" src="icons/png-icons/227.png">
+      <img id="img228" src="icons/png-icons/228.png">
+      <img id="img229" src="icons/png-icons/229.png">
+      <img id="img230" src="icons/png-icons/230.png">
+      <img id="img231" src="icons/png-icons/231.png">
+      <img id="img232" src="icons/png-icons/232.png">
+      <img id="img233" src="icons/png-icons/233.png">
+      <img id="img234" src="icons/png-icons/234.png">
+      <img id="img235" src="icons/png-icons/235.png">
+      <img id="img236" src="icons/png-icons/236.png">
+      <img id="img237" src="icons/png-icons/237.png">
+      <img id="img238" src="icons/png-icons/238.png">
+      <img id="img239" src="icons/png-icons/239.png">
+      <img id="img240" src="icons/png-icons/240.png">
+      <img id="img241" src="icons/png-icons/241.png">
+      <img id="img242" src="icons/png-icons/242.png">
+      <img id="img243" src="icons/png-icons/243.png">
+      <img id="img244" src="icons/png-icons/244.png">
+      <img id="img245" src="icons/png-icons/245.png">
+      <img id="img246" src="icons/png-icons/246.png">
+      <img id="img247" src="icons/png-icons/247.png">
+      <img id="img248" src="icons/png-icons/248.png">
+      <img id="img249" src="icons/png-icons/249.png">
+      <img id="img250" src="icons/png-icons/250.png">
+      <!-- <img id="img2" src="assets/2.png">
+      <img id="img3" src="assets/3.png">
+      <img id="img4" src="assets/4.png">
+      <img id="img5" src="assets/5.png">
+      <img id="img6" src="assets/6.png">
+      <img id="img7" src="assets/7.png">
+      <img id="img8" src="assets/8.png"> -->
+    </a-assets>
+
+    <a-entity id="left-hand" vive-controls="hand:left">
+      <a-entity rotation="-80 0 0" position="0.015 -0.03 0.05" text-geometry="value: <--- scroll; size: 0.015; height: 0.001;" material="color: white"></a-entity>
+      <a-entity rotation="-80 0 0" position="-0.18 0.004 0.05" text-geometry="value: next task ------->; size: 0.015; height: 0.001;" material="color: white"></a-entity>
+      <a-entity rotation="-80 0 0" position="-0.18 0.004 0.025" text-geometry="value: previous task --->; size: 0.015; height: 0.001;" material="color: white"></a-entity>
+    </a-entity>
+    <a-entity id="right-hand" laser-controls="hand:right" controller-cursor>
+      <a-entity rotation="-80 0 0" position="0.015 -0.03 0.05" text-geometry="value: <----- select; size: 0.015; height: 0.001;" material="color: white"></a-entity>
+      <a-entity card rotation="-80 0 0" position="-0.06 -0.02 0.05" scale="0.2 0.2"></a-entity>
+      <a-entity card rotation="-80 0 0" position="-0.11 -0.02 0.05" scale="0.2 0.2"></a-entity>
+      <a-entity card rotation="-80 0 0" position="-0.16 -0.02 0.05" scale="0.2 0.2"></a-entity>
+      <a-entity card rotation="-80 0 0" position="-0.21 -0.02 0.05" scale="0.2 0.2"></a-entity>
+      <a-entity card rotation="-80 0 0" position="-0.26 -0.02 0.05" scale="0.2 0.2"></a-entity>
+    </a-entity>
+
+    <a-sky color="#1b2252"></a-sky>
+
+    <!--  floor -->
+    <a-plane rotation="-90 0 0" width="900" height="900" color="#101432"></a-plane>
+    <a-circle rotation="-90 0 0" position="0 0.02 -0.6" color="#5e6cca" radius="2"></a-circle>
+
+    <!--  task navigation -->
+    <!-- <a-circle id="prev-step" rotation="-90 0 0" position="-5 0.02 -0.6" color="#2a3271" radius="1.4" hoverable></a-circle>
+    <a-circle id="next-step" rotation="-90 0 0" position="5 0.02 -0.6" color="#2a3271" radius="1.4" hoverable></a-circle> -->
+
+    <!-- <a-circle rotation="-90 0 0" position="-2 0.005 -2" color="#7a80b6" radius="0.5"></a-circle>
+    <a-circle rotation="-90 0 0" position="2 0.005 -2" color="#7a80b6" radius="0.5"></a-circle> -->
+
+    <!--  ceiling -->
+    <!-- <a-plane rotation="-270 0 0" width="10" height="10" position="0 3 0" repeat="10 10" color="#999f99"></a-plane> -->
+
+    <!--  walls -->
+    <!-- <a-box rotation="0 0 0" scale="10 100 0.1" position="0 0 -5" repeat="10 10" color="#bed"></a-box>
+    <a-box rotation="0 90 0" scale="10 100 0.1" position="5 0 0" repeat="10 10" color="#bed"></a-box>
+    <a-box rotation="0 90 0" scale="10 100 0.1" position="-5 0 0" repeat="10 10" color="#bed"></a-box> -->
+
+    <a-entity id="step-container" position="0 0 -1">
+      <a-entity id="tutorial-select" step="number: 0">
+        <a-entity position="-0.33 1.6 0" text-geometry="value: Selection; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.45 1.42 0" text-geometry="value: Press the trigger button with your; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.45 1.33 0" text-geometry="value: right index finger to select an icon; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+
+        <a-entity card="id: 4" position="-0.24 1.1 0"></a-entity>
+        <a-entity card="id: 87" position="0 1.1 0"></a-entity>
+        <a-entity card="id: 185" position="0.24 1.1 0"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity id="tutorial-scroll" step="number: 1">
+        <a-entity position="-0.45 1.6 0" text-geometry="value: Scrolling; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity card-stack="size: 15"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity step="number: 2">
+        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 1; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity card-stack="size: 20"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity id="stack" step="number: 3">
+        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 2; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity card-stack="size: 50"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity step="number: 4">
+        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 3; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity step="number: 5">
+        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 4; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity step="number: 6">
+        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 5; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+    </a-entity>
+
+    <!-- lights -->
+    <a-light type="hemisphere" color="#dff" intensity="0.9" position="0 0.2 0" target="null"></a-light>
+
+  </a-scene>
+
+
+  <script src="js/script.js"></script>
+</body>
+</html>
