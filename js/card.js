@@ -22,7 +22,6 @@ AFRAME.registerComponent("card", {
           "dir": "alternate",
           "dur": 100,
           "easing": "easeOutQuad",
-          "loop": true,
           "to": "1.2 1.2 1",
         });
       }
@@ -35,7 +34,6 @@ AFRAME.registerComponent("card", {
           "dir": "alternate",
           "dur": 100,
           "easing": "easeOutQuad",
-          "loop": true,
           "to": "1 1 1",
         });
       }
@@ -49,7 +47,6 @@ AFRAME.registerComponent("card", {
           "dir": "alternate",
           "dur": 200,
           "easing": "easeOutQuad",
-          "loop": true,
           "to": "0.6 0.6 1",
         });
       }

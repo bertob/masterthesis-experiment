@@ -8,10 +8,8 @@
   <script src='lib/jquery.min.js'></script>
   <script src='lib/aframe.min.js'></script>
   <script src='lib/aframe-extras.min.js'></script>
-  <script src='lib/aframe-auto-detect-controllers-component.min.js'></script>
   <script src='lib/aframe-text-geometry-component.min.js'></script>
   <script src='lib/aframe-animation-component.min.js'></script>
-  <script src='lib/aframe-controller-cursor-component.min.js'></script>
 
   <script src="js/components.js"></script>
   <script src="js/card.js"></script>
@@ -334,32 +332,36 @@
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="tutorial-scroll" step="number: 1">
-        <a-entity position="-0.45 1.6 0" text-geometry="value: Scrolling; size: 0.1; height: 0.001;" material="color: white"></a-entity>
-        <a-entity card-stack="size: 15"></a-entity>
+        <a-entity position="-0.9 1.6 0" text-geometry="value: Scrolling; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.9 1.42 0" text-geometry="value: Press the left trigger button and move the; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.9 1.33 0" text-geometry="value: left controller up and down to scroll; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+        <a-entity card-stack="size: 15" position="0.8 0 0"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity step="number: 2">
-        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 1; size: 0.1; height: 0.001;" material="color: white"></a-entity>
-        <a-entity card-stack="size: 20"></a-entity>
+        <a-entity card-clip="size: 20"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="stack" step="number: 3">
-        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 2; size: 0.1; height: 0.001;" material="color: white"></a-entity>
-        <a-entity card-stack="size: 50"></a-entity>
+        <a-entity card-grid="size: 250">
+          <a-entity id="panel-0" position="-1.6 0 1.1" rotation="0 70 0"></a-entity>
+          <a-entity id="panel-1" position="-1 0 0.3" rotation="0 30 0"></a-entity>
+          <a-entity id="panel-2" position="0 0 0"></a-entity>
+          <a-entity id="panel-3" position="1 0 0.3" rotation="0 -30 0"></a-entity>
+          <a-entity id="panel-4" position="1.6 0 1.1" rotation="0 -70  0"></a-entity>
+        </a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity step="number: 4">
-        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 3; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity card-stack="size: 20"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
-      <a-entity step="number: 5">
-        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 4; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+      <!-- <a-entity step="number: 5">
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity step="number: 6">
-        <a-entity position="-0.45 1.6 0" text-geometry="value: Task 5; size: 0.1; height: 0.001;" material="color: white"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
-      </a-entity>
+      </a-entity> -->
     </a-entity>
 
     <!-- lights -->
