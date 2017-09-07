@@ -12,6 +12,7 @@
   <script src='lib/aframe-animation-component.min.js'></script>
 
   <script src="js/components.js"></script>
+  <script src="js/step.js"></script>
   <script src="js/card.js"></script>
   <script src="js/card-stack.js"></script>
   <script src="js/card-grid.js"></script>
@@ -320,7 +321,7 @@
     <a-box rotation="0 90 0" scale="10 100 0.1" position="5 0 0" repeat="10 10" color="#bed"></a-box>
     <a-box rotation="0 90 0" scale="10 100 0.1" position="-5 0 0" repeat="10 10" color="#bed"></a-box> -->
 
-    <a-entity id="step-container" position="0 0 -1">
+    <a-entity id="step-container" stepcontainer="current: 0" position="0 0 -1">
       <a-entity id="tutorial-select" step="number: 0">
         <a-entity position="-0.33 1.6 0" text-geometry="value: Selection; size: 0.1; height: 0.001;" material="color: white"></a-entity>
         <a-entity position="-0.45 1.42 0" text-geometry="value: Press the trigger button with your; size: 0.04; height: 0.001;" material="color: white"></a-entity>

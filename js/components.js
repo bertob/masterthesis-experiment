@@ -1,12 +1,3 @@
-AFRAME.registerComponent("step", {
-  schema: {
-    number: {type: "int"},
-  },
-  init: function () {
-    this.el.setAttribute("position", new THREE.Vector3(this.data.number*5, 0, -1));
-  }
-});
-
 AFRAME.registerComponent("hoverable", {
   schema: {
   },
