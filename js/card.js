@@ -14,43 +14,52 @@ AFRAME.registerComponent("card", {
     this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
                          "; height:" + card_h + "; depth: " + card_d + ";");
     this.el.setAttribute("material", "color: white; src: #img" + id);
-
-    this.el.addEventListener("mouseenter", function(e) {
-      if (!e.target.dataset.clicked) {
-        this.setAttribute("animation__hover", {
-          "property": "scale",
-          "dir": "alternate",
-          "dur": 100,
-          "easing": "easeOutQuad",
-          "to": "1.2 1.2 1",
-        });
-      }
-    });
-
-    this.el.addEventListener("mouseleave", function(e) {
-      if (!e.target.dataset.clicked) {
-        this.setAttribute("animation__hover", {
-          "property": "scale",
-          "dir": "alternate",
-          "dur": 100,
-          "easing": "easeOutQuad",
-          "to": "1 1 1",
-        });
-      }
-    });
-
-    this.el.addEventListener("mouseup", function(e) {
-      if (!e.target.dataset.clicked) {
-        this.dataset.clicked = true;
-        this.setAttribute("animation__scale", {
-          "property": "scale",
-          "dir": "alternate",
-          "dur": 200,
-          "easing": "easeOutQuad",
-          "to": "0.6 0.6 1",
-        });
-      }
-    });
-
-  }
+  },
+  pause: function () {
+    this.el.removeEventListener("mouseenter", cardMouseover);
+    this.el.removeEventListener("mouseleave", cardMouseleave);
+    this.el.removeEventListener("mouseup", cardMouseup);
+  },
+  play: function () {
+    this.el.addEventListener("mouseenter", cardMouseover);
+    this.el.addEventListener("mouseleave", cardMouseleave);
+    this.el.addEventListener("mouseup", cardMouseup);
+  },
 });
+
+function cardMouseover(e) {
+  if (!e.target.dataset.clicked) {
+    this.setAttribute("animation__hover", {
+      "property": "scale",
+      "dir": "alternate",
+      "dur": 100,
+      "easing": "easeOutQuad",
+      "to": "1.2 1.2 1",
+    });
+  }
+}
+
+function cardMouseleave(e) {
+  if (!e.target.dataset.clicked) {
+    this.setAttribute("animation__hover", {
+      "property": "scale",
+      "dir": "alternate",
+      "dur": 100,
+      "easing": "easeOutQuad",
+      "to": "1 1 1",
+    });
+  }
+}
+
+function cardMouseup(e) {
+  if (!e.target.dataset.clicked) {
+    this.setAttribute("animation__hover", {
+      "property": "scale",
+      "dir": "alternate",
+      "dur": 100,
+      "easing": "easeOutQuad",
+      "to": "0.6 0.6 1",
+    });
+    e.target.dataset.clicked = true;
+  }
+}
