@@ -67,12 +67,12 @@ AFRAME.registerComponent("stacked", {
     var prev = this.prev;
 
     if (triggerdown) {
-      console.log("TICK + TRIGGERDOWN");
+      // console.log("TICK + TRIGGERDOWN");
       now.cursorPosition = document.getElementById("left-hand").components.position.attrValue;
       now.cursorY = now.cursorPosition.y;
 
       if (!this.moving) {
-        console.log("start");
+        // console.log("start");
         start.cursorY = now.cursorY;
         start.cardY = prev.position[1];
         start.position = prev.position;
@@ -84,7 +84,7 @@ AFRAME.registerComponent("stacked", {
         this.moving = true;
       }
       else {
-        console.log("moving");
+        // console.log("moving");
         now.relDeltaY = now.cursorY - prev.cursorY;
         now.absDeltaY = prev.absDeltaY + now.relDeltaY * 3;
         now.cardY = start.cardY + now.absDeltaY;
