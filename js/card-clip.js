@@ -21,7 +21,7 @@ AFRAME.registerComponent("card-clip", {
     topBarrier.setAttribute("box", "");
     topBarrier.setAttribute("geometry", "primitive: box; width:" + barrier_w +
                          "; height:" + barrier_h + "; depth: " + barrier_d + ";");
-    topBarrier.setAttribute("material", "color: #113");
+    topBarrier.setAttribute("material", "color: #1b2252");
     topBarrier.setAttribute("position", new THREE.Vector3( 0, top_baseline_clip, z_offset ));
     this.el.appendChild(topBarrier);
 
@@ -70,7 +70,7 @@ AFRAME.registerComponent("clipped", {
     var start = this.start;
     var prev = this.prev;
 
-    if (triggerdown) {
+    if (triggerdown && this.isPlaying) {
       // console.log("TICK + TRIGGERDOWN");
       now.cursorPosition = document.getElementById("left-hand").components.position.attrValue;
       now.cursorY = now.cursorPosition.y;
