@@ -332,6 +332,7 @@
         <a-entity card="id: 185" position="0.24 1.1 0"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
+
       <a-entity id="tutorial-scroll" step="number: 1">
         <a-entity position="-0.9 1.6 0" text-geometry="value: Scrolling; size: 0.1; height: 0.001;" material="color: white"></a-entity>
         <a-entity position="-0.9 1.42 0" text-geometry="value: Press the left trigger button and move the; size: 0.04; height: 0.001;" material="color: white"></a-entity>
@@ -339,11 +340,31 @@
         <a-entity card-stack="size: 15" position="0.8 0 0"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
-      <a-entity step="number: 2">
+
+      <!--  CLIPPED -->
+      <a-entity id="c20">
         <a-entity card-clip="size: 20"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
-      <a-entity id="stack" step="number: 3">
+      <a-entity id="c50">
+        <a-entity card-clip="size: 50"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity id="c250">
+        <a-entity card-clip="size: 250"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+
+      <!-- SPATIAL -->
+      <a-entity id="p20">
+        <a-entity card-grid="size: 20"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity id="p50">
+        <a-entity card-grid="size: 50"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity id="p250">
         <a-entity card-grid="size: 250">
           <a-entity id="panel-0" position="-1.6 0 1.1" rotation="0 70 0"></a-entity>
           <a-entity id="panel-1" position="-1 0 0.3" rotation="0 30 0"></a-entity>
@@ -353,10 +374,23 @@
         </a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
-      <a-entity step="number: 4">
+
+      <!-- STACKED -->
+      <a-entity id="s20">
         <a-entity card-stack="size: 20"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
+      <a-entity id="s50">
+        <a-entity card-stack="size: 50"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+      <a-entity id="s250">
+        <a-entity card-stack="size: 250"></a-entity>
+        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+
+
+
       <!-- <a-entity step="number: 5">
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
