@@ -26,7 +26,7 @@ AFRAME.registerComponent("stepcontainer", {
         child.components.step.play();
       }
       else {
-        console.log("playing step " + id);
+        console.log("pausing step " + id);
         child.components.step.pause();
       }
     });
