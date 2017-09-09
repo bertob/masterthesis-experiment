@@ -1,4 +1,4 @@
-AFRAME.registerComponent("card-grid", {
+AFRAME.registerComponent("card-space", {
   schema: {
     size: {type: "int"},
 
@@ -10,12 +10,15 @@ AFRAME.registerComponent("card-grid", {
 
       for (var i=0; i<this.data.size; i++) {
         var card = document.createElement("a-entity");
-        card.setAttribute("card", "");
 
-        if (this.data.size <= 20)
+        if (this.data.size <= 20) {
+          card.setAttribute("card", "id: " + conditions.p20[i]);
           card.setAttribute("position", getGridPosition20(i));
-        else if (this.data.size <= 50)
+        }
+        else if (this.data.size <= 50) {
+          card.setAttribute("card", "id: " + conditions.p50[i]);
           card.setAttribute("position", getGridPosition50(i));
+        }
 
         this.el.appendChild(card);
       }
@@ -29,7 +32,7 @@ AFRAME.registerComponent("card-grid", {
         var parentPanel = document.getElementById("panel-" + parentPanelId);
 
         var card = document.createElement("a-entity");
-        card.setAttribute("card", "");
+        card.setAttribute("card", "id: " + conditions.p250[i]);
         card.setAttribute("position", getGridPosition250(i, parentPanelId));
 
         parentPanel.appendChild(card);
