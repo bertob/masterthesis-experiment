@@ -15,7 +15,7 @@
   <script src="js/step.js"></script>
   <script src="js/card.js"></script>
   <script src="js/card-stack.js"></script>
-  <script src="js/card-grid.js"></script>
+  <script src="js/card-space.js"></script>
   <script src="js/card-clip.js"></script>
 </head>
 
@@ -293,11 +293,15 @@
     </a-entity>
     <a-entity id="right-hand" laser-controls="hand:right" controller-cursor>
       <a-entity rotation="-80 0 0" position="0.015 -0.03 0.05" text-geometry="value: <----- select; size: 0.015; height: 0.001;" material="color: white"></a-entity>
-      <a-entity card rotation="-80 0 0" position="-0.06 -0.02 0.05" scale="0.2 0.2"></a-entity>
-      <a-entity card rotation="-80 0 0" position="-0.11 -0.02 0.05" scale="0.2 0.2"></a-entity>
-      <a-entity card rotation="-80 0 0" position="-0.16 -0.02 0.05" scale="0.2 0.2"></a-entity>
-      <a-entity card rotation="-80 0 0" position="-0.21 -0.02 0.05" scale="0.2 0.2"></a-entity>
-      <a-entity card rotation="-80 0 0" position="-0.26 -0.02 0.05" scale="0.2 0.2"></a-entity>
+
+      <a-entity id="controller-icons" rotation="-80 0 0" position="-0.25 -0.02 0.05">
+        <a-entity card position="0 0 0" scale="0.2 0.2"></a-entity>
+        <a-entity card position="0.05 0 0" scale="0.2 0.2"></a-entity>
+        <a-entity card position="0.1 0 0" scale="0.2 0.2"></a-entity>
+        <a-entity card position="0.15 0 0" scale="0.2 0.2"></a-entity>
+        <a-entity card position="0.2 0 0" scale="0.2 0.2"></a-entity>
+      </a-entity>
+
     </a-entity>
 
     <a-sky color="#1b2252"></a-sky>
@@ -351,21 +355,21 @@
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="c250">
-        <a-entity card-clip="size: 250"></a-entity>
+        <a-entity card-clip="size: 51"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
 
       <!-- SPATIAL -->
       <a-entity id="p20">
-        <a-entity card-grid="size: 20"></a-entity>
+        <a-entity card-space="size: 20"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="p50">
-        <a-entity card-grid="size: 50"></a-entity>
+        <a-entity card-space="size: 50"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="p250">
-        <a-entity card-grid="size: 250">
+        <a-entity card-space="size: 80">
           <a-entity id="panel-0" position="-1.6 0 1.1" rotation="0 70 0"></a-entity>
           <a-entity id="panel-1" position="-1 0 0.3" rotation="0 30 0"></a-entity>
           <a-entity id="panel-2" position="0 0 0"></a-entity>
@@ -385,18 +389,10 @@
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="s250">
-        <a-entity card-stack="size: 250"></a-entity>
+        <a-entity card-stack="size: 51"></a-entity>
         <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
 
-
-
-      <!-- <a-entity step="number: 5">
-        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
-      </a-entity>
-      <a-entity step="number: 6">
-        <a-circle rotation="-90 0 0" position="0 0.015 1" color="#2a3271" radius="1.4"></a-circle>
-      </a-entity> -->
     </a-entity>
 
     <!-- lights -->
