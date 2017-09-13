@@ -5,6 +5,10 @@ AFRAME.registerComponent("task", {
     size: {type: "int"},
 
     iconList: {type: "array"},
+
+    // [ [initial], [repeat] ]
+    // initial/repeat: [ [icon], [icon], ... [icon] ]
+    // icon: [ [icon ID, index in target list] ]
     targetList: {type: "array"},
 
     currentStage: {type: "int", default: 0},
@@ -34,20 +38,20 @@ AFRAME.registerComponent("task", {
 
     // populate UI with icons
     if ($(this.el).hasClass("c")) {
-      console.log("CLIP SETUP", this.data.id);
+      // console.log("CLIP SETUP", this.data.id);
       $(this.el).children("[cards]").get(0).components["card-clip"].setup(this.data.iconList);
     }
     else if ($(this.el).hasClass("p")) {
-      console.log("SPACE SETUP", this.data.id);
+      // console.log("SPACE SETUP", this.data.id);
       $(this.el).children("[cards]").get(0).components["card-space"].setup(this.data.iconList);
     }
     else if ($(this.el).hasClass("s")) {
-      console.log("STACK SETUP", this.data.id);
+      // console.log("STACK SETUP", this.data.id);
       $(this.el).children("[cards]").get(0).components["card-stack"].setup(this.data.iconList);
     }
 
     // add event listener to first target
-
+    newTaskIcon(this.data);
 
   },
   nextIcon: function () {
@@ -75,18 +79,9 @@ AFRAME.registerComponent("task", {
       }
     }
 
-    // update highlighted icons in controller UI
-    updateControllerIcons(this.data.targetList[currentStage], targetList[this.data.currentIcon]);
+    newTaskIcon(this.data);
 
-    // create ID e.g. s50_115
-    var iconID = this.data.id + "_" + this.data.targetList[this.data.currentStage][this.data.currentIcon][1];
-    console.log("iconID", iconID);
-
-    // add event listeners to new target icon
-    var icon = document.getElementById(iconID);
-    icon.addEventListener("mouseup", iconSelected);
-
-  }
+  },
 });
 
 function randomList(length) {
@@ -126,6 +121,7 @@ function generateTargetList(size, iconList) {
   for (var j=0; j<5; j++) {
     // one icon per quintile
     var index = (size/5 * j) + Math.floor(Math.random() * size/5);
+    // each icon has this structure: [ [icon id], [index in the list of icons for this task] ]
     targetList[0].push([iconList[index],index]);
   }
   // shuffle targets so they are no longer in original order
@@ -137,23 +133,41 @@ function generateTargetList(size, iconList) {
   var tmp2 = shuffle(targetList[0].slice(1,));
   first = first.concat(tmp2);
 
-  // cut off the first 3
+  // cut off the first 3 to get only 3 repeat targets
   targetList[1] = first.slice(0,3);
 
   return targetList;
 }
 
 
+function newTaskIcon(data) {
+  var targetIcons = data.targetList[data.currentStage];
+
+  // update highlighted icons in controller UI
+  updateControllerIcons(targetIcons, data.currentIcon);
+
+  // create ID e.g. s50_115
+  var iconID = data.id + "_" + targetIcons[data.currentIcon][1];
+  // console.log("iconID", iconID);
+
+  // add event listeners to new target icon
+  var icon = document.getElementById(iconID);
+  icon.addEventListener("mouseup", iconSelected);
+}
+
 function updateControllerIcons(targetIcons, currentIcon) {
-  var children = $("#controller-icons").children("a-entity");
+  console.log("UPDATING CONTROLLER", targetIcons, currentIcon);
+  var controllerIcons = $("#controller-icons").children("a-entity");
   var i = 0;
-  [].forEach.call(children, function(child) {
+  [].forEach.call(controllerIcons, function(controllerIcon) {
     var iconType = targetIcons[i][0];
+    console.log("controller icon", iconType, currentIcon, i);
+    console.log("visible", i === currentIcon);
 
     if (i === currentIcon)
-      child.setAttribute("material", "color: white; src: #img" + iconType);
+      controllerIcon.setAttribute("material", "color: white; src: #img" + iconType);
     else
-      child.setAttribute("material", "color: black; src: #img" + iconType);
+      controllerIcon.setAttribute("material", "color: black; src: #img" + iconType);
 
     i++;
   });
