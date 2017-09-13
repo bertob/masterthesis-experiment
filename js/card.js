@@ -70,11 +70,12 @@ function cardMouseup(e) {
 }
 
 function iconSelected(e) {
+  console.log("TARGET ICON SELECTED");
+
   // remove event listener from this icon
-  e.target.removeEventListener(iconSelected);
+  e.target.removeEventListener("mouseup", iconSelected);
 
   // TODO: highlight icon as correctly selected
 
-  $("active-task").components.task.nextIcon();
-
+  $(".active-task").get(0).components.task.nextIcon();
 }
