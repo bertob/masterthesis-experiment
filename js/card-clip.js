@@ -4,11 +4,16 @@ var top_baseline_clip = y_offset + (visible_items_clip - 1) * (card_h + y_gap);
 AFRAME.registerComponent("card-clip", {
   schema: {
     size: {type: "int"}, // number of cards in stack
+    iconList: {type: "array"},
   },
-  init: function () {
-    for (var i=0; i<this.data.size; i++) {
+  setup: function (iconList) {
+    this.teardown();
+    this.data.iconList = iconList;
+
+    for (var i=0; i<this.data.iconList.length; i++) {
       var card = document.createElement("a-entity");
-      card.setAttribute("card", "");
+      card.setAttribute("id", "c" + this.data.size + "_" + (i+1));
+      card.setAttribute("card", "id: " + this.data.iconList[i]);
       card.setAttribute("clipped", "list_position: " + i);
       this.el.appendChild(card);
     }
@@ -33,11 +38,9 @@ AFRAME.registerComponent("card-clip", {
     bottomBarrier.setAttribute("position", new THREE.Vector3( 0, (bottom_baseline), z_offset ));
     this.el.appendChild(bottomBarrier);
   },
-  update: function () {},
-  tick: function (time) {},
-  remove: function () {},
-  pause: function () {},
-  play: function () {}
+  teardown: function () {
+    $(this.el).empty();
+  },
 });
 
 AFRAME.registerComponent("clipped", {

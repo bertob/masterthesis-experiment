@@ -16,17 +16,20 @@ AFRAME.registerComponent("card", {
     this.el.setAttribute("material", "color: white; src: #img" + id);
   },
   pause: function () {
-    console.log("card paused");
+    // console.log("card paused");
     this.el.removeEventListener("mouseenter", cardMouseover);
     this.el.removeEventListener("mouseleave", cardMouseleave);
     this.el.removeEventListener("mouseup", cardMouseup);
   },
   play: function () {
-    console.log("card playing");
+    // console.log("card playing");
     this.el.addEventListener("mouseenter", cardMouseover);
     this.el.addEventListener("mouseleave", cardMouseleave);
     this.el.addEventListener("mouseup", cardMouseup);
   },
+  // update: function () {
+  //   this.el.setAttribute("material", "color: white; src: #img" + this.data.id);
+  // }
 });
 
 function cardMouseover(e) {
@@ -64,4 +67,14 @@ function cardMouseup(e) {
     });
     e.target.dataset.clicked = true;
   }
+}
+
+function iconSelected(e) {
+  // remove event listener from this icon
+  e.target.removeEventListener(iconSelected);
+
+  // TODO: highlight icon as correctly selected
+
+  $("active-task").components.task.nextIcon();
+
 }

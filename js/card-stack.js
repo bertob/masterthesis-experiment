@@ -20,17 +20,25 @@ var triggerdown = false;
 AFRAME.registerComponent("card-stack", {
   schema: {
     size: {type: "int"}, // number of cards in stack
+    iconList: {type: "array"},
   },
-  init: function () {
-    for (var i=0; i<this.data.size; i++) {
+  setup: function (iconList) {
+    this.teardown();
+    this.data.iconList = iconList;
+
+    for (var i=0; i<this.data.iconList.length; i++) {
       var card = document.createElement("a-entity");
-      card.setAttribute("card", "");
+      card.setAttribute("id", "s" + this.data.size + "_" + (i+1));
+      card.setAttribute("card", "id: " + this.data.iconList[i]);
       card.setAttribute("stacked", "list_position: " + i);
       this.el.appendChild(card);
     }
   },
+  teardown: function () {
+    $(this.el).empty();
+  },
   update: function () {},
-  tick: function (time) {},
+  tick: function () {},
   remove: function () {},
   pause: function () {},
   play: function () {}
@@ -53,10 +61,6 @@ AFRAME.registerComponent("stacked", {
     y = y_offset + real_position * (card_h + y_gap);
     z = z_offset;
 
-    // var id = Math.floor(Math.random()*250) + 1;
-    // this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
-                        //  "; height:" + card_h + "; depth: " + card_d + ";");
-    // this.el.setAttribute("material", "color: white; src: #img" + id);
     this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
     this.prev.position = [x, y, z];
   },

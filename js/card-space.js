@@ -1,22 +1,27 @@
 AFRAME.registerComponent("card-space", {
   schema: {
     size: {type: "int"},
-
+    iconList: {type: "array"},
   },
   init: function () {
+  },
+  setup: function (iconList) {
+    this.teardown();
+    this.data.iconList = iconList;
 
     if (this.data.size <= 50) {
       // 20 or 50 elements case
-
-      for (var i=0; i<this.data.size; i++) {
+      for (var i=0; i<this.data.iconList.length; i++) {
         var card = document.createElement("a-entity");
 
         if (this.data.size <= 20) {
-          card.setAttribute("card", "id: " + conditions.p20[i]);
+          card.setAttribute("id", "p20_" + (i+1));
+          card.setAttribute("card", "id: " + this.data.iconList[i]);
           card.setAttribute("position", getGridPosition20(i));
         }
         else if (this.data.size <= 50) {
-          card.setAttribute("card", "id: " + conditions.p50[i]);
+          card.setAttribute("id", "p50_" + (i+1));
+          card.setAttribute("card", "id: " + this.data.iconList[i]);
           card.setAttribute("position", getGridPosition50(i));
         }
 
@@ -26,21 +31,25 @@ AFRAME.registerComponent("card-space", {
     }
     else {
       // 250 elements case
-
-      for (var i=0; i<this.data.size; i++) {
+      for (var i=0; i<this.data.iconList.length; i++) {
         var parentPanelId = Math.floor(i/50);
         var parentPanel = document.getElementById("panel-" + parentPanelId);
 
         var card = document.createElement("a-entity");
-        card.setAttribute("card", "id: " + conditions.p250[i]);
+        card.setAttribute("id", "p250_" + (i+1));
+        card.setAttribute("card", "id: " + this.data.iconList[i]);
         card.setAttribute("position", getGridPosition250(i, parentPanelId));
 
         parentPanel.appendChild(card);
       }
 
     }
+  },
+  teardown: function () {
+    console.log();
+    $(this.el).find("[card]").remove();
+  },
 
-  }
 });
 
 function getGridPosition20 (index) {
