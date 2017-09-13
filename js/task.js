@@ -13,6 +13,14 @@ AFRAME.registerComponent("task", {
   init: function () {
     var row = LATIN_SQUARE[LATIN_SQUARE_ROW];
     stepPosition = row.indexOf(this.data.id);
+
+    var number = document.createElement("a-entity");
+    number.setAttribute("class", "task-number");
+    number.setAttribute("position", "-1.5 0.4 -1");
+    number.setAttribute("material", "color: white");
+    number.setAttribute("text-geometry", "value: " + (stepPosition+1) + "; size: 1.8; height: 0.001;");
+    this.el.appendChild(number);
+
     // offset of 2, because the first 2 steps are tutorials
     this.el.setAttribute("step", "number: " + (stepPosition + 2));
   },
