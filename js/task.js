@@ -183,7 +183,7 @@ function newTaskIcon(data) {
   // get icon through ID e.g. s50_115
   // add event listeners to new target icon
   var icon = document.getElementById(iconID);
-  icon.setAttribute("rotation", "0 0 20");
+  // icon.setAttribute("rotation", "0 0 20");
   icon.addEventListener("mouseup", iconSelected);
 }
 

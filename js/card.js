@@ -93,7 +93,7 @@ function iconSelected(e) {
   // remove event listener from this icon
   e.target.removeEventListener("mouseup", iconSelected);
 
-  e.target.setAttribute("rotation", "0 0 0");
+  // e.target.setAttribute("rotation", "0 0 0");
 
   // TODO: highlight icon as correctly selected for 1s, then reset
 
