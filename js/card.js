@@ -20,12 +20,14 @@ AFRAME.registerComponent("card", {
     // console.log("card paused");
     this.el.removeEventListener("mouseenter", cardMouseover);
     this.el.removeEventListener("mouseleave", cardMouseleave);
+    this.el.removeEventListener("mousedown", cardMousedown);
     this.el.removeEventListener("mouseup", cardMouseup);
   },
   play: function () {
     // console.log("card playing");
     this.el.addEventListener("mouseenter", cardMouseover);
     this.el.addEventListener("mouseleave", cardMouseleave);
+    this.el.addEventListener("mousedown", cardMousedown);
     this.el.addEventListener("mouseup", cardMouseup);
   },
   // update: function () {
@@ -40,7 +42,7 @@ function cardMouseover(e) {
       "dir": "alternate",
       "dur": 100,
       "easing": "easeOutQuad",
-      "to": "1.2 1.2 1",
+      "to": "1.1 1.1 1",
     });
   }
 }
@@ -57,7 +59,19 @@ function cardMouseleave(e) {
   }
 }
 
+function cardMousedown(e) {
+  var allOtherCards = $(document).find("[card]").not(e.target);
+  [].forEach.call(allOtherCards, function(otherCard) {
+    otherCard.components.card.pause();
+  });
+}
+
 function cardMouseup(e) {
+  var allOtherCards = $(document).find("[card]").not(e.target);
+  [].forEach.call(allOtherCards, function(otherCard) {
+    otherCard.components.card.play();
+  });
+
   if (!e.target.components.card.data.clicked) {
     e.target.setAttribute("animation__hover", {
       "property": "scale",
