@@ -38,15 +38,12 @@ AFRAME.registerComponent("task", {
 
     // populate UI with icons
     if ($(this.el).hasClass("c")) {
-      // console.log("CLIP SETUP", this.data.id);
       $(this.el).children("[cards]").get(0).components["card-clip"].setup(this.data.iconList);
     }
     else if ($(this.el).hasClass("p")) {
-      // console.log("SPACE SETUP", this.data.id);
       $(this.el).children("[cards]").get(0).components["card-space"].setup(this.data.iconList);
     }
     else if ($(this.el).hasClass("s")) {
-      // console.log("STACK SETUP", this.data.id);
       $(this.el).children("[cards]").get(0).components["card-stack"].setup(this.data.iconList);
     }
 
@@ -92,12 +89,9 @@ AFRAME.registerComponent("task", {
         done.setAttribute("material", "color: white");
         done.setAttribute("text-geometry", "value: DONE; size: 0.1; height: 0.001;");
         this.el.appendChild(done);
-
       }
     }
-
     newTaskIcon(this.data);
-
   },
 });
 
@@ -141,17 +135,20 @@ function generateTargetList(size, iconList) {
     // each icon has this structure: [ [icon id], [index in the list of icons for this task] ]
     targetList[0].push([iconList[index],index]);
   }
+
   // shuffle targets so they are no longer in original order
-  targetList[0] = shuffle(targetList[0]);
+  targetList[0] = shuffle(targetList[0].slice(0,));
 
   // avoid having the last target be the first repeat target
-  var tmp = targetList[0].slice(0,4);
-  var first = [tmp[0]];
-  var tmp2 = shuffle(targetList[0].slice(1,));
-  first = first.concat(tmp2);
+  var last = targetList[0][4];
+  var rest = shuffle(targetList[0].slice(0,4));
+  var first = [rest[0]];
+  var tmp = rest.slice(1,);
+  tmp.push(last);
+  var list = first.concat(shuffle(tmp.slice(0,)));
 
   // cut off the first 3 to get only 3 repeat targets
-  targetList[1] = first.slice(0,3);
+  targetList[1] = list.slice(0,3);
 
   return targetList;
 }
@@ -160,20 +157,30 @@ function generateTargetList(size, iconList) {
 function newTaskIcon(data) {
   // list of all 5 target icons
   var targetIcons = data.targetList[0];
-  var currentIcon = data.currentIcon;
+  // list of 3 repeat target icons
+  var repeatTargetIcons = data.targetList[1];
+  // index of icon in initial/repeat list
+  var iconIndex = data.currentIcon;
+  // position in list of 5, regardless of stage
+  var iconPosition;
+  var iconID;
 
-  // find position of repeat currentIcon in full list of 5
-  if (data.currentStage === 1) {
-    currentIcon = data.targetList[0].indexOf(data.targetList[1][data.currentIcon]);
+  // initial stage
+  if (data.currentStage === 0) {
+    iconPosition = iconIndex;
+    iconID = data.id + "_" + targetIcons[iconIndex][1];
+  }
+  // repeat stage
+  else if (data.currentStage === 1) {
+    // find position of repeat currentIcon in full list of 5
+    iconPosition = data.targetList[0].indexOf(data.targetList[1][data.currentIcon]);
+    iconID = data.id + "_" + repeatTargetIcons[iconIndex][1];
   }
 
   // update highlighted icons in controller UI
-  updateControllerIcons(targetIcons, currentIcon);
+  updateControllerIcons(targetIcons, iconPosition);
 
-  // create ID e.g. s50_115
-  var iconID = data.id + "_" + targetIcons[data.currentIcon][1];
-  console.log("iconID",iconID);
-
+  // get icon through ID e.g. s50_115
   // add event listeners to new target icon
   var icon = document.getElementById(iconID);
   icon.setAttribute("rotation", "0 0 20");
