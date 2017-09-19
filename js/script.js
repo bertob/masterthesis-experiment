@@ -10,10 +10,10 @@ document.getElementById("left-hand").addEventListener("menuup", function() {
 });
 
 
-document.getElementById("left-hand").addEventListener("triggerdown", function() {
+document.getElementById("right-hand").addEventListener("triggerdown", function() {
   triggerdown = true;
 });
-document.getElementById("left-hand").addEventListener("triggerup", function() {
+document.getElementById("right-hand").addEventListener("triggerup", function() {
   triggerdown = false;
 });
 

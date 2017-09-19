@@ -72,7 +72,7 @@ AFRAME.registerComponent("stacked", {
 
     if (triggerdown && this.isPlaying) {
       // console.log("TICK + TRIGGERDOWN");
-      now.cursorPosition = document.getElementById("left-hand").components.position.attrValue;
+      now.cursorPosition = document.getElementById("right-hand").components.position.attrValue;
       now.cursorY = now.cursorPosition.y;
 
       if (!this.moving) {
