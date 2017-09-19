@@ -5,6 +5,7 @@ var card_d = 0.0009;
 AFRAME.registerComponent("card", {
   schema: {
     id: {type: "int", default: -1},
+    clicked: {type: "boolean", default: false},
   },
   init: function () {
     var id = this.data.id;
@@ -33,8 +34,8 @@ AFRAME.registerComponent("card", {
 });
 
 function cardMouseover(e) {
-  if (!e.target.dataset.clicked) {
-    this.setAttribute("animation__hover", {
+  if (!e.target.components.card.data.clicked) {
+    e.target.setAttribute("animation__hover", {
       "property": "scale",
       "dir": "alternate",
       "dur": 100,
@@ -45,8 +46,8 @@ function cardMouseover(e) {
 }
 
 function cardMouseleave(e) {
-  if (!e.target.dataset.clicked) {
-    this.setAttribute("animation__hover", {
+  if (!e.target.components.card.data.clicked) {
+    e.target.setAttribute("animation__hover", {
       "property": "scale",
       "dir": "alternate",
       "dur": 100,
@@ -57,25 +58,41 @@ function cardMouseleave(e) {
 }
 
 function cardMouseup(e) {
-  if (!e.target.dataset.clicked) {
-    this.setAttribute("animation__hover", {
+  if (!e.target.components.card.data.clicked) {
+    e.target.setAttribute("animation__hover", {
       "property": "scale",
       "dir": "alternate",
-      "dur": 100,
+      "dur": 200,
       "easing": "easeOutQuad",
       "to": "0.6 0.6 1",
     });
-    e.target.dataset.clicked = true;
+    e.target.components.card.data.clicked = true;
+    setTimeout(
+      function() {
+        // reset to normal after 1 second
+        resetIcon(e)
+    }, 1000);
   }
 }
 
 function iconSelected(e) {
-  console.log("TARGET ICON SELECTED");
-
   // remove event listener from this icon
   e.target.removeEventListener("mouseup", iconSelected);
 
-  // TODO: highlight icon as correctly selected
+  e.target.setAttribute("rotation", "0 0 0");
+
+  // TODO: highlight icon as correctly selected for 1s, then reset
 
   $(".active-task").get(0).components.task.nextIcon();
+}
+
+function resetIcon(e) {
+  e.target.setAttribute("animation__hover", {
+    "property": "scale",
+    "dir": "alternate",
+    "dur": 200,
+    "easing": "easeOutQuad",
+    "to": "1 1 1",
+  });
+  e.target.components.card.data.clicked = false;
 }

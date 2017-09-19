@@ -29,7 +29,7 @@ AFRAME.registerComponent("task", {
     this.el.setAttribute("step", "number: " + (stepPosition + 2));
   },
   setup: function () {
-    $("active-task").removeClass("active-task");
+    $(".active-task").removeClass("active-task");
     $(this.el).addClass("active-task");
 
     // generate icons and targets
@@ -55,6 +55,7 @@ AFRAME.registerComponent("task", {
 
   },
   nextIcon: function () {
+    // currentStage and currentIcon have yet to be updated
 
     // move to next step
     if (this.data.currentStage === 0) {
@@ -64,18 +65,34 @@ AFRAME.registerComponent("task", {
       }
       else {
         console.log("starting repeat stage");
+        this.data.currentStage = 1;
         this.data.currentIcon = 0;
       }
     }
     else {
+      console.log("repeat stage, icon:", this.data.currentIcon);
       // 3 repeat icons
       if (this.data.currentIcon < 2) {
         this.data.currentIcon++;
       }
       else {
-        console.log("done with task");
+        console.log("done with task!");
 
         // TODO: done with task popup or something
+        var doneRect = document.createElement("a-box");
+        doneRect.setAttribute("class", "task-done-popup");
+        doneRect.setAttribute("scale", "1.4 0.8 0.02");
+        doneRect.setAttribute("position", "-0.07 1.23 0.4");
+        doneRect.setAttribute("material", "color: black; opacity: 0.8");
+        this.el.appendChild(doneRect);
+
+        var done = document.createElement("a-entity");
+        done.setAttribute("class", "task-done-popup");
+        done.setAttribute("position", "-0.25 1.2 0.5");
+        done.setAttribute("material", "color: white");
+        done.setAttribute("text-geometry", "value: DONE; size: 0.1; height: 0.001;");
+        this.el.appendChild(done);
+
       }
     }
 
@@ -141,33 +158,38 @@ function generateTargetList(size, iconList) {
 
 
 function newTaskIcon(data) {
-  var targetIcons = data.targetList[data.currentStage];
+  // list of all 5 target icons
+  var targetIcons = data.targetList[0];
+  var currentIcon = data.currentIcon;
+
+  // find position of repeat currentIcon in full list of 5
+  if (data.currentStage === 1) {
+    currentIcon = data.targetList[0].indexOf(data.targetList[1][data.currentIcon]);
+  }
 
   // update highlighted icons in controller UI
-  updateControllerIcons(targetIcons, data.currentIcon);
+  updateControllerIcons(targetIcons, currentIcon);
 
   // create ID e.g. s50_115
   var iconID = data.id + "_" + targetIcons[data.currentIcon][1];
-  // console.log("iconID", iconID);
+  console.log("iconID",iconID);
 
   // add event listeners to new target icon
   var icon = document.getElementById(iconID);
+  icon.setAttribute("rotation", "0 0 20");
   icon.addEventListener("mouseup", iconSelected);
 }
 
 function updateControllerIcons(targetIcons, currentIcon) {
-  console.log("UPDATING CONTROLLER", targetIcons, currentIcon);
   var controllerIcons = $("#controller-icons").children("a-entity");
   var i = 0;
   [].forEach.call(controllerIcons, function(controllerIcon) {
     var iconType = targetIcons[i][0];
-    console.log("controller icon", iconType, currentIcon, i);
-    console.log("visible", i === currentIcon);
 
     if (i === currentIcon)
       controllerIcon.setAttribute("material", "color: white; src: #img" + iconType);
     else
-      controllerIcon.setAttribute("material", "color: black; src: #img" + iconType);
+      controllerIcon.setAttribute("material", "color: black; opacity: 0.8");
 
     i++;
   });
