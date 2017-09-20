@@ -49,7 +49,7 @@ AFRAME.registerComponent("stacked", {
     list_position: {type: "int"},
   },
   init: function () {
-    console.log("INIT STACKED CARD");
+    // console.log("INIT STACKED CARD");
     this.start = {};
     this.prev = {};
     this.moving = false;
