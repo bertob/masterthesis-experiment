@@ -48,22 +48,26 @@ AFRAME.registerComponent("clipped", {
     list_position: {type: "int"},
   },
   init: function () {
-    console.log("INIT STACKED CARD");
+    // console.log("INIT CLIPPED CARD");
     this.start = {};
     this.prev = {};
     this.moving = false;
-    var x, y, z;
-    x = x_offset;
 
+    var x, y, z;
     var real_position = this.data.list_position - scroll_position;
 
-    y = y_offset + real_position * (card_h + y_gap);
+    x = x_offset;
+    y = y_offset + 1.68 - real_position * (card_h + y_gap);
     z = z_offset;
 
-    // var id = Math.floor(Math.random()*250) + 1;
-    // this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
-                        //  "; height:" + card_h + "; depth: " + card_d + ";");
-    // this.el.setAttribute("material", "color: white; src: #img" + id);
+    var visible = getVisibility(y, bottom_baseline, top_baseline_clip);
+    if (visible === false) {
+      this.el.setAttribute("material", "opacity: 0; transparent: true");
+    }
+    else {
+      this.el.setAttribute("material", "opacity: 1; transparent: false");
+    }
+
     this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
     this.prev.position = [x, y, z];
   },
@@ -98,29 +102,14 @@ AFRAME.registerComponent("clipped", {
 
         if (now.relDeltaY !== 0) {
           var x, y, z;
-          x = x_offset;
           var new_y = now.cardY; // theoretical new y value
-          var visible = false;
 
+          x = x_offset;
           y = new_y;
           z = z_offset;
 
-          if (new_y < bottom_baseline) {
-            // stacked on bottom
-            // var y_below = bottom_baseline - new_y; // how far below bottom baseline
-            // y = bottom_baseline - getStackedY(y_below);
-            // z = z_offset - getCardDepth(y_below);
-          }
-          else if (new_y > top_baseline_clip) {
-            // stacked on top
-            // var y_above = new_y - top_baseline_clip; // how far above top baseline
-            // y = top_baseline_clip + getStackedY(y_above);
-            // z = z_offset - getCardDepth(y_above);
-          }
-          else {
-            // visible in list
-            visible = true;
-          }
+          var visible = getVisibility(new_y, bottom_baseline, top_baseline_clip);
+
           if (visible === false) {
             this.el.setAttribute("material", "opacity: 0; transparent: true");
           }
@@ -145,3 +134,14 @@ AFRAME.registerComponent("clipped", {
   pause: function () {},
   play: function () {}
 });
+
+function getVisibility(new_y, bottom_baseline, top_baseline_clip) {
+  var visible;
+  if (new_y < bottom_baseline || new_y > top_baseline_clip) {
+    visible = false;
+  }
+  else {
+    visible = true;
+  }
+  return visible;
+}
