@@ -53,16 +53,18 @@ AFRAME.registerComponent("stacked", {
     this.start = {};
     this.prev = {};
     this.moving = false;
+
     var x, y, z;
-    x = x_offset;
-
     var real_position = this.data.list_position - scroll_position;
+    var theoretical_y = y_offset + 0.6 - real_position * (card_h + y_gap);
 
-    y = y_offset + real_position * (card_h + y_gap);
-    z = z_offset;
+    var position = getCardPosition(theoretical_y, bottom_baseline, x_offset, z_offset);
+    x = position[0];
+    y = position[1];
+    z = position[2];
 
     this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
-    this.prev.position = [x, y, z];
+    this.prev.position = [x, theoretical_y, z];
   },
   update: function () {},
   tick: function (time) {
@@ -95,37 +97,13 @@ AFRAME.registerComponent("stacked", {
 
         if (now.relDeltaY !== 0) {
           var x, y, z;
-          x = x_offset;
-          var new_y = now.cardY; // theoretical new y value
-          var visible = false;
-
-          if (new_y < bottom_baseline) {
-            // stacked on bottom
-            var y_below = bottom_baseline - new_y; // how far below bottom baseline
-            y = bottom_baseline - getStackedY(y_below);
-            z = z_offset - getCardDepth(y_below);
-          }
-          else if (new_y > top_baseline) {
-            // stacked on top
-            var y_above = new_y - top_baseline; // how far above top baseline
-            y = top_baseline + getStackedY(y_above);
-            z = z_offset - getCardDepth(y_above);
-          }
-          else {
-            // visible in list
-            y = new_y;
-            z = z_offset;
-            visible = true;
-          }
-          // if (visible === false) {
-          //   this.el.setAttribute("material", "opacity: 0; transparent: true");
-          // }
-          // else {
-          //   this.el.setAttribute("material", "opacity: 1; transparent: false");
-          // }
+          var position = getCardPosition(now.cardY, bottom_baseline, x_offset, z_offset);
+          x = position[0];
+          y = position[1];
+          z = position[2];
           this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
 
-          this.prev.position = [x, new_y, z];
+          this.prev.position = [x, now.cardY, z];
           this.prev.absDeltaY = now.absDeltaY;
           this.prev.cursorY = now.cursorY;
         }
@@ -142,15 +120,39 @@ AFRAME.registerComponent("stacked", {
   play: function () {}
 });
 
-// returns z position as a function of how far
-// outside the visible area the card is
-function getCardDepth(y) {
-  var z_distance = 0.14;
-  return y * z_distance;
+function getCardPosition (new_y, bottom_baseline, x_offset, z_offset) {
+  var y, z;
+
+  if (new_y < bottom_baseline) {
+    // stacked on bottom
+    var y_below = bottom_baseline - new_y; // how far below bottom baseline
+    y = bottom_baseline - getStackedY(y_below);
+    z = z_offset - getCardDepth(y_below);
+  }
+  else if (new_y > top_baseline) {
+    // stacked on top
+    var y_above = new_y - top_baseline; // how far above top baseline
+    y = top_baseline + getStackedY(y_above);
+    z = z_offset - getCardDepth(y_above);
+  }
+  else {
+    // visible in list
+    y = new_y;
+    z = z_offset;
+    visible = true;
+  }
+  return [x_offset, y, z];
 }
 
 // returns y position of stacked card
 function getStackedY(y) {
   var steepness = 0.09; // the higher, the steeper the curve
   return Math.sqrt(y * steepness);
+}
+
+// returns z position as a function of how far
+// outside the visible area the card is
+function getCardDepth(y) {
+  var z_distance = 0.14;
+  return y * z_distance;
 }
