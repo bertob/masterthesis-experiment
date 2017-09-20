@@ -15,35 +15,49 @@ var LATIN_SQUARE_ROW = 1;
 
 var stepContainer = document.getElementById("step-container");
 
-// AFRAME.registerComponent("hoverable", {
-//   schema: {
-//   },
-//   init: function () {
-//     this.el.addEventListener("mouseenter", function(e) {
-//       if (!e.target.dataset.clicked) {
-//         this.setAttribute("animation__hover", {
-//           "property": "scale",
-//           "dir": "alternate",
-//           "dur": 250,
-//           "easing": "easeOutQuad",
-//           "loop": true,
-//           "to": "1.2 1.2 1",
-//         });
-//       }
-//     });
-//
-//     this.el.addEventListener("mouseleave", function(e) {
-//       if (!e.target.dataset.clicked) {
-//         this.setAttribute("animation__hover", {
-//           "property": "scale",
-//           "dir": "alternate",
-//           "dur": 250,
-//           "easing": "easeOutQuad",
-//           "loop": true,
-//           "to": "1 1 1",
-//         });
-//       }
-//     });
-//
-//   }
-// });
+AFRAME.registerComponent("hoverable", {
+  schema: {
+    clicked: {type: "boolean", default: false},
+  },
+  init: function () {
+    this.data.clicked = false;
+    this.el.addEventListener("mouseenter", hoverableMouseenter);
+    this.el.addEventListener("mouseleave", hoverableMouseleave);
+    this.el.addEventListener("mouseup", hoverableMouseup);
+  }
+});
+
+
+function hoverableMouseenter(e) {
+  if (!e.target.components.hoverable.data.clicked) {
+    e.target.setAttribute("animation__hover", {
+      "property": "scale",
+      "dur": 200,
+      "easing": "easeOutQuad",
+      "to": "1.2 1.2 1",
+    });
+  }
+}
+
+function hoverableMouseleave(e) {
+  if (!e.target.components.hoverable.data.clicked) {
+    e.target.setAttribute("animation__hover", {
+      "property": "scale",
+      "dur": 200,
+      "easing": "easeOutQuad",
+      "to": "1 1 1",
+    });
+  }
+}
+
+function hoverableMouseup(e) {
+  if (!e.target.components.hoverable.data.clicked) {
+    e.target.setAttribute("animation__hover", {
+      "property": "scale",
+      "dur": 200,
+      "easing": "easeOutQuad",
+      "to": "0.6 0.6 1",
+    });
+    e.target.components.hoverable.data.clicked = true;
+  }
+}
