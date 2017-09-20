@@ -1,10 +1,10 @@
 // CONTROLLER EVENT LISTENERS
-document.getElementById("left-hand").addEventListener("trackpadup", function() {
+document.getElementById("right-hand").addEventListener("trackpadup", function() {
   // console.log("NEXT STEP");
   document.getElementById("step-container").components.stepcontainer.next();
 
 });
-document.getElementById("left-hand").addEventListener("menuup", function() {
+document.getElementById("right-hand").addEventListener("menuup", function() {
   // console.log("PREV STEP");
   document.getElementById("step-container").components.stepcontainer.previous();
 });
