@@ -43,8 +43,8 @@ AFRAME.registerComponent("stepcontainer", {
     this.el.setAttribute("animation__move", {
       "property": "position",
       "dir": "alternate",
-      "dur": 1000,
-      "easing": "easeOutElastic",
+      "dur": 700,
+      "easing": "easeOutExpo",
       "to": new THREE.Vector3( this.data.currentStep*(-STEP_DISTANCE), 0, -1 ),
     });
   }
