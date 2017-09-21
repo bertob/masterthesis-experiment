@@ -92,7 +92,7 @@ AFRAME.registerComponent("stacked", {
       else {
         // console.log("moving");
         now.relDeltaY = now.cursorY - prev.cursorY;
-        now.absDeltaY = prev.absDeltaY + now.relDeltaY * 3;
+        now.absDeltaY = prev.absDeltaY + now.relDeltaY * 12;
         now.cardY = start.cardY + now.absDeltaY;
 
         if (now.relDeltaY !== 0) {
