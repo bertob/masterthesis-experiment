@@ -6,6 +6,7 @@ AFRAME.registerComponent("card", {
   schema: {
     id: {type: "int", default: -1},
     clicked: {type: "boolean", default: false},
+    target: {type: "boolean", default: false},
   },
   init: function () {
     var id = this.data.id;
@@ -17,14 +18,12 @@ AFRAME.registerComponent("card", {
     this.el.setAttribute("material", "color: white; src: #img" + id);
   },
   pause: function () {
-    // console.log("card paused");
     this.el.removeEventListener("mouseenter", cardMouseover);
     this.el.removeEventListener("mouseleave", cardMouseleave);
     this.el.removeEventListener("mousedown", cardMousedown);
     this.el.removeEventListener("mouseup", cardMouseup);
   },
   play: function () {
-    // console.log("card playing");
     this.el.addEventListener("mouseenter", cardMouseover);
     this.el.addEventListener("mouseleave", cardMouseleave);
     this.el.addEventListener("mousedown", cardMousedown);
@@ -78,14 +77,23 @@ function cardMouseup(e) {
       "dir": "alternate",
       "dur": 200,
       "easing": "easeOutQuad",
-      "to": "0.6 0.6 1",
+      "to": "0.7 0.7 1",
     });
     e.target.components.card.data.clicked = true;
+
+    setTimeout(
+      function() {
+        var correctness = "incorrect";
+        if (e.target.components.card.data.target) correctness = "correct";
+        e.target.setAttribute("material", "color: white; src: #" + correctness);
+      }, 50);
+
     setTimeout(
       function() {
         // reset to normal after 1 second
         resetIcon(e)
-    }, 1000);
+      }, 1000);
+
   }
 }
 
@@ -93,14 +101,14 @@ function iconSelected(e) {
   // remove event listener from this icon
   e.target.removeEventListener("mouseup", iconSelected);
 
-  // e.target.setAttribute("rotation", "0 0 0");
-
-  // TODO: highlight icon as correctly selected for 1s, then reset
+  // changes the highlight icon to a checkmark
+  e.target.components.card.data.target = true;
 
   $(".active-task").get(0).components.task.nextIcon();
 }
 
 function resetIcon(e) {
+  console.log("RESETTING");
   e.target.setAttribute("animation__hover", {
     "property": "scale",
     "dir": "alternate",
@@ -108,5 +116,7 @@ function resetIcon(e) {
     "easing": "easeOutQuad",
     "to": "1 1 1",
   });
+  e.target.setAttribute("material", "color: white; src: #img" + e.target.components.card.data.id);
   e.target.components.card.data.clicked = false;
+  e.target.components.card.data.target = false;
 }
