@@ -53,23 +53,16 @@ AFRAME.registerComponent("clipped", {
     this.prev = {};
     this.moving = false;
 
-    var x, y, z;
+    var x, y, z, new_y;
     var real_position = this.data.list_position - scroll_position;
 
     x = x_offset;
-    y = y_offset + 1.68 - real_position * (card_h + y_gap);
+    new_y = y_offset + 1.68 - real_position * (card_h + y_gap);
+    y = getClippedY(new_y, bottom_baseline, top_baseline_clip);
     z = z_offset;
 
-    var visible = getVisibility(y, bottom_baseline, top_baseline_clip);
-    if (visible === false) {
-      this.el.setAttribute("material", "opacity: 0; transparent: true");
-    }
-    else {
-      this.el.setAttribute("material", "opacity: 1; transparent: false");
-    }
-
     this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
-    this.prev.position = [x, y, z];
+    this.prev.position = [x, new_y, z];
   },
   update: function () {},
   tick: function (time) {
@@ -105,17 +98,9 @@ AFRAME.registerComponent("clipped", {
           var new_y = now.cardY; // theoretical new y value
 
           x = x_offset;
-          y = new_y;
+          y = getClippedY(new_y, bottom_baseline, top_baseline_clip);
           z = z_offset;
 
-          var visible = getVisibility(new_y, bottom_baseline, top_baseline_clip);
-
-          if (visible === false) {
-            this.el.setAttribute("material", "opacity: 0; transparent: true");
-          }
-          else {
-            this.el.setAttribute("material", "opacity: 1; transparent: false");
-          }
           this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
 
           this.prev.position = [x, new_y, z];
@@ -135,13 +120,6 @@ AFRAME.registerComponent("clipped", {
   play: function () {}
 });
 
-function getVisibility(new_y, bottom_baseline, top_baseline_clip) {
-  var visible;
-  if (new_y < bottom_baseline || new_y > top_baseline_clip) {
-    visible = false;
-  }
-  else {
-    visible = true;
-  }
-  return visible;
+function getClippedY(new_y, bottom, top) {
+  return Math.min(Math.max(new_y, bottom), top);
 }
