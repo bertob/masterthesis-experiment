@@ -130,7 +130,7 @@ AFRAME.registerComponent("task", {
 });
 
 function randomList(length) {
-  var list = shuffle(generateList(250));
+  var list = shuffle(generateList(150));
   return list.slice(0,length);
 }
 

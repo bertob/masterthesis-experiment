@@ -30,15 +30,15 @@ AFRAME.registerComponent("card-space", {
 
     }
     else {
-      // 250 elements case
+      // 150 elements case
       for (var i=0; i<this.data.iconList.length; i++) {
         var parentPanelId = Math.floor(i/50);
         var parentPanel = document.getElementById("panel-" + parentPanelId);
 
         var card = document.createElement("a-entity");
-        card.setAttribute("id", "p250_" + i);
+        card.setAttribute("id", "p150_" + i);
         card.setAttribute("card", "id: " + this.data.iconList[i]);
-        card.setAttribute("position", getGridPosition250(i, parentPanelId));
+        card.setAttribute("position", getGridPosition150(i, parentPanelId));
 
         parentPanel.appendChild(card);
       }
@@ -84,7 +84,7 @@ function getGridPosition50 (index) {
   return new THREE.Vector3( x, y, z );
 }
 
-function getGridPosition250 (index, parentPanelId) {
+function getGridPosition150 (index, parentPanelId) {
   var columns = 5;
   var gap = 0.02;
 
