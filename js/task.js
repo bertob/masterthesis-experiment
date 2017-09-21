@@ -69,7 +69,7 @@ AFRAME.registerComponent("task", {
     else {
       console.log("repeat stage, icon:", this.data.currentIcon);
       // 3 repeat icons
-      if (this.data.currentIcon < 2) {
+      if (this.data.currentIcon < 4) {
         this.data.currentIcon++;
       }
       else {
@@ -182,7 +182,7 @@ function generateTargetList(size, iconList) {
   var list = first.concat(shuffle(tmp.slice(0,)));
 
   // cut off the first 3 to get only 3 repeat targets
-  targetList[1] = list.slice(0,3);
+  targetList[1] = list;
 
   return targetList;
 }
