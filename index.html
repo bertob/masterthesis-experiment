@@ -27,6 +27,9 @@
 
     <a-assets>
       <a-asset-item id="helvetiker" src="lib/helvetiker_regular.typeface.json"></a-asset-item>
+      <img id="correct" src="icons/correct.png">
+      <img id="incorrect" src="icons/incorrect.png">
+
       <img id="img1" src="icons/png-icons/1.png">
       <img id="img2" src="icons/png-icons/2.png">
       <img id="img3" src="icons/png-icons/3.png">
@@ -290,9 +293,9 @@
       <img id="img8" src="assets/8.png"> -->
     </a-assets>
 
+    <!--  controller -->
     <a-entity id="right-hand" laser-controls="hand:right" controller-cursor>
       <a-entity rotation="-80 0 0" position="0.015 -0.03 0.05" text-geometry="value: <----- select; size: 0.015; height: 0.001;" material="color: white"></a-entity>
-
       <a-entity id="controller-icons" rotation="-40 0 0" position="-0.3 -0.005 0.05">
         <a-entity card position="0 0 0" scale="0.3 0.3"></a-entity>
         <a-entity card position="0.06 0 0" scale="0.3 0.3"></a-entity>
@@ -300,74 +303,61 @@
         <a-entity card position="0.18 0 0" scale="0.3 0.3"></a-entity>
         <a-entity card position="0.24 0 0" scale="0.3 0.3"></a-entity>
       </a-entity>
-
     </a-entity>
 
+    <!--  environment -->
     <a-sky color="#1b2252"></a-sky>
-
-    <!--  floor -->
     <a-plane rotation="-90 0 0" width="900" height="900" color="#101432"></a-plane>
-    <!-- <a-circle rotation="-90 0 0" position="0 0.02 -0.6" color="#5e6cca" radius="2"></a-circle> -->
 
-    <!--  task navigation -->
-    <!-- <a-circle id="prev-step" rotation="-90 0 0" position="-5 0.02 -0.6" color="#2a3271" radius="1.4" hoverable></a-circle>
-    <a-circle id="next-step" rotation="-90 0 0" position="5 0.02 -0.6" color="#2a3271" radius="1.4" hoverable></a-circle> -->
-
-    <!-- <a-circle rotation="-90 0 0" position="-2 0.005 -2" color="#7a80b6" radius="0.5"></a-circle>
-    <a-circle rotation="-90 0 0" position="2 0.005 -2" color="#7a80b6" radius="0.5"></a-circle> -->
-
-    <!--  ceiling -->
-    <!-- <a-plane rotation="-270 0 0" width="10" height="10" position="0 3 0" repeat="10 10" color="#999f99"></a-plane> -->
-
-    <!--  walls -->
-    <!-- <a-box rotation="0 0 0" scale="10 100 0.1" position="0 0 -5" repeat="10 10" color="#bed"></a-box>
-    <a-box rotation="0 90 0" scale="10 100 0.1" position="5 0 0" repeat="10 10" color="#bed"></a-box>
-    <a-box rotation="0 90 0" scale="10 100 0.1" position="-5 0 0" repeat="10 10" color="#bed"></a-box> -->
-
+    <!-- steps -->
     <a-entity id="step-container" taskcontainer="currentTask: 0" stepcontainer="currentStep: 0" position="0 0 -1">
+
+      <!-- SELECTION TUTORIAL -->
       <a-entity id="tutorial-select" class="non-task" step="number: 0">
-        <!-- <a-entity position="-2.5 0 -1" text-geometry="value: 1; size: 2.5; height: 0.001;" material="color: white"></a-entity> -->
+        <a-entity position="-1.9 0.4 -1" text-geometry="value: Tutorial; size: 1.8; height: 0.001;" material="color: white"></a-entity>
 
-        <a-entity position="-0.3 1.6 0" text-geometry="value: Selection; size: 0.1; height: 0.001;" material="color: white"></a-entity>
-        <a-entity position="-0.42 1.42 0" text-geometry="value: Press the trigger button with your; size: 0.04; height: 0.001;" material="color: white"></a-entity>
-        <a-entity position="-0.42 1.33 0" text-geometry="value: right index finger to select an icon; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="0 1.6 -0.1" geometry="primitive: box; width: 1.2; height: 0.7; depth: 0.08" material="color: black; opacity: 0.8"></a-entity>
 
+        <a-entity position="-0.3 1.7 0" text-geometry="value: Selection; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.42 1.52 0" text-geometry="value: Press the trigger button with your; size: 0.04; height: 0.01;" material="color: white"></a-entity>
+        <a-entity position="-0.42 1.43 0" text-geometry="value: right index finger to select an icon; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+
+        <!-- selection test cards -->
         <a-entity card="id: 4" position="-0.24 1.1 0"></a-entity>
-        <a-entity card="id: 87" position="0 1.1 0"></a-entity>
+        <a-entity card="id: 87; target: true" position="0 1.1 0"></a-entity>
         <a-entity card="id: 185" position="0.24 1.1 0"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
 
+      <!-- SCROLLING TUTORIAL -->
       <a-entity id="tutorial-scroll" class="non-task" step="number: 1">
+        <a-entity position="-0.16 1.6 -0.1" geometry="primitive: box; width: 1.2; height: 0.7; depth: 0.08" material="color: black; opacity: 0.8"></a-entity>
+
+        <a-entity position="-0.6 1.7 0" text-geometry="value: Scrolling; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.6 1.52 0" text-geometry="value: Press the trigger button and move; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.6 1.43 0" text-geometry="value: the controller up and down to scroll; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+
+        <!-- scrolling test cards -->
         <a-entity card-stack="size: 15" position="0.55 0 0"></a-entity>
-        <a-entity position="-0.6 1.6 0" text-geometry="value: Scrolling; size: 0.1; height: 0.001;" material="color: white"></a-entity>
-        <a-entity position="-0.6 1.42 0" text-geometry="value: Press the trigger button and move; size: 0.04; height: 0.001;" material="color: white"></a-entity>
-        <a-entity position="-0.6 1.33 0" text-geometry="value: the controller up and down to scroll; size: 0.04; height: 0.001;" material="color: white"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
+
 
       <!--  CLIPPED -->
       <a-entity id="c20" task="id: c20; type: c; size: 20" class="task c">
         <a-entity cards card-clip="size: 20"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="c50" task="id: c50; type: c; size: 50" class="task c">
         <a-entity cards card-clip="size: 50"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="c250" task="id: c250; type: c; size: 250" class="task c">
         <a-entity cards card-clip="size: 250"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
 
       <!-- SPATIAL -->
       <a-entity id="p20" task="id: p20; type: p; size: 20" class="task p">
         <a-entity cards card-space="size: 20"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="p50" task="id: p50; type: p; size: 50" class="task p">
         <a-entity cards card-space="size: 50"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="p250" task="id: p250; type: p; size: 250" class=" task p">
         <a-entity cards card-space="size: 250">
@@ -377,21 +367,30 @@
           <a-entity id="panel-3" position="1 0 0.3" rotation="0 -30 0"></a-entity>
           <a-entity id="panel-4" position="1.6 0 1.1" rotation="0 -70  0"></a-entity>
         </a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
 
       <!-- STACKED -->
       <a-entity id="s20" task="id: s20; type: s; size: 20" class="task s">
         <a-entity cards card-stack="size: 20"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="s50" task="id: s50; type: s; size: 50" class="task s">
         <a-entity cards card-stack="size: 50"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
       </a-entity>
       <a-entity id="s250" task="id: s250; type: s; size: 250" class="task s">
         <a-entity cards card-stack="size: 250"></a-entity>
-        <a-circle rotation="-90 0 0" position="0 0.045 1" color="#2a3271" radius="1.4"></a-circle>
+      </a-entity>
+
+
+      <!-- FINAL STEP -->
+      <a-entity id="end" class="non-task" step="number: 11">
+        <a-entity position="-1.9 0.4 -1" text-geometry="value: End; size: 1.8; height: 0.001;" material="color: white"></a-entity>
+
+        <a-entity position="0 1.6 -0.1" geometry="primitive: box; width: 1.35; height: 0.75; depth: 0.08" material="color: black; opacity: 0.8"></a-entity>
+
+        <a-entity position="-0.35 1.7 0" text-geometry="value: Thank you!; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+        <a-entity position="-0.52 1.52 0" text-geometry="value: You've reached the end of the experiment.; size: 0.04; height: 0.01;" material="color: white"></a-entity>
+        <a-entity position="-0.52 1.43 0" text-geometry="value: You can now take off your headset.; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+
       </a-entity>
 
     </a-entity>

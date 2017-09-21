@@ -56,7 +56,13 @@ AFRAME.registerComponent("step", {
   },
   init: function () {
     this.el.setAttribute("position", new THREE.Vector3(this.data.number * STEP_DISTANCE, 0, -1));
-    // this.pause();
+
+    var floor = document.createElement("a-circle");
+    floor.setAttribute("radius", "1.4");
+    floor.setAttribute("position", "0 0.05 1");
+    floor.setAttribute("rotation", "-90 0 0");
+    floor.setAttribute("material", "color: #2a3271");
+    this.el.appendChild(floor);
   },
   pause: function () {
     var children = $(this.el).children("a-entity");

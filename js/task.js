@@ -22,7 +22,7 @@ AFRAME.registerComponent("task", {
     number.setAttribute("class", "task-number");
     number.setAttribute("position", "-1.5 0.4 -1");
     number.setAttribute("material", "color: white");
-    number.setAttribute("text-geometry", "value: " + (stepPosition+1) + "; size: 1.8; height: 0.001;");
+    number.setAttribute("text-geometry", "value: " + (stepPosition+1) + "; size: 1.8; height: 0.01;");
     this.el.appendChild(number);
 
     // offset of 2, because the first 2 steps are tutorials
