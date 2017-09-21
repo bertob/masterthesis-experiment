@@ -228,7 +228,7 @@ function updateControllerIcons(targetIcons, currentIcon) {
     var iconType = targetIcons[i][0];
 
     if (i === currentIcon)
-      controllerIcon.setAttribute("material", "color: white; src: #img" + iconType);
+      controllerIcon.setAttribute("material", "color: white; opacity: 1; src: #img" + iconType);
     else
       controllerIcon.setAttribute("material", "color: black; opacity: 0.8");
 
