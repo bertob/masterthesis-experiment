@@ -22,8 +22,14 @@ AFRAME.registerComponent("stepcontainer", {
     this.data.currentStep += movement;
     console.log("MOVING TO STEP",this.data.currentStep);
 
+    // stop tutorial scroller from scrolling on other steps
     if (this.data.currentStep === 1) {
+      $(this.el).children("#tutorial-scroll").get(0).components["step"].play();
     }
+    else {
+      $(this.el).children("#tutorial-scroll").get(0).components["step"].pause();
+    }
+
     // first experiment
     if (this.data.currentStep === 2) {
       this.el.components.taskcontainer.first();
@@ -52,16 +58,16 @@ AFRAME.registerComponent("step", {
     this.el.setAttribute("position", new THREE.Vector3(this.data.number * STEP_DISTANCE, 0, -1));
     // this.pause();
   },
-  // pause: function () {
-  //   var children = $(this.el).children("a-entity");
-  //   [].forEach.call(children, function(child) {
-  //     child.pause();
-  //   });
-  // },
-  // play: function () {
-  //   var children = $(this.el).children("a-entity");
-  //   [].forEach.call(children, function(child) {
-  //     child.play();
-  //   });
-  // }
+  pause: function () {
+    var children = $(this.el).children("a-entity");
+    [].forEach.call(children, function(child) {
+      child.pause();
+    });
+  },
+  play: function () {
+    var children = $(this.el).children("a-entity");
+    [].forEach.call(children, function(child) {
+      child.play();
+    });
+  }
 });
