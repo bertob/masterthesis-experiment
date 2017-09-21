@@ -74,8 +74,7 @@ AFRAME.registerComponent("stacked", {
 
     if (triggerdown && this.isPlaying) {
       // console.log("TICK + TRIGGERDOWN");
-      now.cursorPosition = document.getElementById("right-hand").components.position.attrValue;
-      now.cursorY = now.cursorPosition.y;
+      now.cursorY = getCursorY();
 
       if (!this.moving) {
         // console.log("start");
@@ -155,4 +154,8 @@ function getStackedY(y) {
 function getCardDepth(y) {
   var z_distance = 0.14;
   return y * z_distance;
+}
+
+function getCursorY() {
+  return document.getElementById("right-hand").components.position.attrValue.y;
 }

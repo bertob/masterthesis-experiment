@@ -7,6 +7,7 @@ AFRAME.registerComponent("card", {
     id: {type: "int", default: -1},
     clicked: {type: "boolean", default: false},
     target: {type: "boolean", default: false},
+    scrollStartY: {type: "int", default: 0},
   },
   init: function () {
     var id = this.data.id;
@@ -63,6 +64,10 @@ function cardMousedown(e) {
   [].forEach.call(allOtherCards, function(otherCard) {
     otherCard.components.card.pause();
   });
+
+  // store cursor position at mousedown
+  e.target.components.card.data.scrollStartY = e.target.components.position.data.y;
+  console.log("DOWN cursor", e.target.components.card.data.scrollStartY);
 }
 
 function cardMouseup(e) {
@@ -71,30 +76,41 @@ function cardMouseup(e) {
     otherCard.components.card.play();
   });
 
-  if (!e.target.components.card.data.clicked) {
-    e.target.setAttribute("animation__hover", {
-      "property": "scale",
-      "dir": "alternate",
-      "dur": 200,
-      "easing": "easeOutQuad",
-      "to": "0.7 0.7 1",
-    });
-    e.target.components.card.data.clicked = true;
+  var oldCursorY = e.target.components.card.data.scrollStartY;
+  var newCursorY = e.target.components.position.data.y;
+  console.log("old new",oldCursorY, newCursorY);
 
-    setTimeout(
-      function() {
-        var correctness = "incorrect";
-        if (e.target.components.card.data.target) correctness = "correct";
-        e.target.setAttribute("material", "color: white; src: #" + correctness);
-      }, 50);
+  // only register the click if the cursor hasn't moved too much
+  if (Math.abs(newCursorY - oldCursorY) < 0.06) {
+    console.log("not scrolled too far",Math.abs(newCursorY - oldCursorY));
+    if (!e.target.components.card.data.clicked) {
+      e.target.setAttribute("animation__hover", {
+        "property": "scale",
+        "dir": "alternate",
+        "dur": 200,
+        "easing": "easeOutQuad",
+        "to": "0.7 0.7 1",
+      });
+      e.target.components.card.data.clicked = true;
 
-    setTimeout(
-      function() {
-        // reset to normal after 1 second
-        resetIcon(e)
-      }, 1000);
+      setTimeout(
+        function() {
+          var correctness = "incorrect";
+          if (e.target.components.card.data.target) correctness = "correct";
+          e.target.setAttribute("material", "color: white; src: #" + correctness);
+        }, 50);
 
+      setTimeout(
+        function() {
+          // reset to normal after 1 second
+          resetIcon(e)
+        }, 1000);
+    }
   }
+  else {
+    console.log("toooooooooooooooo far", Math.abs(newCursorY - oldCursorY));
+  }
+
 }
 
 function iconSelected(e) {

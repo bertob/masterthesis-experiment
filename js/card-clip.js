@@ -72,8 +72,7 @@ AFRAME.registerComponent("clipped", {
 
     if (triggerdown && this.isPlaying) {
       // console.log("TICK + TRIGGERDOWN");
-      now.cursorPosition = document.getElementById("right-hand").components.position.attrValue;
-      now.cursorY = now.cursorPosition.y;
+      now.cursorY = getCursorY();
 
       if (!this.moving) {
         // console.log("start");
