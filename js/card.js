@@ -67,7 +67,6 @@ function cardMousedown(e) {
 
   // store cursor position at mousedown
   e.target.components.card.data.scrollStartY = e.target.components.position.data.y;
-  console.log("DOWN cursor", e.target.components.card.data.scrollStartY);
 }
 
 function cardMouseup(e) {
@@ -78,11 +77,9 @@ function cardMouseup(e) {
 
   var oldCursorY = e.target.components.card.data.scrollStartY;
   var newCursorY = e.target.components.position.data.y;
-  console.log("old new",oldCursorY, newCursorY);
 
   // only register the click if the cursor hasn't moved too much
   if (Math.abs(newCursorY - oldCursorY) < 0.06) {
-    console.log("not scrolled too far",Math.abs(newCursorY - oldCursorY));
     if (!e.target.components.card.data.clicked) {
       e.target.setAttribute("animation__hover", {
         "property": "scale",
@@ -107,9 +104,6 @@ function cardMouseup(e) {
         }, 1000);
     }
   }
-  else {
-    console.log("toooooooooooooooo far", Math.abs(newCursorY - oldCursorY));
-  }
 
 }
 
@@ -124,7 +118,6 @@ function iconSelected(e) {
 }
 
 function resetIcon(e) {
-  console.log("RESETTING");
   e.target.setAttribute("animation__hover", {
     "property": "scale",
     "dir": "alternate",
