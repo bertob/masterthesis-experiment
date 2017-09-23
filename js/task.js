@@ -52,6 +52,9 @@ AFRAME.registerComponent("task", {
 
   },
   nextIcon: function () {
+    // store logs for previous icon
+    updateLogIconEnd(this.data);
+
     // currentStage and currentIcon have yet to be updated
 
     // move to next step
@@ -68,7 +71,7 @@ AFRAME.registerComponent("task", {
     }
     else {
       console.log("repeat stage, icon:", this.data.currentIcon);
-      // 3 repeat icons
+      // 5 repeat icons
       if (this.data.currentIcon < 4) {
         this.data.currentIcon++;
       }
@@ -121,8 +124,6 @@ AFRAME.registerComponent("task", {
           }, 300);
         });
         this.el.appendChild(nextButton);
-
-
       }
     }
     newTaskIcon(this.data);
@@ -191,7 +192,7 @@ function generateTargetList(size, iconList) {
 function newTaskIcon(data) {
   // list of all 5 target icons
   var targetIcons = data.targetList[0];
-  // list of 3 repeat target icons
+  // list of 5 repeat target icons
   var repeatTargetIcons = data.targetList[1];
   // index of icon in initial/repeat list
   var iconIndex = data.currentIcon;
@@ -217,8 +218,9 @@ function newTaskIcon(data) {
   // get icon through ID e.g. s50_115
   // add event listeners to new target icon
   var icon = document.getElementById(iconID);
-  // icon.setAttribute("rotation", "0 0 20");
   icon.addEventListener("mouseup", iconSelected);
+
+  updateLogIconStart(data);
 }
 
 function updateControllerIcons(targetIcons, currentIcon) {
@@ -235,4 +237,22 @@ function updateControllerIcons(targetIcons, currentIcon) {
     i++;
   });
 
+}
+
+function updateLogIconStart(data) {
+  log.iconId = data.targetList[data.currentStage][data.currentIcon][0];
+  log.iconPosition = data.iconList.indexOf(log.iconId);
+  log.trial = data.currentIcon;
+  log.repeat = data.currentStage;
+
+  log.startTimestamp = Date.now();
+}
+
+function updateLogIconEnd(data) {
+  var currentTime = Date.now();
+  log.duration = currentTime - log.startTimestamp;
+
+  // apppend current log item to list
+  var new_log = JSON.parse(JSON.stringify(log))
+  logs.push(new_log);
 }

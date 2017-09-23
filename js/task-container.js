@@ -16,6 +16,8 @@ AFRAME.registerComponent("taskcontainer", {
 
     // initialize fist task
     document.getElementById(this.data.currentTaskID).components.task.setup();
+
+    updateLogTask(this.data);
   },
   move: function (movement) {
     console.log("NEW TASK");
@@ -39,5 +41,16 @@ AFRAME.registerComponent("taskcontainer", {
     // initialize new task
     document.getElementById(this.data.currentTaskID).components.task.setup();
 
+    updateLogTask(this.data);
   }
 });
+
+function updateLogTask(data) {
+  log.condition = data.taskIDs.indexOf(data.currentTaskID);
+  log.conditionId = data.currentTaskID;
+
+  log.iconId = 0;
+  log.iconPosition = 0;
+  log.trial = 0;
+  log.repeat = false;
+}

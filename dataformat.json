@@ -1,0 +1,50 @@
+# Detailed log
+
+object for each icon
+{
+  "participant": 3,
+  "condition": 4,
+  "conditionId": "s50",
+
+  "iconId": 223,
+  "iconPosition": 34,
+  "trial": 3,
+  "repeat": 0,
+
+  "duration": 24089,
+
+  "movement": 1.4,
+  "scrolling": 5.33,
+
+  "errors": [
+    {
+      "iconId": 26,
+      "iconPosition": 93,
+      "timestamp": 11843,
+    },
+    {
+      "iconId": 11,
+      "iconPosition": 50,
+      "timestamp": 16689,
+    },
+  ],
+}
+
+
+# Simple CSV
+
+object for each icon
+{
+  "participant": 3,
+  "condition": 4,
+  "conditionId": "s50",
+
+  "iconId": 223,
+  "iconPosition": 34,
+  "trial": 3,
+  "repeat": 0,
+
+  "duration": 24089,
+
+  "errors": 2,
+}

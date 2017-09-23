@@ -12,6 +12,35 @@ var LATIN_SQUARE = [[ 's50', 's20', 'c20', 'c150', 'p50', 'c50', 'p150', 'p20', 
                     [ 'c20', 's150', 'c150', 'p50', 's20', 'p20', 's50', 'p150', 'c50' ]];
 
 var LATIN_SQUARE_ROW = 1;
+var PARTICIPANT_NO = 1;
+
+// array with all log items
+var logs = [];
+
+// current log item
+var log = {
+  "participant": PARTICIPANT_NO,
+
+  // updated for each task
+  "condition": 0,
+  "conditionId": LATIN_SQUARE[LATIN_SQUARE_ROW][0],
+
+  // updated at beginning of new icon
+  "iconId": 0,
+  "iconPosition": 0,
+  "trial": 0,
+  "repeat": 0,
+
+  "startTimestamp": 0,
+
+  // updated at end of new icon
+  "duration": 0,
+
+  "movement": 0,
+  "scrolling": 0,
+
+  "errors": [],
+};
 
 var stepContainer = document.getElementById("step-container");
 
