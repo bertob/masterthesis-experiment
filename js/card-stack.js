@@ -73,11 +73,9 @@ AFRAME.registerComponent("stacked", {
     var prev = this.prev;
 
     if (triggerdown && this.isPlaying) {
-      // console.log("TICK + TRIGGERDOWN");
       now.cursorY = getCursorY();
 
       if (!this.moving) {
-        // console.log("start");
         start.cursorY = now.cursorY;
         start.cardY = prev.position[1];
         start.position = prev.position;
@@ -89,10 +87,14 @@ AFRAME.registerComponent("stacked", {
         this.moving = true;
       }
       else {
-        // console.log("moving");
         now.relDeltaY = now.cursorY - prev.cursorY;
         now.absDeltaY = prev.absDeltaY + now.relDeltaY * 12;
         now.cardY = start.cardY + now.absDeltaY;
+
+        // use the first card to measure scrolling distance
+        if (this.data.list_position === 0) {
+          log.scrolling += Math.abs(now.relDeltaY * 12);
+        }
 
         if (now.relDeltaY !== 0) {
           var x, y, z;
