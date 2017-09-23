@@ -48,9 +48,4 @@ AFRAME.registerComponent("taskcontainer", {
 function updateLogTask(data) {
   log.condition = data.taskIDs.indexOf(data.currentTaskID);
   log.conditionId = data.currentTaskID;
-
-  log.iconId = 0;
-  log.iconPosition = 0;
-  log.trial = 0;
-  log.repeat = false;
 }

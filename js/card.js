@@ -5,6 +5,7 @@ var card_d = 0.0009;
 AFRAME.registerComponent("card", {
   schema: {
     id: {type: "int", default: -1},
+    position: {type: "int", default: 0},
     clicked: {type: "boolean", default: false},
     target: {type: "boolean", default: false},
     scrollStartY: {type: "int", default: 0},
@@ -70,17 +71,18 @@ function cardMousedown(e) {
 }
 
 function cardMouseup(e) {
+  var cardData = e.target.components.card.data;
   var allOtherCards = $(document).find("[card]").not(e.target);
   [].forEach.call(allOtherCards, function(otherCard) {
     otherCard.components.card.play();
   });
 
-  var oldCursorY = e.target.components.card.data.scrollStartY;
+  var oldCursorY = cardData.scrollStartY;
   var newCursorY = e.target.components.position.data.y;
 
   // only register the click if the cursor hasn't moved too much
   if (Math.abs(newCursorY - oldCursorY) < 0.06) {
-    if (!e.target.components.card.data.clicked) {
+    if (!cardData.clicked) {
       e.target.setAttribute("animation__hover", {
         "property": "scale",
         "dir": "alternate",
@@ -88,12 +90,19 @@ function cardMouseup(e) {
         "easing": "easeOutQuad",
         "to": "0.7 0.7 1",
       });
-      e.target.components.card.data.clicked = true;
+      cardData.clicked = true;
 
       setTimeout(
         function() {
           var correctness = "incorrect";
-          if (e.target.components.card.data.target) correctness = "correct";
+          if (cardData.target) correctness = "correct";
+          else {
+            log.errors.push({
+              "iconId": cardData.id,
+              "iconPosition": cardData.position,
+              "timestamp": Date.now() - log.startTimestamp,
+            });
+          }
           e.target.setAttribute("material", "color: white; src: #" + correctness);
         }, 50);
 

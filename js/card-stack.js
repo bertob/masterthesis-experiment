@@ -29,7 +29,7 @@ AFRAME.registerComponent("card-stack", {
     for (var i=0; i<this.data.iconList.length; i++) {
       var card = document.createElement("a-entity");
       card.setAttribute("id", "s" + this.data.size + "_" + i);
-      card.setAttribute("card", "id: " + this.data.iconList[i]);
+      card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
       card.setAttribute("stacked", "list_position: " + i);
       this.el.appendChild(card);
     }

@@ -13,7 +13,7 @@ AFRAME.registerComponent("card-clip", {
     for (var i=0; i<this.data.iconList.length; i++) {
       var card = document.createElement("a-entity");
       card.setAttribute("id", "c" + this.data.size + "_" + i);
-      card.setAttribute("card", "id: " + this.data.iconList[i]);
+      card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
       card.setAttribute("clipped", "list_position: " + i);
       this.el.appendChild(card);
     }

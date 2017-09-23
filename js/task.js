@@ -73,7 +73,11 @@ AFRAME.registerComponent("task", {
     startButton.appendChild(start);
 
     // update log item with new icon info
+    setTimeout(
+      function() {
+    }, 500);
     updateLogIconStart(this.data);
+    console.log("first icon data", this.data);
 
     startButton.addEventListener("mouseup", function () {
       // start timer for this icon
@@ -280,8 +284,13 @@ function updateControllerIcons(targetIcons, currentIcon) {
 function updateLogIconStart(data) {
   log.iconId = data.targetList[data.currentStage][data.currentIcon][0];
   log.iconPosition = data.iconList.indexOf(log.iconId);
+  console.log("id pos",log.iconId, log.iconPosition);
   log.trial = data.currentIcon;
   log.repeat = data.currentStage;
+
+  log.errors = [];
+  log.movement = 0;
+  log.scrolling = 0;
 }
 function updateLogStartTimer() {
   log.startTimestamp = Date.now();

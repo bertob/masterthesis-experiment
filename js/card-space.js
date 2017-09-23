@@ -16,12 +16,12 @@ AFRAME.registerComponent("card-space", {
 
         if (this.data.size <= 20) {
           card.setAttribute("id", "p20_" + i);
-          card.setAttribute("card", "id: " + this.data.iconList[i]);
+          card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
           card.setAttribute("position", getGridPosition20(i));
         }
         else if (this.data.size <= 50) {
           card.setAttribute("id", "p50_" + i);
-          card.setAttribute("card", "id: " + this.data.iconList[i]);
+          card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
           card.setAttribute("position", getGridPosition50(i));
         }
 
@@ -37,7 +37,7 @@ AFRAME.registerComponent("card-space", {
 
         var card = document.createElement("a-entity");
         card.setAttribute("id", "p150_" + i);
-        card.setAttribute("card", "id: " + this.data.iconList[i]);
+        card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
         card.setAttribute("position", getGridPosition150(i, parentPanelId));
 
         parentPanel.appendChild(card);
