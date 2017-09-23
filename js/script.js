@@ -17,25 +17,26 @@ document.getElementById("right-hand").addEventListener("triggerup", function() {
   triggerdown = false;
 });
 
+console.save = function(data, filename) {
 
-// document.getElementById("left-hand").addEventListener("triggerdown", function() {
-//   console.log("TRIGGER DOWN");
-//   triggerdownLeft = true;
-// });
-// document.getElementById("left-hand").addEventListener("triggerup", function() {
-//   console.log("TRIGGER UP");
-//   triggerdownLeft = false;
-// });
+  if (!data) {
+    console.error('Console.save: No data');
+    return;
+  }
 
+  if (!filename) filename = 'console.json';
 
-// for (var i=0; i<list_length; i++) {
-//   var card = document.createElement("a-entity");
-//   card.setAttribute("card");
-//   card.setAttribute("stacked", "list_position: " + i);
-//   document.getElement -
-// for (var i=0; i<list_length; i++) {
-//   var card = document.createElement("a-entity");
-//   card.setAttribute("card");
-//   card.setAttribute("stacked", "list_position: " + i);
-//   document.getElementById("stack").appendChild(card);
-// }
+  if (typeof data === "object") {
+    data = JSON.stringify(data, undefined, 4);
+  }
+
+  var blob = new Blob([data], {type: 'text/json'});
+  var e = document.createEvent('MouseEvents');
+  var a = document.createElement('a');
+
+  a.download = filename;
+  a.href = window.URL.createObjectURL(blob);
+  a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
+  e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+  a.dispatchEvent(e);
+}
