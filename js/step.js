@@ -47,7 +47,6 @@ AFRAME.registerComponent("stepcontainer", {
     this.data.currentStep += movement;
     console.log("MOVING TO STEP",this.data.currentStep);
 
-
     if (this.data.currentStep === 0) {
       var testTargets = [[87, 0], [0,0], [0,0], [0,0], [0,0]];
       updateControllerIcons(testTargets, 0);
@@ -58,7 +57,6 @@ AFRAME.registerComponent("stepcontainer", {
     // stop tutorial scroller from scrolling on other steps
     if (this.data.currentStep === 1) {
       $(this.el).children("#tutorial-scroll").get(0).components["step"].play();
-      console.log($("#controller-icons").get(0));
       $("#controller-icons").get(0).setAttribute("visible", "false");
       $("#selection-advice").get(0).setAttribute("visible", "false");
       $("#scrolling-advice").get(0).setAttribute("visible", "true");

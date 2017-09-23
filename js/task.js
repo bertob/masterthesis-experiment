@@ -37,15 +37,56 @@ AFRAME.registerComponent("task", {
     this.data.targetList = generateTargetList(this.data.size, this.data.iconList);
 
     // populate UI with icons
+    var cardContainer;
     if ($(this.el).hasClass("c")) {
-      $(this.el).children("[cards]").get(0).components["card-clip"].setup(this.data.iconList);
+      cardContainer = $(this.el).children("[cards]").get(0).components["card-clip"];
     }
     else if ($(this.el).hasClass("p")) {
-      $(this.el).children("[cards]").get(0).components["card-space"].setup(this.data.iconList);
+      cardContainer = $(this.el).children("[cards]").get(0).components["card-space"];
     }
     else if ($(this.el).hasClass("s")) {
-      $(this.el).children("[cards]").get(0).components["card-stack"].setup(this.data.iconList);
+      cardContainer = $(this.el).children("[cards]").get(0).components["card-stack"];
     }
+    cardContainer.setup(this.data.iconList);
+    cardContainer.el.setAttribute("visible", false);
+
+    // add button to start experiment
+    var startButton = document.createElement("a-entity");
+    startButton.setAttribute("position", "0 1.03 0.6");
+    startButton.setAttribute("scale", "1 1 1");
+    startButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
+    startButton.setAttribute("material", "color: white; opacity: 0.01");
+    startButton.setAttribute("hoverable", "");
+
+    var startRect = document.createElement("a-entity");
+    startRect.setAttribute("class", "task-start-popup");
+    startRect.setAttribute("position", "0 0 0");
+    startRect.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.02");
+    startRect.setAttribute("material", "color: white; opacity: 0.8");
+    startButton.appendChild(startRect);
+
+    var start = document.createElement("a-entity");
+    start.setAttribute("class", "task-start-popup");
+    start.setAttribute("position", "-0.07 -0.03 0.03");
+    start.setAttribute("material", "color: black");
+    start.setAttribute("text-geometry", "value: Start; size: 0.05; height: 0.001;");
+    startButton.appendChild(start);
+
+    // update log item with new icon info
+    updateLogIconStart(this.data);
+
+    startButton.addEventListener("mouseup", function () {
+      // start timer for this icon
+      updateLogStartTimer();
+      // show icons
+      cardContainer.el.setAttribute("visible", true);
+
+      setTimeout(
+        function() {
+          $(startButton).remove();
+      }, 100);
+    });
+    this.el.appendChild(startButton);
 
     // add event listener to first target
     newTaskIcon(this.data);
@@ -219,8 +260,6 @@ function newTaskIcon(data) {
   // add event listeners to new target icon
   var icon = document.getElementById(iconID);
   icon.addEventListener("mouseup", iconSelected);
-
-  updateLogIconStart(data);
 }
 
 function updateControllerIcons(targetIcons, currentIcon) {
@@ -244,7 +283,8 @@ function updateLogIconStart(data) {
   log.iconPosition = data.iconList.indexOf(log.iconId);
   log.trial = data.currentIcon;
   log.repeat = data.currentStage;
-
+}
+function updateLogStartTimer() {
   log.startTimestamp = Date.now();
 }
 
