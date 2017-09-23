@@ -17,6 +17,48 @@ document.getElementById("right-hand").addEventListener("triggerup", function() {
   triggerdown = false;
 });
 
+function exportLogs() {
+  var detailedLog = logs;
+  var csvLog = convertArrayOfObjectsToCSV(logs);
+
+  // TODO: save logs in 2 separate files
+}
+
+function convertArrayOfObjectsToCSV(data) {
+  var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+  if (data == null || !data.length) {
+    return null;
+  }
+
+  columnDelimiter = ',';
+  lineDelimiter = '\n';
+
+  keys = Object.keys(data[0]);
+
+  result = '';
+  result += keys.join(columnDelimiter);
+  result += lineDelimiter;
+
+  data.forEach(function(item) {
+    ctr = 0;
+    keys.forEach(function(key) {
+      if (ctr > 0) result += columnDelimiter;
+
+      if (key === "errors") {
+        result += item.errors.length;
+      }
+      else {
+        result += item[key];
+      }
+      ctr++;
+    });
+    result += lineDelimiter;
+  });
+
+  return result;
+}
+
 console.save = function(data, filename) {
 
   if (!data) {
