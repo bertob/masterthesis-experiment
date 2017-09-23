@@ -105,20 +105,16 @@ AFRAME.registerComponent("task", {
         this.data.currentIcon++;
       }
       else {
-        console.log("starting repeat stage");
         this.data.currentStage = 1;
         this.data.currentIcon = 0;
       }
     }
     else {
-      console.log("repeat stage, icon:", this.data.currentIcon);
       // 5 repeat icons
       if (this.data.currentIcon < 4) {
         this.data.currentIcon++;
       }
       else {
-        console.log("done with task!");
-
         // show "task complete" popup and next button
         var doneRect = document.createElement("a-box");
         doneRect.setAttribute("class", "task-done-popup");
@@ -260,6 +256,9 @@ function newTaskIcon(data) {
   // add event listeners to new target icon
   var icon = document.getElementById(iconID);
   icon.addEventListener("mouseup", iconSelected);
+
+  updateLogStartTimer();
+  updateLogIconStart(data);
 }
 
 function updateControllerIcons(targetIcons, currentIcon) {
