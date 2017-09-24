@@ -51,6 +51,8 @@ AFRAME.registerComponent("stepcontainer", {
     this.data.currentStep += movement;
     console.log("MOVING TO STEP",this.data.currentStep);
 
+    $(".start-button").remove();
+
     if (this.data.currentStep === 0) {
       var testTargets = [[87, 0], [0,0], [0,0], [0,0], [0,0]];
       updateControllerIcons(testTargets, 0);

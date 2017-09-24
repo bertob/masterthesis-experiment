@@ -52,6 +52,7 @@ AFRAME.registerComponent("task", {
 
     // add button to start experiment
     var startButton = document.createElement("a-entity");
+    startButton.setAttribute("class", "start-button");
     startButton.setAttribute("position", "0 1.03 0.6");
     startButton.setAttribute("scale", "1 1 1");
     startButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
@@ -77,7 +78,6 @@ AFRAME.registerComponent("task", {
       function() {
     }, 500);
     updateLogIconInit(this.data);
-    console.log("first icon data", this.data);
 
     startButton.addEventListener("mouseup", function () {
       // start timer for this icon and reset movement & scrolling
