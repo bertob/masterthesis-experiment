@@ -1,4 +1,4 @@
-var visible_items_clip = 12;
+var visible_items_clip = 10;
 var top_baseline_clip = y_offset + (visible_items_clip - 1) * (card_h + y_gap);
 
 AFRAME.registerComponent("card-clip", {
@@ -57,7 +57,7 @@ AFRAME.registerComponent("clipped", {
     var real_position = this.data.list_position - scroll_position;
 
     x = x_offset;
-    new_y = y_offset + 1.68 - real_position * (card_h + y_gap);
+    new_y = y_offset + 1.3 - real_position * (card_h + y_gap);
     y = getClippedY(new_y, bottom_baseline, top_baseline_clip);
     z = z_offset;
 
