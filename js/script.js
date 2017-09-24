@@ -21,7 +21,9 @@ function exportLogs() {
   var detailedLog = logs;
   var csvLog = convertArrayOfObjectsToCSV(logs);
 
-  // TODO: save logs in 2 separate files
+  console.log("exporting logfiles", logs, csvLog);
+  console.save(detailedLog, log.participant + "_detailed.json");
+  console.save(csvLog, log.participant + "_simple.csv");
 }
 
 function convertArrayOfObjectsToCSV(data) {

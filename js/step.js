@@ -78,6 +78,10 @@ AFRAME.registerComponent("stepcontainer", {
     if (this.data.currentStep > 2 && this.data.currentStep < 11) {
       this.el.components.taskcontainer.move(movement);
     }
+    // last step
+    if (this.data.currentStep === 11) {
+      exportLogs();
+    }
 
     // move user to new step
     this.el.setAttribute("animation__move", {
