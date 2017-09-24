@@ -35,7 +35,11 @@ AFRAME.registerComponent("stepcontainer", {
         }, 1400);
     });
 
-    this.move(0);
+    var that = this;
+    setTimeout(
+      function() {
+        that.move(0);
+      }, 1000);
   },
   next: function () {
     this.move(1);
@@ -52,6 +56,9 @@ AFRAME.registerComponent("stepcontainer", {
       updateControllerIcons(testTargets, 0);
       $("#selection-advice").get(0).setAttribute("visible", "true");
       $("#scrolling-advice").get(0).setAttribute("visible", "false");
+
+      // prevent scrolling tutorial from scrolling during first step
+      $(this.el).children("#tutorial-scroll").get(0).components["step"].pause();
     }
 
     // stop tutorial scroller from scrolling on other steps
