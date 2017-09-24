@@ -76,12 +76,12 @@ AFRAME.registerComponent("task", {
     setTimeout(
       function() {
     }, 500);
-    updateLogIconStart(this.data);
+    updateLogIconInit(this.data);
     console.log("first icon data", this.data);
 
     startButton.addEventListener("mouseup", function () {
-      // start timer for this icon
-      updateLogStartTimer();
+      // start timer for this icon and reset movement & scrolling
+      updateLogIconStarted();
       // show icons
       cardContainer.el.setAttribute("visible", true);
 
@@ -261,8 +261,8 @@ function newTaskIcon(data) {
   var icon = document.getElementById(iconID);
   icon.addEventListener("mouseup", iconSelected);
 
-  updateLogStartTimer();
-  updateLogIconStart(data);
+  updateLogIconInit(data);
+  updateLogIconStarted();
 }
 
 function updateControllerIcons(targetIcons, currentIcon) {
@@ -281,19 +281,18 @@ function updateControllerIcons(targetIcons, currentIcon) {
 
 }
 
-function updateLogIconStart(data) {
+function updateLogIconInit(data) {
   log.iconId = data.targetList[data.currentStage][data.currentIcon][0];
   log.iconPosition = data.iconList.indexOf(log.iconId);
-  console.log("id pos",log.iconId, log.iconPosition);
   log.trial = data.currentIcon;
   log.repeat = data.currentStage;
 
   log.errors = [];
-  log.movement = 0;
-  log.scrolling = 0;
 }
-function updateLogStartTimer() {
+function updateLogIconStarted() {
   log.startTimestamp = Date.now();
+  log.scrolling = 0;
+  log.movement = 0;
 }
 
 function updateLogIconEnd(data) {

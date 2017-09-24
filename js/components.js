@@ -90,3 +90,30 @@ function hoverableMouseup(e) {
     e.target.components.hoverable.data.clicked = true;
   }
 }
+
+
+AFRAME.registerComponent("trackmovement", {
+  schema: {
+    prevPosition: {type: "vec3", default: null},
+  },
+  tick: function () {
+    if (document.getElementById("right-hand").components.position.attrValue != null) {
+      var curr = document.getElementById("right-hand").components.position.attrValue;
+      var prev = this.data.prevPosition;
+
+      if (prev === null) {
+        this.data.prevPosition = curr;
+      }
+      else {
+        var length = Math.hypot(curr.x - prev.x, curr.y - prev.y, curr.z - prev.z);
+        if (length > 0.003) {
+          log.movement += length;
+        }
+        else {
+        }
+
+        this.data.prevPosition = curr;
+      }
+    }
+  },
+});
