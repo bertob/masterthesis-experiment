@@ -26,7 +26,7 @@ AFRAME.registerComponent("task", {
     this.el.appendChild(number);
 
     // offset of 2, because the first 2 steps are tutorials
-    this.el.setAttribute("step", "number: " + (stepPosition + 2));
+    this.el.setAttribute("step", "number: " + (stepPosition + 5));
   },
   setup: function () {
     $(".active-task").removeClass("active-task");
@@ -74,9 +74,6 @@ AFRAME.registerComponent("task", {
     startButton.appendChild(start);
 
     // update log item with new icon info
-    setTimeout(
-      function() {
-    }, 500);
     updateLogIconInit(this.data);
 
     startButton.addEventListener("mouseup", function () {

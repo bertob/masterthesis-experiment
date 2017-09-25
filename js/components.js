@@ -42,6 +42,9 @@ var log = {
   "errors": [],
 };
 
+var test = {};
+test.s = [{}, {}, {}];
+
 var stepContainer = document.getElementById("step-container");
 
 AFRAME.registerComponent("hoverable", {

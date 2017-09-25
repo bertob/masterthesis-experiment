@@ -13,8 +13,12 @@ AFRAME.registerComponent("card-space", {
       // 20 or 50 elements case
       for (var i=0; i<this.data.iconList.length; i++) {
         var card = document.createElement("a-entity");
-
-        if (this.data.size <= 20) {
+        if (this.data.size <= 15) {
+          card.setAttribute("id", "p15_" + i);
+          card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
+          card.setAttribute("position", getGridPosition20(i));
+        }
+        else if (this.data.size <= 20) {
           card.setAttribute("id", "p20_" + i);
           card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
           card.setAttribute("position", getGridPosition20(i));

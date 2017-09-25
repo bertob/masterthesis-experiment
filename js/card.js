@@ -138,3 +138,30 @@ function resetIcon(e) {
   e.target.components.card.data.clicked = false;
   e.target.components.card.data.target = false;
 }
+
+function testSelected(e) {
+  e.target.removeEventListener("mouseup", testSelected);
+  e.target.components.card.data.target = true;
+
+  test.currentIcon++;
+
+  if (test.currentIcon === 3) {
+    // move to next step
+    test.currentStep++;
+    test.currentIcon = 0;
+    test.currentId = test.stepIds[test.currentStep];
+    document.getElementById("step-container").components.stepcontainer.next();
+    if (test.currentStep <= 4) {
+      newTestIcon();
+    }
+  }
+  else {
+    newTestIcon();
+  }
+}
+
+function newTestIcon() {
+  var iconID = test.currentId + "_" + test.s[test.currentStep].targetList[test.currentIcon][1];
+  updateControllerIcons(test.s[test.currentStep].targetList, test.currentIcon);
+  document.getElementById(iconID).addEventListener("mouseup", testSelected);
+}

@@ -8,12 +8,13 @@ AFRAME.registerComponent("stepcontainer", {
     this.el.setAttribute("position", new THREE.Vector3(this.data.currentStep*(-STEP_DISTANCE), 0, -1));
 
     // scrolling tutorial
-    var icons = [227,66,185,214,11,55,220,231,67,46,144,239,47,32,61];
-    var testStack = $(this.el).children("#tutorial-scroll").children("[card-stack]").get(0);
-    testStack.components["card-stack"].setup(icons);
+    var icons = [227,66,185,214,11,55,220,231,67,46,144,239,47,32];
+    var testScroll = $(this.el).children("#tutorial-scroll").children("[card-stack]").get(0);
+    testScroll.components["card-stack"].setup(icons);
+
 
     // clicking last icon on scroller moves to next step
-    var last = $(testStack).children().get(14);
+    var last = $(testScroll).children().get(13);
 
     // give elements time to be generated
     setTimeout(
@@ -27,6 +28,7 @@ AFRAME.registerComponent("stepcontainer", {
           });
       }, 800);
 
+
     // clicking selection test target moves to next step
     document.getElementById("test-target").addEventListener("mouseup", function() {
       setTimeout(
@@ -34,6 +36,23 @@ AFRAME.registerComponent("stepcontainer", {
           document.getElementById("step-container").components.stepcontainer.next();
         }, 1400);
     });
+
+    // test conditions
+    // test [stack, clip, space]
+    test.s[0].iconList = randomList(15);
+    test.s[0].targetList = generateTargetList(15, test.s[0].iconList)[0];
+    test.s[1].iconList = randomList(15);
+    test.s[1].targetList = generateTargetList(15, test.s[1].iconList)[0];
+    test.s[2].iconList = randomList(15);
+    test.s[2].targetList = generateTargetList(15, test.s[2].iconList)[0];
+    test.currentStep = 0;
+    test.currentIcon = 0;
+    test.stepIds = ["c15", "s15", "p15"];
+    test.currentId = test.stepIds[0];
+
+    $(this.el).children("#tutorial-clip").children("[card-clip]").get(0).components["card-clip"].setup(test.s[0].iconList);
+    $(this.el).children("#tutorial-stack").children("[card-stack]").get(0).components["card-stack"].setup(test.s[1].iconList);
+    $(this.el).children("#tutorial-space").children("[card-space]").get(0).components["card-space"].setup(test.s[2].iconList);
 
     var that = this;
     setTimeout(
@@ -61,6 +80,8 @@ AFRAME.registerComponent("stepcontainer", {
 
       // prevent scrolling tutorial from scrolling during first step
       $(this.el).children("#tutorial-scroll").get(0).components["step"].pause();
+      $(this.el).children("#tutorial-stack").get(0).components["step"].pause();
+      $(this.el).children("#tutorial-clip").get(0).components["step"].pause();
     }
 
     // stop tutorial scroller from scrolling on other steps
@@ -70,25 +91,35 @@ AFRAME.registerComponent("stepcontainer", {
       $("#selection-advice").get(0).setAttribute("visible", "false");
       $("#scrolling-advice").get(0).setAttribute("visible", "true");
     }
-    else {
-      $(this.el).children("#tutorial-scroll").get(0).components["step"].pause();
-      $("#controller-icons").get(0).setAttribute("visible", "true");
-    }
-
+    // test clip
     if (this.data.currentStep === 2) {
+      $(this.el).children("#tutorial-scroll").get(0).components["step"].pause();
+      $(this.el).children("#tutorial-clip").get(0).components["step"].play();
       $("#scrolling-advice").get(0).setAttribute("visible", "false");
+      $("#controller-icons").get(0).setAttribute("visible", "true");
+
+      newTestIcon();
+    }
+    // test stack
+    if (this.data.currentStep === 3) {
+      $(this.el).children("#tutorial-clip").get(0).components["step"].pause();
+      $(this.el).children("#tutorial-stack").get(0).components["step"].play();
+    }
+    // test space
+    if (this.data.currentStep === 4) {
+      $(this.el).children("#tutorial-stack").get(0).components["step"].pause();
     }
 
     // first experiment
-    if (this.data.currentStep === 2) {
+    if (this.data.currentStep === 5) {
       this.el.components.taskcontainer.first();
     }
     // experiment tasks
-    if (this.data.currentStep > 2 && this.data.currentStep < 11) {
+    if (this.data.currentStep > 5 && this.data.currentStep < 14) {
       this.el.components.taskcontainer.move(movement);
     }
     // last step
-    if (this.data.currentStep === 11) {
+    if (this.data.currentStep === 14) {
       exportLogs();
     }
 

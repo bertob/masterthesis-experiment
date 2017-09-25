@@ -355,7 +355,18 @@
         </a-entity>
 
         <!-- scrolling test cards -->
+        <a-entity card-stack="size: 14" position="0.55 0 0"></a-entity>
+      </a-entity>
+
+      <!-- test conditions -->
+      <a-entity id="tutorial-clip" class="non-task" step="number: 2">
+        <a-entity card-clip="size: 15" position="0.55 0 0"></a-entity>
+      </a-entity>
+      <a-entity id="tutorial-stack" class="non-task" step="number: 3">
         <a-entity card-stack="size: 15" position="0.55 0 0"></a-entity>
+      </a-entity>
+      <a-entity id="tutorial-space" class="non-task" step="number: 4">
+        <a-entity cards card-space="size: 15"></a-entity>
       </a-entity>
 
 
@@ -400,7 +411,7 @@
 
 
       <!-- FINAL STEP -->
-      <a-entity id="end" class="non-task" step="number: 11">
+      <a-entity id="end" class="non-task" step="number: 14">
         <a-entity position="-1.9 0.4 -1" text-geometry="value: End; size: 1.8; height: 0.001;" material="color: white"></a-entity>
 
         <!-- info box -->
