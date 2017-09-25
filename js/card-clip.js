@@ -1,5 +1,6 @@
 var visible_items_clip = 10;
 var top_baseline_clip = y_offset + (visible_items_clip - 1) * (card_h + y_gap);
+var bottom_baseline_clip = 0.8;
 
 AFRAME.registerComponent("card-clip", {
   schema: {
@@ -35,7 +36,7 @@ AFRAME.registerComponent("card-clip", {
     bottomBarrier.setAttribute("geometry", "primitive: box; width:" + barrier_w +
                          "; height:" + barrier_h + "; depth: " + barrier_d + ";");
     bottomBarrier.setAttribute("material", "color: #113");
-    bottomBarrier.setAttribute("position", new THREE.Vector3( 0, (bottom_baseline), z_offset ));
+    bottomBarrier.setAttribute("position", new THREE.Vector3( 0, (bottom_baseline_clip), z_offset ));
     this.el.appendChild(bottomBarrier);
   },
   teardown: function () {
@@ -58,7 +59,7 @@ AFRAME.registerComponent("clipped", {
 
     x = x_offset;
     new_y = y_offset + 1.3 - real_position * (card_h + y_gap);
-    y = getClippedY(new_y, bottom_baseline, top_baseline_clip);
+    y = getClippedY(new_y, bottom_baseline_clip, top_baseline_clip);
     z = z_offset;
 
     this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
@@ -99,7 +100,7 @@ AFRAME.registerComponent("clipped", {
           var new_y = now.cardY; // theoretical new y value
 
           x = x_offset;
-          y = getClippedY(new_y, bottom_baseline, top_baseline_clip);
+          y = getClippedY(new_y, bottom_baseline_clip, top_baseline_clip);
           z = z_offset;
 
           this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
