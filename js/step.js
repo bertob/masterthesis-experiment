@@ -24,7 +24,7 @@ AFRAME.registerComponent("stepcontainer", {
           setTimeout(
             function() {
               document.getElementById("step-container").components.stepcontainer.next();
-            }, 1400);
+            }, 1000);
           });
       }, 800);
 
@@ -34,7 +34,7 @@ AFRAME.registerComponent("stepcontainer", {
       setTimeout(
         function() {
           document.getElementById("step-container").components.stepcontainer.next();
-        }, 1400);
+        }, 1000);
     });
 
     // test conditions

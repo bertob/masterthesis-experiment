@@ -150,7 +150,12 @@ function testSelected(e) {
     test.currentStep++;
     test.currentIcon = 0;
     test.currentId = test.stepIds[test.currentStep];
-    document.getElementById("step-container").components.stepcontainer.next();
+
+    setTimeout(
+      function() {
+        document.getElementById("step-container").components.stepcontainer.next();
+      }, 1000);
+
     if (test.currentStep <= 4) {
       newTestIcon();
     }
