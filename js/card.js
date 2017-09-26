@@ -13,7 +13,7 @@ AFRAME.registerComponent("card", {
   init: function () {
     var id = this.data.id;
     if (id === -1)
-      id = Math.floor(Math.random()*250) + 1;
+      id = Math.floor(Math.random()*150) + 1;
 
     this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
                          "; height:" + card_h + "; depth: " + card_d + ";");

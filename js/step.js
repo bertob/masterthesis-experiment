@@ -8,7 +8,7 @@ AFRAME.registerComponent("stepcontainer", {
     this.el.setAttribute("position", new THREE.Vector3(this.data.currentStep*(-STEP_DISTANCE), 0, -1));
 
     // scrolling tutorial
-    var icons = [227,66,185,214,11,55,220,231,67,46,144,239,47,32];
+    var icons = [27,66,15,84,11,55,20,41,67,46,144,139,47,32];
     var testScroll = $(this.el).children("#tutorial-scroll").children("[card-stack]").get(0);
     testScroll.components["card-stack"].setup(icons);
 
