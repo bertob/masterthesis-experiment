@@ -2,6 +2,7 @@ AFRAME.registerComponent("card-space", {
   schema: {
     size: {type: "int"},
     iconList: {type: "array"},
+    degrees: {type: "int", default: 120},
   },
   init: function () {
   },
@@ -9,44 +10,29 @@ AFRAME.registerComponent("card-space", {
     this.teardown();
     this.data.iconList = iconList;
 
-    if (this.data.size <= 50) {
-      // 20 or 50 elements case
-      for (var i=0; i<this.data.iconList.length; i++) {
-        var card = document.createElement("a-entity");
-        if (this.data.size <= 15) {
-          card.setAttribute("id", "p15_" + i);
-          card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
-          card.setAttribute("position", getGridPosition20(i));
-        }
-        else if (this.data.size <= 20) {
-          card.setAttribute("id", "p20_" + i);
-          card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
-          card.setAttribute("position", getGridPosition20(i));
-        }
-        else if (this.data.size <= 50) {
-          card.setAttribute("id", "p50_" + i);
-          card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
-          card.setAttribute("position", getGridPosition50(i));
-        }
-
-        this.el.appendChild(card);
+    for (var i=0; i<this.data.iconList.length; i++) {
+      var card = document.createElement("a-entity");
+      if (this.data.size <= 15) {
+        card.setAttribute("id", "p15_" + i);
+        card.setAttribute("position", getGridPosition20(i));
       }
-
-    }
-    else {
-      // 150 elements case
-      for (var i=0; i<this.data.iconList.length; i++) {
-        var parentPanelId = Math.floor(i/50);
-        var parentPanel = document.getElementById("panel-" + parentPanelId);
-
-        var card = document.createElement("a-entity");
+      else if (this.data.size <= 20) {
+        card.setAttribute("id", "p20_" + i);
+        card.setAttribute("position", getGridPosition20(i));
+      }
+      else if (this.data.size <= 50) {
+        card.setAttribute("id", "p50_" + i);
+        card.setAttribute("position", getGridPosition50(i));
+      }
+      else if (this.data.size <= 150) {
+        var angular_gap = this.data.degrees/15;
         card.setAttribute("id", "p150_" + i);
-        card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
-        card.setAttribute("position", getGridPosition150(i, parentPanelId));
-
-        parentPanel.appendChild(card);
+        card.setAttribute("position", getGridPosition150(i, this.data.degrees, angular_gap));
+        card.setAttribute("rotation", getGridRotation150(i, this.data.degrees, angular_gap));
       }
 
+      card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
+      this.el.appendChild(card);
     }
   },
   teardown: function () {
@@ -88,20 +74,23 @@ function getGridPosition50 (index) {
   return new THREE.Vector3( x, y, z );
 }
 
-function getGridPosition150 (index, parentPanelId) {
-  var columns = 5;
-  var gap = 0.02;
+var ring = {};
+ring.x = 0;
+ring.y = 1;
+ring.z = 1;
+ring.radius = 1.4;
+ring.vertical_gap = 0.2; // vertical distance between rows
 
-  var relative_index = index - (parentPanelId*50)
+function getGridPosition150 (i, fov, angular_gap) {
+  var x, y, z;
+  var a = (i*angular_gap)%fov + (180 + (90 - fov/2) + angular_gap/2);
 
-  var row_width = (columns * card_w) + ((columns - 1) * gap);
-  var base_x = -1 * (row_width / 2);
-  var base_y = 2;
-  var base_z = z_offset;
-
-  var x = base_x + (relative_index % columns) * (card_w + gap);
-  var y = base_y - Math.floor(relative_index / columns) * (card_h + gap);
-  var z = base_z;
-
+  x = ring.x + Math.cos(a*Math.PI/180) * ring.radius;
+  y = ring.y - (Math.floor(i/15) * ring.vertical_gap) + 1.1;
+  z = ring.z + Math.sin(a*Math.PI/180) * ring.radius;
   return new THREE.Vector3( x, y, z );
+}
+function getGridRotation150(i, fov, angular_gap) {
+  var a = (i*angular_gap)%fov + (180 + (90 - fov/2) + angular_gap/2);
+  return new THREE.Vector3( 0, 90-a, 0 );
 }
