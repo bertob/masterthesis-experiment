@@ -73,7 +73,7 @@ AFRAME.registerComponent("stepcontainer", {
     $(".start-button").remove();
 
     if (this.data.currentStep === 0) {
-      var testTargets = [[87, 0], [0,0], [0,0], [0,0], [0,0]];
+      var testTargets = [[176, 0], [12,0], [12,0], [12,0], [12,0]];
       updateControllerIcons(testTargets, 0);
       $("#selection-advice").get(0).setAttribute("visible", "true");
       $("#scrolling-advice").get(0).setAttribute("visible", "false");
