@@ -85,6 +85,7 @@ AFRAME.registerComponent("task", {
       setTimeout(
         function() {
           $(startButton).remove();
+          $(".first-task-popup").remove();
       }, 100);
     });
     this.el.appendChild(startButton);
