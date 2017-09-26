@@ -3,9 +3,10 @@
 #Background from color hashes
 
 COLOR_LIST=( "#19aeff" "#ff6600" "#ba00ff" "#9ade00" "#ff4141" "#9eabb0" "#ffff3e" "#b88100" "#57e4e8" "#fff" )
-WIDTH=800
-HEIGHT=800
-SVG_DIR=$PWD/svg-icons
+COLOR_LIST_2=( "#fff" "#19aeff" "#ff6600" "#ba00ff" "#9ade00" "#ff4141" "#9eabb0" "#ffff3e" "#b88100" "#57e4e8" )
+WIDTH=128
+HEIGHT=128
+SVG_DIR=$PWD/svg
 OUTPUT=$PWD/png-icons
 
 line='viewBox="0 0 48 48"'
@@ -20,7 +21,8 @@ color=0
 name=1;
 for i in *; do
   sed -i "s/${line}/${rep}/g" $i
-  inkscape -z --file=$i --export-png=$OUTPUT/$name.png --export-area-drawing --export-background=${COLOR_LIST[color]}  --export-width=$WIDTH --export-height=$HEIGHT --export-area-page
+  name_2=$((name+250))
+  inkscape -z --file=$i --export-png=$OUTPUT/$name_2.png --export-area-drawing --export-background=${COLOR_LIST[color]}  --export-width=$WIDTH --export-height=$HEIGHT --export-area-page
   name=$((name+1))
 
   if [ $((color+1)) -lt ${#COLOR_LIST[@]} ] ; then
