@@ -258,12 +258,42 @@
 
       <!-- test conditions -->
       <a-entity id="tutorial-clip" class="non-task" step="number: 2">
+
+        <!-- info box -->
+        <a-entity position="-0.42 1.5 -0.1" geometry="primitive: box; width: 1.4; height: 1.1; depth: 0.08" material="color: black; opacity: 0.8">
+          <a-entity position="0 0.15 0.05">
+            <a-entity position="-0.43 0.1 0" text-geometry="value: Example Task; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+
+            <a-entity position="-0.32 -0.08 0" text-geometry="value: Select 3 icons, following the; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+            <a-entity position="-0.34 -0.17 0" text-geometry="value: instructions on your controller; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+
+            <a-entity position="-0.36 -0.38 0" text-geometry="value: Note: You don't have to hover; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+            <a-entity position="-0.2 -0.47 0" text-geometry="value: the icons to scroll; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+          </a-entity>
+        </a-entity>
+
         <a-entity card-clip="size: 15" position="0.55 0 0"></a-entity>
       </a-entity>
       <a-entity id="tutorial-stack" class="non-task" step="number: 3">
+
+        <!-- info box -->
+        <a-entity position="-0.7 1.4 -0.1" geometry="primitive: box; width: 1.35; height: 0.75; depth: 0.08" material="color: black; opacity: 0.8">
+          <a-entity position="-0.51 0.1 0.05" text-geometry="value: Another Example; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+          <a-entity position="-0.32 -0.08 0.05" text-geometry="value: Same task as before, find; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+          <a-entity position="-0.23 -0.17 0.05" text-geometry="value: and select 3 icons; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+        </a-entity>
+
         <a-entity card-stack="size: 15" position="0.55 0 0"></a-entity>
       </a-entity>
       <a-entity id="tutorial-space" class="non-task" step="number: 4">
+
+        <!-- info box -->
+        <a-entity position="-0.1 0.9 -0.1" geometry="primitive: box; width: 1.35; height: 0.75; depth: 0.08" material="color: black; opacity: 0.8">
+          <a-entity position="-0.42 0.1 0.05" text-geometry="value: Last Example!; size: 0.1; height: 0.001;" material="color: white"></a-entity>
+          <a-entity position="-0.32 -0.08 0.05" text-geometry="value: Same task as before, find; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+          <a-entity position="-0.23 -0.17 0.05" text-geometry="value: and select 3 icons; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+        </a-entity>
+
         <a-entity cards card-space="size: 15"></a-entity>
       </a-entity>
 
@@ -316,7 +346,7 @@
         <a-entity position="0 1.6 -0.1" geometry="primitive: box; width: 1.35; height: 0.75; depth: 0.08" material="color: black; opacity: 0.8">
           <a-entity position="-0.35 0.1 0.05" text-geometry="value: Thank you!; size: 0.1; height: 0.001;" material="color: white"></a-entity>
           <a-entity position="-0.52 -0.08 0.05" text-geometry="value: You've reached the end of the experiment.; size: 0.04; height: 0.001;" material="color: white"></a-entity>
-          <a-entity position="-0.52 -0.17 0.05" text-geometry="value: You can now take off your headset.; size: 0.04; height: 0.001;" material="color: white"></a-entity>
+          <a-entity position="-0.43 -0.17 0.05" text-geometry="value: You can now take off your headset.; size: 0.04; height: 0.001;" material="color: white"></a-entity>
         </a-entity>
 
       </a-entity>
