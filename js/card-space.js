@@ -25,9 +25,24 @@ AFRAME.registerComponent("card-space", {
         card.setAttribute("position", getGridPosition50(i));
       }
       else if (this.data.size <= 150) {
+        this.data.degrees = 120;
         var angular_gap = this.data.degrees/15;
         card.setAttribute("id", "p150_" + i);
-        card.setAttribute("position", getGridPosition150(i, this.data.degrees, angular_gap));
+        card.setAttribute("position", getGridPosition150(i, this.data.degrees, angular_gap, 15));
+        card.setAttribute("rotation", getGridRotation150(i, this.data.degrees, angular_gap));
+      }
+      else if (this.data.size <= 250) {
+        this.data.degrees = 200;
+        var angular_gap = this.data.degrees/25;
+        card.setAttribute("id", "p250_" + i);
+        card.setAttribute("position", getGridPosition150(i, this.data.degrees, angular_gap, 25));
+        card.setAttribute("rotation", getGridRotation150(i, this.data.degrees, angular_gap));
+      }
+      else if (this.data.size <= 450) {
+        this.data.degrees = 360;
+        var angular_gap = this.data.degrees/45;
+        card.setAttribute("id", "p450_" + i);
+        card.setAttribute("position", getGridPosition150(i, this.data.degrees, angular_gap, 45));
         card.setAttribute("rotation", getGridRotation150(i, this.data.degrees, angular_gap));
       }
 
@@ -81,12 +96,12 @@ ring.z = 1;
 ring.radius = 1.4;
 ring.vertical_gap = 0.2; // vertical distance between rows
 
-function getGridPosition150 (i, fov, angular_gap) {
+function getGridPosition150 (i, fov, angular_gap, icons_per_row) {
   var x, y, z;
   var a = (i*angular_gap)%fov + (180 + (90 - fov/2) + angular_gap/2);
 
   x = ring.x + Math.cos(a*Math.PI/180) * ring.radius;
-  y = ring.y - (Math.floor(i/15) * ring.vertical_gap) + 1.1;
+  y = ring.y - (Math.floor(i/icons_per_row) * ring.vertical_gap) + 1.1;
   z = ring.z + Math.sin(a*Math.PI/180) * ring.radius;
   return new THREE.Vector3( x, y, z );
 }

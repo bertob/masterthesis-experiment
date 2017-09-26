@@ -115,11 +115,11 @@ AFRAME.registerComponent("stepcontainer", {
       this.el.components.taskcontainer.first();
     }
     // experiment tasks
-    if (this.data.currentStep > 5 && this.data.currentStep < 14) {
+    if (this.data.currentStep > 5 && this.data.currentStep < 16) {
       this.el.components.taskcontainer.move(movement);
     }
     // last step
-    if (this.data.currentStep === 14) {
+    if (this.data.currentStep === 16) {
       exportLogs();
     }
 
