@@ -2,6 +2,10 @@ var card_w = 0.17;
 var card_h = card_w;
 var card_d = 0.0009;
 
+var border_w = 0.002
+var border_l = card_w + border_w;
+var border_d = card_d + 0.001
+
 AFRAME.registerComponent("card", {
   schema: {
     id: {type: "int", default: -1},
@@ -18,6 +22,34 @@ AFRAME.registerComponent("card", {
     this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
                          "; height:" + card_h + "; depth: " + card_d + ";");
     this.el.setAttribute("material", "color: white; src: #img" + id);
+
+    var topBorder = document.createElement("a-entity");
+    topBorder.setAttribute("position", "0 " + (card_w/2) + " 0.001");
+    topBorder.setAttribute("geometry", "primitive: box; width: "+ border_l +"; height: "+ border_w +"; depth:"+ border_d);
+    topBorder.setAttribute("material", "color: gray");
+    topBorder.setAttribute("hoverable", "");
+    this.el.appendChild(topBorder);
+
+    var rightBorder = document.createElement("a-entity");
+    rightBorder.setAttribute("position", (-card_w/2) + "0 0.001");
+    rightBorder.setAttribute("geometry", "primitive: box; width: "+ border_w +"; height: "+ border_l +"; depth:"+ border_d);
+    rightBorder.setAttribute("material", "color: gray");
+    rightBorder.setAttribute("hoverable", "");
+    this.el.appendChild(rightBorder);
+
+    var bottomBorder = document.createElement("a-entity");
+    bottomBorder.setAttribute("position", "0 " + (-card_w/2) + " 0.001");
+    bottomBorder.setAttribute("geometry", "primitive: box; width: "+ border_l +"; height: "+ border_w +"; depth:"+ border_d);
+    bottomBorder.setAttribute("material", "color: gray");
+    bottomBorder.setAttribute("hoverable", "");
+    this.el.appendChild(bottomBorder);
+
+    var leftBorder = document.createElement("a-entity");
+    leftBorder.setAttribute("position", (card_w/2) + "0 0.001");
+    leftBorder.setAttribute("geometry", "primitive: box; width: "+ border_w +"; height: "+ border_l +"; depth:"+ border_d);
+    leftBorder.setAttribute("material", "color: gray");
+    leftBorder.setAttribute("hoverable", "");
+    this.el.appendChild(leftBorder);
   },
   pause: function () {
     this.el.removeEventListener("mouseenter", cardMouseover);
