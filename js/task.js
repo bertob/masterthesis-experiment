@@ -20,7 +20,7 @@ AFRAME.registerComponent("task", {
 
     var number = document.createElement("a-entity");
     number.setAttribute("class", "task-number");
-    number.setAttribute("position", "-1.5 0.4 -1");
+    number.setAttribute("position", "-1.5 2.4 -1");
     number.setAttribute("material", "color: white");
     number.setAttribute("text-geometry", "value: " + (stepPosition+1) + "; size: 1.8; height: 0.01;");
     this.el.appendChild(number);
