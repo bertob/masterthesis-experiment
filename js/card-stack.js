@@ -103,7 +103,7 @@ AFRAME.registerComponent("stacked", {
           y = position[1];
           z = position[2];
           this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
-          this.el.setAttribute("material", "opacity: " + getCardOpacity(now.cardY));
+          // this.el.setAttribute("material", "opacity: " + getCardOpacity(now.cardY));
 
           this.prev.position = [x, now.cardY, z];
           this.prev.absDeltaY = now.absDeltaY;
