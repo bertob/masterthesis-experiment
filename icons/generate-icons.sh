@@ -2,9 +2,10 @@
 #720x720px the icon with colored background 800x800px
 #Background from color hashes
 
-COLOR_LIST=( "#19aeff" "#ff6600" "#ba00ff" "#9ade00" "#ff4141" "#9eabb0" "#ffff3e" "#b88100" "#57e4e8" "#fff" )
-WIDTH=800
-HEIGHT=800
+COLOR_LIST__2=( "#19aeff" "#ff6600" "#ba00ff" "#9ade00" "#ff4141" "#9eabb0" "#ffff3e" "#b88100" "#57e4e8" "#fff" )
+COLOR_LIST=( "#fff" )
+WIDTH=128
+HEIGHT=128
 SVG_DIR=$PWD/svg-icons
 OUTPUT=$PWD/png-icons
 
