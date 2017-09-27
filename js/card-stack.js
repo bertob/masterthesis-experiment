@@ -103,6 +103,7 @@ AFRAME.registerComponent("stacked", {
           y = position[1];
           z = position[2];
           this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
+          this.el.setAttribute("material", "opacity: " + getCardOpacity(now.cardY));
 
           this.prev.position = [x, now.cardY, z];
           this.prev.absDeltaY = now.absDeltaY;
@@ -140,7 +141,6 @@ function getCardPosition (new_y, bottom_baseline, x_offset, z_offset) {
     // visible in list
     y = new_y;
     z = z_offset;
-    visible = true;
   }
   return [x_offset, y, z];
 }
@@ -156,6 +156,25 @@ function getStackedY(y) {
 function getCardDepth(y) {
   var z_distance = 0.14;
   return y * z_distance;
+}
+
+function getCardOpacity(new_y) {
+  var opacity = 1;
+  if (new_y < bottom_baseline) {
+    // stacked on bottom
+    var y_below = bottom_baseline - new_y; // how far below bottom baseline
+    opacity = 1 - Math.sqrt(y_below * 0.1);
+  }
+  else if (new_y > top_baseline) {
+    // stacked on top
+    var y_above = new_y - top_baseline; // how far above top baseline
+    opacity = 1 - Math.sqrt(y_above * 0.1);
+  }
+  else {
+    // visible in list
+    opacity = 1;
+  }
+  return opacity;
 }
 
 function getCursorY() {
