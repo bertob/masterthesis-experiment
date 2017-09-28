@@ -183,10 +183,41 @@ function testSelected(e) {
     test.currentIcon = 0;
     test.currentId = test.stepIds[test.currentStep];
 
-    setTimeout(
-      function() {
-        document.getElementById("step-container").components.stepcontainer.next();
-      }, 1000);
+    var nextButton = document.createElement("a-entity");
+    nextButton.setAttribute("position", "0 1.03 0.6");
+    nextButton.setAttribute("scale", "1 1 1");
+    nextButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
+    nextButton.setAttribute("material", "color: white; opacity: 0.01");
+    nextButton.setAttribute("hoverable", "");
+
+    var nextRect = document.createElement("a-entity");
+    nextRect.setAttribute("class", "task-next-popup");
+    nextRect.setAttribute("position", "0 0 0");
+    nextRect.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.02");
+    nextRect.setAttribute("material", "color: gray; opacity: 0.8");
+    nextButton.appendChild(nextRect);
+
+    var next = document.createElement("a-entity");
+    next.setAttribute("class", "task-next-popup");
+    next.setAttribute("position", "-0.07 -0.03 0.03");
+    next.setAttribute("material", "color: black");
+    next.setAttribute("text-geometry", "value: Next; size: 0.05; height: 0.001;");
+    nextButton.appendChild(next);
+
+    nextButton.addEventListener("mouseup", function () {
+      document.getElementById("step-container").components.stepcontainer.next();
+      setTimeout(
+        function() {
+          $(nextButton).remove();
+          $(done).remove();
+          $(doneRect).remove();
+      }, 300);
+    });
+    var stepId = "tutorial-clip";
+    console.log("step", test.currentStep);
+    if (test.currentStep === 2) stepId = "tutorial-stack";
+    else if (test.currentStep === 3) stepId = "tutorial-space";
+    document.getElementById(stepId).appendChild(nextButton);
 
     if (test.currentStep <= 4) {
       newTestIcon();
