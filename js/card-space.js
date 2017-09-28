@@ -25,10 +25,8 @@ AFRAME.registerComponent("card-space", {
         card.setAttribute("position", getGridPosition50(i));
       }
       else if (this.data.size <= 150) {
-        var angular_gap = this.data.degrees/15;
         card.setAttribute("id", "p150_" + i);
-        card.setAttribute("position", getGridPosition150(i, this.data.degrees, angular_gap));
-        card.setAttribute("rotation", getGridRotation150(i, this.data.degrees, angular_gap));
+        card.setAttribute("position", getGridPosition150(i));
       }
 
       card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
@@ -47,7 +45,7 @@ function getGridPosition20 (index) {
   var gap = 0.02;
 
   var row_width = (columns * card_w) + ((columns - 1) * gap);
-  var base_x = -1 * (row_width / 2);
+  var base_x = -1 * (row_width / 2) + (card_w/2);
   var base_y = 1.8;
   var base_z = z_offset;
 
@@ -63,8 +61,24 @@ function getGridPosition50 (index) {
   var gap = 0.02;
 
   var row_width = (columns * card_w) + ((columns - 1) * gap);
-  var base_x = -1 * (row_width / 2);
+  var base_x = -1 * (row_width / 2) + (card_w/2);
   var base_y = 1.8;
+  var base_z = z_offset;
+
+  var x = base_x + (index % columns) * (card_w + gap);
+  var y = base_y - Math.floor(index / columns) * (card_h + gap);
+  var z = base_z;
+
+  return new THREE.Vector3( x, y, z );
+}
+
+function getGridPosition150 (index) {
+  var columns = 15;
+  var gap = 0.02;
+
+  var row_width = (columns * card_w) + ((columns - 1) * gap);
+  var base_x = -1 * (row_width / 2) + (card_w/2);
+  var base_y = 2.1;
   var base_z = z_offset;
 
   var x = base_x + (index % columns) * (card_w + gap);
@@ -81,7 +95,7 @@ ring.z = 1;
 ring.radius = 1.4;
 ring.vertical_gap = 0.2; // vertical distance between rows
 
-function getGridPosition150 (i, fov, angular_gap) {
+function getGridPositionCylinder150 (i, fov, angular_gap) {
   var x, y, z;
   var a = (i*angular_gap)%fov + (180 + (90 - fov/2) + angular_gap/2);
 
