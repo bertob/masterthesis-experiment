@@ -69,14 +69,15 @@ AFRAME.registerComponent("card", {
 });
 
 function cardMouseover(e) {
-  console.log("mouseOVERRR", e.target.componets);
-  e.target.setAttribute("animation__hover", {
-    "property": "scale",
-    "dir": "alternate",
-    "dur": 100,
-    "easing": "easeOutQuad",
-    "to": "1.1 1.1 1",
-  });
+  if (!e.target.components.card.data.clicked) {
+    e.target.setAttribute("animation__hover", {
+      "property": "scale",
+      "dir": "alternate",
+      "dur": 100,
+      "easing": "easeOutQuad",
+      "to": "1.1 1.1 1",
+    });
+  }
 }
 
 function cardMouseleave(e) {
@@ -112,7 +113,6 @@ function cardMouseup(e) {
   });
 
   // only register the click if the card hasn't moved too much
-  // if (!scrolling && Math.abs(newCardY - oldCardY) < 0.03) {
   if (isValidSelection(e.target)) {
     if (!cardData.clicked) {
       e.target.setAttribute("animation__hover", {

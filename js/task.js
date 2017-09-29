@@ -264,19 +264,22 @@ function newTaskIcon(data) {
 }
 
 function updateControllerIcons(targetIcons, currentIcon) {
-  var controllerIcons = $("#controller-icons").children("a-entity");
-  var i = 0;
-  [].forEach.call(controllerIcons, function(controllerIcon) {
-    var iconType = targetIcons[i][0];
 
-    if (i === currentIcon)
-      controllerIcon.setAttribute("material", "color: white; opacity: 1; src: #img" + iconType);
-    else
-      controllerIcon.setAttribute("material", "color: black; opacity: 0.8");
+  setTimeout(
+    function() {
+      var controllerIcons = $("#controller-icons").children("a-entity");
+      var i = 0;
+      [].forEach.call(controllerIcons, function(controllerIcon) {
+        var iconType = targetIcons[i][0];
 
-    i++;
-  });
+        if (i === currentIcon)
+        controllerIcon.setAttribute("material", "color: white; opacity: 1; src: #img" + iconType);
+        else
+        controllerIcon.setAttribute("material", "color: black; opacity: 0.8");
 
+        i++;
+      });
+    }, 400);
 }
 
 function updateLogIconInit(data) {
