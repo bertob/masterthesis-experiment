@@ -116,6 +116,7 @@ AFRAME.registerComponent("stepcontainer", {
 
     // first experiment
     if (this.data.currentStep === 5) {
+      $(this.el).children(".tutorial").find("[card]").remove();
       this.el.components.taskcontainer.first();
     }
     // experiment tasks

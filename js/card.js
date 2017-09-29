@@ -24,28 +24,28 @@ AFRAME.registerComponent("card", {
     this.el.setAttribute("material", "color: white; src: #img" + id);
 
     var topBorder = document.createElement("a-entity");
-    topBorder.setAttribute("position", "0 " + (card_w/2) + " 0.001");
+    topBorder.setAttribute("position", "0 " + (card_w/2) + " 0");
     topBorder.setAttribute("geometry", "primitive: box; width: "+ border_l +"; height: "+ border_w +"; depth:"+ border_d);
     topBorder.setAttribute("material", "color: gray");
     topBorder.setAttribute("hoverable", "");
     this.el.appendChild(topBorder);
 
     var rightBorder = document.createElement("a-entity");
-    rightBorder.setAttribute("position", (-card_w/2) + "0 0.001");
+    rightBorder.setAttribute("position", (-card_w/2) + "0 0");
     rightBorder.setAttribute("geometry", "primitive: box; width: "+ border_w +"; height: "+ border_l +"; depth:"+ border_d);
     rightBorder.setAttribute("material", "color: gray");
     rightBorder.setAttribute("hoverable", "");
     this.el.appendChild(rightBorder);
 
     var bottomBorder = document.createElement("a-entity");
-    bottomBorder.setAttribute("position", "0 " + (-card_w/2) + " 0.001");
+    bottomBorder.setAttribute("position", "0 " + (-card_w/2) + " 0");
     bottomBorder.setAttribute("geometry", "primitive: box; width: "+ border_l +"; height: "+ border_w +"; depth:"+ border_d);
     bottomBorder.setAttribute("material", "color: gray");
     bottomBorder.setAttribute("hoverable", "");
     this.el.appendChild(bottomBorder);
 
     var leftBorder = document.createElement("a-entity");
-    leftBorder.setAttribute("position", (card_w/2) + "0 0.001");
+    leftBorder.setAttribute("position", (card_w/2) + "0 0");
     leftBorder.setAttribute("geometry", "primitive: box; width: "+ border_w +"; height: "+ border_l +"; depth:"+ border_d);
     leftBorder.setAttribute("material", "color: gray");
     leftBorder.setAttribute("hoverable", "");
@@ -69,15 +69,14 @@ AFRAME.registerComponent("card", {
 });
 
 function cardMouseover(e) {
-  if (!e.target.components.card.data.clicked && !scrolling) {
-    e.target.setAttribute("animation__hover", {
-      "property": "scale",
-      "dir": "alternate",
-      "dur": 100,
-      "easing": "easeOutQuad",
-      "to": "1.1 1.1 1",
-    });
-  }
+  console.log("mouseOVERRR", e.target.componets);
+  e.target.setAttribute("animation__hover", {
+    "property": "scale",
+    "dir": "alternate",
+    "dur": 100,
+    "easing": "easeOutQuad",
+    "to": "1.1 1.1 1",
+  });
 }
 
 function cardMouseleave(e) {

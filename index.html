@@ -7,7 +7,6 @@
 
   <script src='lib/jquery.min.js'></script>
   <script src='lib/aframe.min.js'></script>
-  <script src='lib/aframe-extras.min.js'></script>
   <script src='lib/aframe-text-geometry-component.min.js'></script>
   <script src='lib/aframe-animation-component.min.js'></script>
 
@@ -217,7 +216,7 @@
     <a-entity id="step-container" taskcontainer="currentTask: 0" stepcontainer="currentStep: 0" position="0 0 -1">
 
       <!-- SELECTION TUTORIAL -->
-      <a-entity id="tutorial-select" class="non-task" step="number: 0">
+      <a-entity id="tutorial-select" class="tutorial non-task" step="number: 0">
         <a-entity position="-1.9 2.4 -1" text-geometry="value: Tutorial; size: 1.8; height: 0.001;" material="color: white"></a-entity>
 
         <!-- info box -->
@@ -237,7 +236,7 @@
       </a-entity>
 
       <!-- SCROLLING TUTORIAL -->
-      <a-entity id="tutorial-scroll" class="non-task" step="number: 1">
+      <a-entity id="tutorial-scroll" class="tutorial non-task" step="number: 1">
 
         <!-- info box -->
         <a-entity position="-0.26 1.5 -0.1" geometry="primitive: box; width: 1.2; height: 1.1; depth: 0.08" material="color: black; opacity: 0.8">
@@ -260,7 +259,7 @@
       </a-entity>
 
       <!-- test conditions -->
-      <a-entity id="tutorial-clip" class="non-task" step="number: 2">
+      <a-entity id="tutorial-clip" class="tutorial non-task" step="number: 2">
         <a-entity position="-1.9 2.4 -1" text-geometry="value: Examples; size: 1.8; height: 0.001;" material="color: white"></a-entity>
 
         <!-- info box -->
@@ -281,7 +280,7 @@
 
         <a-entity card-clip="size: 15" position="0.55 0 0"></a-entity>
       </a-entity>
-      <a-entity id="tutorial-stack" class="non-task" step="number: 3">
+      <a-entity id="tutorial-stack" class="tutorial non-task" step="number: 3">
 
         <!-- info box -->
         <a-entity position="-0.4 1.4 -0.1" geometry="primitive: box; width: 1.35; height: 0.75; depth: 0.08" material="color: black; opacity: 0.8">
@@ -292,7 +291,7 @@
 
         <a-entity card-stack="size: 15" position="0.55 0 0"></a-entity>
       </a-entity>
-      <a-entity id="tutorial-space" class="non-task" step="number: 4">
+      <a-entity id="tutorial-space" class="tutorial non-task" step="number: 4">
 
         <!-- info box -->
         <a-entity position="-0.1 1.7 -0.1" geometry="primitive: box; width: 1.35; height: 0.75; depth: 0.08" material="color: black; opacity: 0.8">
