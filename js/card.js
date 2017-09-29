@@ -69,7 +69,7 @@ AFRAME.registerComponent("card", {
 });
 
 function cardMouseover(e) {
-  if (!e.target.components.card.data.clicked) {
+  if (!e.target.components.card.data.clicked && !scrolling) {
     e.target.setAttribute("animation__hover", {
       "property": "scale",
       "dir": "alternate",
@@ -98,7 +98,7 @@ function cardMousedown(e) {
     otherCard.components.card.pause();
   });
 
-  // store cursor position at mousedown
+  // store card position at mousedown
   e.target.components.card.data.scrollStartY = e.target.components.position.data.y;
 }
 
@@ -106,14 +106,15 @@ function cardMouseup(e) {
   var cardData = e.target.components.card.data;
   var allOtherCards = $(document).find("[card]").not(e.target);
   [].forEach.call(allOtherCards, function(otherCard) {
-    otherCard.components.card.play();
+    setTimeout(
+      function() {
+        otherCard.components.card.play();
+    }, 300);
   });
 
-  var oldCursorY = cardData.scrollStartY;
-  var newCursorY = e.target.components.position.data.y;
-
-  // only register the click if the cursor hasn't moved too much
-  if (Math.abs(newCursorY - oldCursorY) < 0.06) {
+  // only register the click if the card hasn't moved too much
+  // if (!scrolling && Math.abs(newCardY - oldCardY) < 0.03) {
+  if (isValidSelection(e.target)) {
     if (!cardData.clicked) {
       e.target.setAttribute("animation__hover", {
         "property": "scale",
@@ -136,7 +137,7 @@ function cardMouseup(e) {
             });
           }
           e.target.setAttribute("material", "color: white; src: #" + correctness);
-        }, 50);
+        }, 100);
 
       setTimeout(
         function() {
@@ -149,13 +150,15 @@ function cardMouseup(e) {
 }
 
 function iconSelected(e) {
-  // remove event listener from this icon
-  e.target.removeEventListener("mouseup", iconSelected);
+  if (isValidSelection(e.target)) {
+    // remove event listener from this icon
+    e.target.removeEventListener("mouseup", iconSelected);
 
-  // changes the highlight icon to a checkmark
-  e.target.components.card.data.target = true;
+    // changes the highlight icon to a checkmark
+    e.target.components.card.data.target = true;
 
-  $(".active-task").get(0).components.task.nextIcon();
+    $(".active-task").get(0).components.task.nextIcon();
+  }
 }
 
 function resetIcon(e) {
@@ -172,59 +175,60 @@ function resetIcon(e) {
 }
 
 function testSelected(e) {
-  e.target.removeEventListener("mouseup", testSelected);
-  e.target.components.card.data.target = true;
+  if (isValidSelection(e.target)) {
+    e.target.removeEventListener("mouseup", testSelected);
+    e.target.components.card.data.target = true;
 
-  test.currentIcon++;
+    test.currentIcon++;
 
-  if (test.currentIcon === 3) {
-    // move to next step
-    test.currentStep++;
-    test.currentIcon = 0;
-    test.currentId = test.stepIds[test.currentStep];
+    if (test.currentIcon === 3) {
+      // move to next step
+      test.currentStep++;
+      test.currentIcon = 0;
+      test.currentId = test.stepIds[test.currentStep];
 
-    var nextButton = document.createElement("a-entity");
-    nextButton.setAttribute("position", "0 1.03 0.6");
-    nextButton.setAttribute("scale", "1 1 1");
-    nextButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
-    nextButton.setAttribute("material", "color: white; opacity: 0.01");
-    nextButton.setAttribute("hoverable", "");
+      var nextButton = document.createElement("a-entity");
+      nextButton.setAttribute("position", "0 1.03 0.6");
+      nextButton.setAttribute("scale", "1 1 1");
+      nextButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
+      nextButton.setAttribute("material", "color: white; opacity: 0.01");
+      nextButton.setAttribute("hoverable", "");
 
-    var nextRect = document.createElement("a-entity");
-    nextRect.setAttribute("class", "task-next-popup");
-    nextRect.setAttribute("position", "0 0 0");
-    nextRect.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.02");
-    nextRect.setAttribute("material", "color: gray; opacity: 0.8");
-    nextButton.appendChild(nextRect);
+      var nextRect = document.createElement("a-entity");
+      nextRect.setAttribute("class", "task-next-popup");
+      nextRect.setAttribute("position", "0 0 0");
+      nextRect.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.02");
+      nextRect.setAttribute("material", "color: gray; opacity: 0.8");
+      nextButton.appendChild(nextRect);
 
-    var next = document.createElement("a-entity");
-    next.setAttribute("class", "task-next-popup");
-    next.setAttribute("position", "-0.07 -0.03 0.03");
-    next.setAttribute("material", "color: black");
-    next.setAttribute("text-geometry", "value: Next; size: 0.05; height: 0.001;");
-    nextButton.appendChild(next);
+      var next = document.createElement("a-entity");
+      next.setAttribute("class", "task-next-popup");
+      next.setAttribute("position", "-0.07 -0.03 0.03");
+      next.setAttribute("material", "color: black");
+      next.setAttribute("text-geometry", "value: Next; size: 0.05; height: 0.001;");
+      nextButton.appendChild(next);
 
-    nextButton.addEventListener("mouseup", function () {
-      document.getElementById("step-container").components.stepcontainer.next();
-      setTimeout(
-        function() {
-          $(nextButton).remove();
-          $(done).remove();
-          $(doneRect).remove();
-      }, 300);
-    });
-    var stepId = "tutorial-clip";
-    console.log("step", test.currentStep);
-    if (test.currentStep === 2) stepId = "tutorial-stack";
-    else if (test.currentStep === 3) stepId = "tutorial-space";
-    document.getElementById(stepId).appendChild(nextButton);
+      nextButton.addEventListener("mouseup", function () {
+        document.getElementById("step-container").components.stepcontainer.next();
+        setTimeout(
+          function() {
+            $(nextButton).remove();
+            $(done).remove();
+            $(doneRect).remove();
+        }, 300);
+      });
+      var stepId = "tutorial-clip";
+      if (test.currentStep === 2) stepId = "tutorial-stack";
+      else if (test.currentStep === 3) stepId = "tutorial-space";
+      document.getElementById(stepId).appendChild(nextButton);
 
-    if (test.currentStep <= 4) {
+      if (test.currentStep <= 4) {
+        newTestIcon();
+      }
+    }
+    else {
       newTestIcon();
     }
-  }
-  else {
-    newTestIcon();
   }
 }
 
@@ -232,4 +236,19 @@ function newTestIcon() {
   var iconID = test.currentId + "_" + test.s[test.currentStep].targetList[test.currentIcon][1];
   updateControllerIcons(test.s[test.currentStep].targetList, test.currentIcon);
   document.getElementById(iconID).addEventListener("mouseup", testSelected);
+}
+
+function isHovered(el) {
+  var h = false;
+  if (el.states.indexOf("cursor-hovered") !== -1) h = true;
+  return h;
+}
+
+function isValidSelection(el) {
+  var oldCardY = el.components.card.data.scrollStartY;
+  var newCardY = el.components.position.data.y;
+  var valid = false;
+  if ((Math.abs(newCardY - oldCardY) < 0.06) && isHovered(el))
+    valid = true;
+  return valid;
 }

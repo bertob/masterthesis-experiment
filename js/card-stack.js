@@ -16,6 +16,7 @@ var top_baseline = y_offset + (visible_items - 1) * (card_h + y_gap);
 var bottom_baseline = y_offset;
 
 var triggerdown = false;
+var scrolling = false;
 
 AFRAME.registerComponent("card-stack", {
   schema: {
@@ -76,6 +77,8 @@ AFRAME.registerComponent("stacked", {
       now.cursorY = getCursorY();
 
       if (!this.moving) {
+        scrolling = true;
+
         start.cursorY = now.cursorY;
         start.cardY = prev.position[1];
         start.position = prev.position;
@@ -112,6 +115,8 @@ AFRAME.registerComponent("stacked", {
       }
     }
     else {
+      scrolling = false;
+
       this.start = {};
       this.moving = false;
     }

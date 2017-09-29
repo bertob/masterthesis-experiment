@@ -21,20 +21,24 @@ AFRAME.registerComponent("stepcontainer", {
       function() {
         last.components.card.data.target = true;
         last.addEventListener("mouseup", function() {
-          setTimeout(
-            function() {
-              document.getElementById("step-container").components.stepcontainer.next();
-            }, 1000);
-          });
-      }, 800);
+          if (isValidSelection(last)) {
+            setTimeout(
+              function() {
+                document.getElementById("step-container").components.stepcontainer.next();
+              }, 1000);
+          }
+        });
+      }, 500);
 
 
     // clicking selection test target moves to next step
     document.getElementById("test-target").addEventListener("mouseup", function() {
-      setTimeout(
-        function() {
-          document.getElementById("step-container").components.stepcontainer.next();
-        }, 1000);
+      if (isValidSelection(document.getElementById("test-target"))) {
+        setTimeout(
+          function() {
+            document.getElementById("step-container").components.stepcontainer.next();
+          }, 1000);
+        }
     });
 
     // test conditions
