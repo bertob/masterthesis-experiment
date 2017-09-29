@@ -23,24 +23,17 @@ AFRAME.registerComponent("taskcontainer", {
 
         var title = document.createElement("a-entity");
         title.setAttribute("class", "first-task-popup");
-        title.setAttribute("position", "-0.3 1.8 0.54");
+        title.setAttribute("position", "-0.3 1.7 0.54");
         title.setAttribute("material", "color: white");
         title.setAttribute("text-geometry", "value: First Task; size: 0.1; height: 0.001;");
         $(".active-task").get(0).appendChild(title);
 
         var info1 = document.createElement("a-entity");
         info1.setAttribute("class", "first-task-popup");
-        info1.setAttribute("position", "-0.197 1.62 0.54");
+        info1.setAttribute("position", "-0.4 1.52 0.54");
         info1.setAttribute("material", "color: white");
-        info1.setAttribute("text-geometry", "value: Now the actual; size: 0.04; height: 0.001;");
+        info1.setAttribute("text-geometry", "value: Now the actual experiment starts; size: 0.04; height: 0.001;");
         $(".active-task").get(0).appendChild(info1);
-
-        var info2 = document.createElement("a-entity");
-        info2.setAttribute("class", "first-task-popup");
-        info2.setAttribute("position", "-0.23 1.53 0.54");
-        info2.setAttribute("material", "color: white");
-        info2.setAttribute("text-geometry", "value: experiment starts; size: 0.04; height: 0.001;");
-        $(".active-task").get(0).appendChild(info2);
 
         var info1 = document.createElement("a-entity");
         info1.setAttribute("class", "first-task-popup");
