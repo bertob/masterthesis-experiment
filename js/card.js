@@ -26,28 +26,28 @@ AFRAME.registerComponent("card", {
     var topBorder = document.createElement("a-entity");
     topBorder.setAttribute("position", "0 " + (card_w/2) + " 0");
     topBorder.setAttribute("geometry", "primitive: box; width: "+ border_l +"; height: "+ border_w +"; depth:"+ border_d);
-    topBorder.setAttribute("material", "color: gray");
+    topBorder.setAttribute("material", "color: black; opacity: 0.5");
     topBorder.setAttribute("hoverable", "");
     this.el.appendChild(topBorder);
 
     var rightBorder = document.createElement("a-entity");
     rightBorder.setAttribute("position", (-card_w/2) + "0 0");
     rightBorder.setAttribute("geometry", "primitive: box; width: "+ border_w +"; height: "+ border_l +"; depth:"+ border_d);
-    rightBorder.setAttribute("material", "color: gray");
+    rightBorder.setAttribute("material", "color: black; opacity: 0.5");
     rightBorder.setAttribute("hoverable", "");
     this.el.appendChild(rightBorder);
 
     var bottomBorder = document.createElement("a-entity");
     bottomBorder.setAttribute("position", "0 " + (-card_w/2) + " 0");
     bottomBorder.setAttribute("geometry", "primitive: box; width: "+ border_l +"; height: "+ border_w +"; depth:"+ border_d);
-    bottomBorder.setAttribute("material", "color: gray");
+    bottomBorder.setAttribute("material", "color: black; opacity: 0.5");
     bottomBorder.setAttribute("hoverable", "");
     this.el.appendChild(bottomBorder);
 
     var leftBorder = document.createElement("a-entity");
     leftBorder.setAttribute("position", (card_w/2) + "0 0");
     leftBorder.setAttribute("geometry", "primitive: box; width: "+ border_w +"; height: "+ border_l +"; depth:"+ border_d);
-    leftBorder.setAttribute("material", "color: gray");
+    leftBorder.setAttribute("material", "color: black; opacity: 0.5");
     leftBorder.setAttribute("hoverable", "");
     this.el.appendChild(leftBorder);
   },
