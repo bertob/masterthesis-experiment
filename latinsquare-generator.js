@@ -1,4 +1,5 @@
-var elements = ["s20", "s50", "s150", "c20", "c50", "c150", "p20", "p50", "p150"];
+var elements = ["s20", "s50", "s150", "c20", "c50", "c150", "p20", "p50", "p150",
+                "s20c", "s50c", "s150c", "c20c", "c50c", "c150c", "p20c", "p50c", "p150c"];
 var makeRow = latinSquare(elements);
 
 for (i=0; i<25; i++) {
