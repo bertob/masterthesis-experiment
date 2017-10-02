@@ -25,7 +25,7 @@ AFRAME.registerComponent("task", {
     number.setAttribute("text-geometry", "value: " + (stepPosition+1) + "; size: 1.8; height: 0.01;");
     this.el.appendChild(number);
 
-    // offset of 2, because the first 2 steps are tutorials
+    // offset of 5, because the first 5 steps are tutorials
     this.el.setAttribute("step", "number: " + (stepPosition + 5));
   },
   setup: function () {
