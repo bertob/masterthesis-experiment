@@ -3,6 +3,7 @@ AFRAME.registerComponent("task", {
     id: {type: "string"},
     type: {type: "string"},
     size: {type: "int"},
+    color: {type: "boolean", default: false},
 
     iconList: {type: "array"},
 
@@ -32,8 +33,10 @@ AFRAME.registerComponent("task", {
     $(".active-task").removeClass("active-task");
     $(this.el).addClass("active-task");
 
+    var colorOffset = 0;
+    if (this.data.color) colorOffset = 150;
     // generate icons and targets
-    this.data.iconList = randomList(this.data.size);
+    this.data.iconList = randomList(this.data.size, colorOffset);
     this.data.targetList = generateTargetList(this.data.size, this.data.iconList);
 
     // populate UI with icons
@@ -169,8 +172,9 @@ AFRAME.registerComponent("task", {
   },
 });
 
-function randomList(length) {
-  var list = shuffle(generateList(150));
+function randomList(length, startingPoint) {
+  if (startingPoint == undefined) startingPoint = 0;
+  var list = shuffle(generateList(150, startingPoint));
   return list.slice(0,length);
 }
 
@@ -190,9 +194,9 @@ function shuffle(array) {
   return array;
 }
 
-function generateList(length) {
+function generateList(length, startingPoint) {
   var list = [];
-  for (var i=1; i<=length; i++) {
+  for (var i=startingPoint; i<startingPoint+length; i++) {
     list.push(i);
   }
   return list;
