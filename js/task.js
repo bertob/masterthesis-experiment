@@ -50,7 +50,7 @@ AFRAME.registerComponent("task", {
     else if ($(this.el).hasClass("s")) {
       cardContainer = $(this.el).children("[cards]").get(0).components["card-stack"];
     }
-    cardContainer.setup(this.data.iconList);
+    cardContainer.setup(this.data.iconList, this.data.color);
     cardContainer.el.setAttribute("visible", false);
 
     // add button to start experiment

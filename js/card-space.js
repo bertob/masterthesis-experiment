@@ -2,30 +2,34 @@ AFRAME.registerComponent("card-space", {
   schema: {
     size: {type: "int"},
     iconList: {type: "array"},
-    degrees: {type: "int", default: 120},
+    color: {type: "boolean", default: false},
+    // degrees: {type: "int", default: 120},
   },
   init: function () {
   },
-  setup: function (iconList) {
+  setup: function (iconList, color) {
     this.teardown();
     this.data.iconList = iconList;
+    this.data.color = color;
+    var isColor = "";
+    if (this.data.color) isColor = "c";
 
     for (var i=0; i<this.data.iconList.length; i++) {
       var card = document.createElement("a-entity");
       if (this.data.size <= 15) {
-        card.setAttribute("id", "p15_" + i);
+        card.setAttribute("id", "p15" + isColor + "_" + i);
         card.setAttribute("position", getGridPosition20(i));
       }
       else if (this.data.size <= 20) {
-        card.setAttribute("id", "p20_" + i);
+        card.setAttribute("id", "p20" + isColor + "_" + i);
         card.setAttribute("position", getGridPosition20(i));
       }
       else if (this.data.size <= 50) {
-        card.setAttribute("id", "p50_" + i);
+        card.setAttribute("id", "p50" + isColor + "_" + i);
         card.setAttribute("position", getGridPosition50(i));
       }
       else if (this.data.size <= 150) {
-        card.setAttribute("id", "p150_" + i);
+        card.setAttribute("id", "p150" + isColor + "_" + i);
         card.setAttribute("position", getGridPosition150(i));
       }
 

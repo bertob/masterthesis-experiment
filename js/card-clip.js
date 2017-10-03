@@ -6,14 +6,18 @@ AFRAME.registerComponent("card-clip", {
   schema: {
     size: {type: "int"}, // number of cards in stack
     iconList: {type: "array"},
+    color: {type: "boolean", default: false},
   },
-  setup: function (iconList) {
+  setup: function (iconList, color) {
     this.teardown();
     this.data.iconList = iconList;
+    this.data.color = color;
+    var isColor = "";
+    if (this.data.color) isColor = "c";
 
     for (var i=0; i<this.data.iconList.length; i++) {
       var card = document.createElement("a-entity");
-      card.setAttribute("id", "c" + this.data.size + "_" + i);
+      card.setAttribute("id", "c" + this.data.size + isColor + "_" + i);
       card.setAttribute("card", "id: " + this.data.iconList[i] + "; position: " + i);
       card.setAttribute("clipped", "list_position: " + i);
       this.el.appendChild(card);
