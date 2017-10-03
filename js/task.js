@@ -206,10 +206,11 @@ function generateTargetList(size, iconList) {
 
   // [ [initial], [repeat] ]
   var targetList = [ [], [] ];
+  var TARGET_NO = 5;
 
-  for (var j=0; j<5; j++) {
+  for (var j=0; j<TARGET_NO; j++) {
     // one icon per quintile
-    var index = (size/5 * j) + Math.floor(Math.random() * size/5);
+    var index = Math.floor(size/TARGET_NO * j) + Math.floor(Math.random() * size/TARGET_NO);
     // each icon has this structure: [ [icon id], [index in the list of icons for this task] ]
     targetList[0].push([iconList[index],index]);
   }
@@ -218,8 +219,8 @@ function generateTargetList(size, iconList) {
   targetList[0] = shuffle(targetList[0].slice(0,));
 
   // avoid having the last target be the first repeat target
-  var last = targetList[0][4];
-  var rest = shuffle(targetList[0].slice(0,4));
+  var last = targetList[0][TARGET_NO-1];
+  var rest = shuffle(targetList[0].slice(0,TARGET_NO-1));
   var first = [rest[0]];
   var tmp = rest.slice(1,);
   tmp.push(last);
