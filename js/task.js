@@ -174,7 +174,7 @@ AFRAME.registerComponent("task", {
 
 function randomList(length, startingPoint) {
   if (startingPoint == undefined) startingPoint = 0;
-  var list = shuffle(generateList(150, startingPoint));
+  var list = shuffle(generateList(150, startingPoint+1));
   return list.slice(0,length);
 }
 
