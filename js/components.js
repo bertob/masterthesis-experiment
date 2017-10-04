@@ -20,7 +20,7 @@ var LATIN_SQUARE = [[ 'c50',  's50c',  'p50',  'c150',  'p20c',  'p150',  'c150c
                     [ 's150',  'p150',  'c150',  'c20',  'c50c',  'p20',  'c20c',  'c150c',  'p20c',  'p50',  'c50',  's50c',  'p150c',  's50',  'p50c',  's20',  's20c',  's150c' ],
                     [ 'p150c',  'c150',  's150',  's20',  's50c',  'c20',  's20c',  's150c',  'c20c',  'c50',  's50',  'p50',  'c150c',  'p50c',  'c50c',  'p20c',  'p20',  'p150' ]];
 
-var LATIN_SQUARE_ROW = 1;
+var LATIN_SQUARE_ROW = 8;
 var PARTICIPANT_NO = 1;
 
 // array with all log items
@@ -57,7 +57,7 @@ var questionnaires = [];
 // current questionnaire
 var questionnaire = {
   "conditionId": LATIN_SQUARE[LATIN_SQUARE_ROW][0],
-  "answers": [],
+  "answers": [0,0,0,0],
 }
 
 var test = {};
@@ -74,7 +74,16 @@ AFRAME.registerComponent("hoverable", {
     this.el.addEventListener("mouseenter", hoverableMouseenter);
     this.el.addEventListener("mouseleave", hoverableMouseleave);
     this.el.addEventListener("mouseup", hoverableMouseup);
-  }
+  },
+  reset: function () {
+    this.el.setAttribute("animation__hover", {
+      "property": "scale",
+      "dur": 200,
+      "easing": "easeOutQuad",
+      "to": "1 1 1",
+    });
+    this.data.clicked = false;
+  },
 });
 
 
@@ -146,12 +155,13 @@ AFRAME.registerComponent("questionnaire", {
   },
   init: function () {
   },
-  teardown: function () {
-    $(".questionnaire").remove();
-  },
   setup: function () {
     var q = document.createElement("a-entity");
     q.setAttribute("class", "questionnaire");
+    hideControllerIcons();
+
+    questionnaire.answers = [0,0,0,0];
+    questionnaire.conditionId = this.el.components.task.id;
 
     var bgRect = document.createElement("a-box");
     bgRect.setAttribute("scale", "1.7 1.6 0.02");
@@ -199,10 +209,12 @@ AFRAME.registerComponent("questionnaire", {
       for (var j=0; j<7; j++) {
 
         var ratingButton = document.createElement("a-entity");
+        ratingButton.setAttribute("class", "rating-row-" + (i+1));
         ratingButton.setAttribute("position", (-0.45 + j*0.15) + " " + (1.89 - i*0.3) + " 0.56");
         ratingButton.setAttribute("scale", "1 1 1");
         ratingButton.setAttribute("geometry", "primitive: box; width: 0.12; height: 0.12; depth: 0.08");
         ratingButton.setAttribute("material", "color: white; opacity: 0.01");
+        ratingButton.setAttribute("ratingButton", "question: " + (i+1) + "; rating: " + (j+1));
         ratingButton.setAttribute("hoverable", "");
 
         var ratingRect = document.createElement("a-box");
@@ -217,9 +229,50 @@ AFRAME.registerComponent("questionnaire", {
         ratingNum.setAttribute("text-geometry", "value: " + (j+1) + "; size: 0.04; height: 0.001;");
         ratingButton.appendChild(ratingNum);
 
+        ratingButton.addEventListener("mouseup", function (e) {
+          console.log("CLICKING RATING BUTTON");
+          var btn = e.target.components.ratingButton.attrValue;
+          console.log("question",btn.question,"rating",btn.rating);
+
+          // reset all other rating buttons
+          var otherRatings = $(".rating-row-" + btn.question).not(e.target);
+          [].forEach.call(otherRatings, function(otherRating) {
+            otherRating.components.hoverable.reset();
+          });
+
+          // write data to questionnaire
+          questionnaire.answers[btn.question-1] = btn.rating;
+          if (questionnaire.answers.every(isntZero)) {
+            console.log("questionnaire complete!");
+
+            var new_q = JSON.parse(JSON.stringify(questionnaire));
+            questionnaires.push(new_q);
+
+            $(".questionnaire").remove();
+            setTimeout(
+              function() {
+                $(".active-task").get(0).components.task.showNextDialog();
+            }, 300);
+          }
+        });
+
         q.appendChild(ratingButton);
       }
     }
     this.el.appendChild(q);
   },
 });
+
+
+AFRAME.registerComponent("ratingButton", {
+  schema: {
+    question: {type: "int"},
+    rating: {type: "int"},
+  },
+  init: function() {
+  },
+});
+
+function isntZero(a) {
+  return a > 0;
+}

@@ -28,10 +28,18 @@ AFRAME.registerComponent("task", {
 
     // offset of 5, because the first 5 steps are tutorials
     this.el.setAttribute("step", "number: " + (stepPosition + 5));
+
+    this.el.setAttribute("questionnaire", "");
   },
   setup: function () {
     $(".active-task").removeClass("active-task");
     $(this.el).addClass("active-task");
+
+    showControllerIcons();
+    questionnaire.answers = [0,0,0,0];
+    questionnaire.conditionId = this.data.id;
+    console.log("setting up new questionnaire answer", this.data.id);
+    // this.el.components.questionnaire.setup();
 
     var colorOffset = 0;
     if (this.data.color) colorOffset = 150;
@@ -120,55 +128,59 @@ AFRAME.registerComponent("task", {
         this.data.currentIcon++;
       }
       else {
-        // show "task complete" popup and next button
-        var doneRect = document.createElement("a-box");
-        doneRect.setAttribute("class", "task-done-popup");
-        doneRect.setAttribute("scale", "1.4 0.8 0.02");
-        doneRect.setAttribute("position", "0 1.23 0.5");
-        doneRect.setAttribute("material", "color: black; opacity: 0.8");
-        this.el.appendChild(doneRect);
-
-        var done = document.createElement("a-entity");
-        done.setAttribute("class", "task-done-popup");
-        done.setAttribute("position", "-0.45 1.26 0.54");
-        done.setAttribute("material", "color: white");
-        done.setAttribute("text-geometry", "value: Task complete; size: 0.1; height: 0.001;");
-        this.el.appendChild(done);
-
-        var nextButton = document.createElement("a-entity");
-        nextButton.setAttribute("position", "0 1.03 0.6");
-        nextButton.setAttribute("scale", "1 1 1");
-        nextButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
-        nextButton.setAttribute("material", "color: white; opacity: 0.01");
-        nextButton.setAttribute("hoverable", "");
-
-        var nextRect = document.createElement("a-entity");
-        nextRect.setAttribute("class", "task-next-popup");
-        nextRect.setAttribute("position", "0 0 0");
-        nextRect.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.02");
-        nextRect.setAttribute("material", "color: white; opacity: 0.8");
-        nextButton.appendChild(nextRect);
-
-        var next = document.createElement("a-entity");
-        next.setAttribute("class", "task-next-popup");
-        next.setAttribute("position", "-0.07 -0.03 0.03");
-        next.setAttribute("material", "color: black");
-        next.setAttribute("text-geometry", "value: Next; size: 0.05; height: 0.001;");
-        nextButton.appendChild(next);
-
-        nextButton.addEventListener("mouseup", function () {
-          document.getElementById("step-container").components.stepcontainer.next();
-          setTimeout(
-            function() {
-              $(nextButton).remove();
-              $(done).remove();
-              $(doneRect).remove();
-          }, 300);
-        });
-        this.el.appendChild(nextButton);
+        // show questionnaire
+        this.el.components.questionnaire.setup();
       }
     }
     newTaskIcon(this.data);
+  },
+  showNextDialog: function () {
+    // show "task complete" popup and next button
+    var doneRect = document.createElement("a-box");
+    doneRect.setAttribute("class", "task-done-popup");
+    doneRect.setAttribute("scale", "1.4 0.8 0.02");
+    doneRect.setAttribute("position", "0 1.23 0.5");
+    doneRect.setAttribute("material", "color: black; opacity: 0.8");
+    this.el.appendChild(doneRect);
+
+    var done = document.createElement("a-entity");
+    done.setAttribute("class", "task-done-popup");
+    done.setAttribute("position", "-0.45 1.26 0.54");
+    done.setAttribute("material", "color: white");
+    done.setAttribute("text-geometry", "value: Task complete; size: 0.1; height: 0.001;");
+    this.el.appendChild(done);
+
+    var nextButton = document.createElement("a-entity");
+    nextButton.setAttribute("position", "0 1.03 0.6");
+    nextButton.setAttribute("scale", "1 1 1");
+    nextButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
+    nextButton.setAttribute("material", "color: white; opacity: 0.01");
+    nextButton.setAttribute("hoverable", "");
+
+    var nextRect = document.createElement("a-entity");
+    nextRect.setAttribute("class", "task-next-popup");
+    nextRect.setAttribute("position", "0 0 0");
+    nextRect.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.02");
+    nextRect.setAttribute("material", "color: white; opacity: 0.8");
+    nextButton.appendChild(nextRect);
+
+    var next = document.createElement("a-entity");
+    next.setAttribute("class", "task-next-popup");
+    next.setAttribute("position", "-0.07 -0.03 0.03");
+    next.setAttribute("material", "color: black");
+    next.setAttribute("text-geometry", "value: Next; size: 0.05; height: 0.001;");
+    nextButton.appendChild(next);
+
+    nextButton.addEventListener("mouseup", function () {
+      document.getElementById("step-container").components.stepcontainer.next();
+      setTimeout(
+        function() {
+          $(nextButton).remove();
+          $(done).remove();
+          $(doneRect).remove();
+      }, 300);
+    });
+    this.el.appendChild(nextButton);
   },
 });
 
@@ -287,6 +299,13 @@ function updateControllerIcons(targetIcons, currentIcon) {
     }, 400);
 }
 
+function hideControllerIcons() {
+  $("#controller-icons").get(0).setAttribute("visible", "false");
+}
+function showControllerIcons() {
+  $("#controller-icons").get(0).setAttribute("visible", "true");
+}
+
 function updateLogIconInit(data) {
   log.iconId = data.targetList[data.currentStage][data.currentIcon][0];
   log.iconPosition = data.iconList.indexOf(log.iconId);
@@ -306,6 +325,6 @@ function updateLogIconEnd(data) {
   log.duration = currentTime - log.startTimestamp;
 
   // apppend current log item to list
-  var new_log = JSON.parse(JSON.stringify(log))
+  var new_log = JSON.parse(JSON.stringify(log));
   logs.push(new_log);
 }
