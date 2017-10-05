@@ -1,17 +1,19 @@
-// CONTROLLER EVENT LISTENERS
+// // CONTROLLER EVENT LISTENERS
 document.getElementById("right-hand").addEventListener("trackpadup", function() {
-  // console.log("NEXT STEP");
   document.getElementById("step-container").components.stepcontainer.next();
 
 });
 document.getElementById("right-hand").addEventListener("menuup", function() {
-  // console.log("PREV STEP");
   document.getElementById("step-container").components.stepcontainer.previous();
 });
 
+var othersPaused = false;
 
 document.getElementById("right-hand").addEventListener("triggerdown", function() {
   triggerdown = true;
+  if (othersPaused) {
+    playAllCards();
+  }
 });
 document.getElementById("right-hand").addEventListener("triggerup", function() {
   triggerdown = false;
