@@ -114,7 +114,6 @@ function playAllCards() {
 }
 
 function cardMouseup(e) {
-  if (e.target.components.card === undefined) console.log("undef",e.target.components.card);
   var cardData = e.target.components.card.data;
   var allOtherCards = $(document).find("[card]");
   [].forEach.call(allOtherCards, function(otherCard) {
