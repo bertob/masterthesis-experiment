@@ -69,6 +69,7 @@ AFRAME.registerComponent("card", {
 });
 
 function cardMouseover(e) {
+//error TypeError: e.target.components.card is undefined
   if (!e.target.components.card.data.clicked) {
     e.target.setAttribute("animation__hover", {
       "property": "scale",
@@ -93,23 +94,31 @@ function cardMouseleave(e) {
 }
 
 function cardMousedown(e) {
-  var allOtherCards = $(document).find("[card]").not(e.target);
-  [].forEach.call(allOtherCards, function(otherCard) {
-    otherCard.components.card.pause();
-  });
+  if (isHovered(e.target)) {
+    var allOtherCards = $(document).find("[card]").not(e.target);
+    [].forEach.call(allOtherCards, function(otherCard) {
+      othersPaused = true;
+      otherCard.components.card.pause();
+    });
 
-  // store card position at mousedown
-  e.target.components.card.data.scrollStartY = e.target.components.position.data.y;
+    // store card position at mousedown
+    e.target.components.card.data.scrollStartY = e.target.components.position.data.y;
+  }
+}
+
+function playAllCards() {
+  var allOtherCards = $(document).find("[card]");
+  [].forEach.call(allOtherCards, function(otherCard) {
+    otherCard.components.card.play();
+  });
 }
 
 function cardMouseup(e) {
+  if (e.target.components.card === undefined) console.log("undef",e.target.components.card);
   var cardData = e.target.components.card.data;
-  var allOtherCards = $(document).find("[card]").not(e.target);
+  var allOtherCards = $(document).find("[card]");
   [].forEach.call(allOtherCards, function(otherCard) {
-    setTimeout(
-      function() {
-        otherCard.components.card.play();
-    }, 300);
+    otherCard.components.card.play();
   });
 
   // only register the click if the card hasn't moved too much
@@ -145,6 +154,7 @@ function cardMouseup(e) {
         }, 1000);
     }
   }
+  e.target.components.card.data.scrollStartY = 0;
 
 }
 
@@ -233,6 +243,8 @@ function testSelected(e) {
 
 function newTestIcon() {
   var iconID = test.currentId + "_" + test.s[test.currentStep].targetList[test.currentIcon][1];
+  console.log(test.s);
+  console.log("id", iconID);
   updateControllerIcons(test.s[test.currentStep].targetList, test.currentIcon);
   document.getElementById(iconID).addEventListener("mouseup", testSelected);
 }

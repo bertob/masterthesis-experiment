@@ -91,6 +91,7 @@ AFRAME.registerComponent("stepcontainer", {
     // stop tutorial scroller from scrolling on other steps
     if (this.data.currentStep === 1) {
       $(this.el).children("#tutorial-scroll").get(0).components["step"].play();
+      $(this.el).children("#tutorial-select").get(0).components["step"].pause();
       $("#controller-icons").get(0).setAttribute("visible", "false");
       $("#selection-advice").get(0).setAttribute("visible", "false");
       $("#scrolling-advice").get(0).setAttribute("visible", "true");
