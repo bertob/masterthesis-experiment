@@ -36,11 +36,7 @@ AFRAME.registerComponent("task", {
     $(this.el).addClass("active-task");
 
     showControllerIcons();
-    questionnaire.answers = [0,0,0,0];
-    questionnaire.conditionId = this.data.id;
-    console.log("setting up new questionnaire answer", this.data.id);
-    // this.el.components.questionnaire.setup();
-
+    
     var colorOffset = 0;
     if (this.data.color) colorOffset = 150;
     // generate icons and targets

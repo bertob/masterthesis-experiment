@@ -1,6 +1,8 @@
 
 AFRAME.registerComponent("questionnaire", {
   schema: {
+    answers: {type: "array", default: [0,0,0,0]},
+    conditionId: {type:"string"},
   },
   init: function () {
   },
@@ -9,8 +11,8 @@ AFRAME.registerComponent("questionnaire", {
     q.setAttribute("class", "questionnaire");
     hideControllerIcons();
 
-    questionnaire.answers = [0,0,0,0];
-    questionnaire.conditionId = this.el.components.task.id;
+    this.data.answers = [0,0,0,0];
+    this.data.conditionId = this.el.components.task.data.id;
 
     var bgRect = document.createElement("a-box");
     bgRect.setAttribute("scale", "1.7 1.6 0.02");
@@ -79,9 +81,7 @@ AFRAME.registerComponent("questionnaire", {
         ratingButton.appendChild(ratingNum);
 
         ratingButton.addEventListener("mouseup", function (e) {
-          console.log("CLICKING RATING BUTTON");
           var btn = e.target.components.ratingButton.attrValue;
-          console.log("question",btn.question,"rating",btn.rating);
 
           // reset all other rating buttons
           var otherRatings = $(".rating-row-" + btn.question).not(e.target);
@@ -90,13 +90,9 @@ AFRAME.registerComponent("questionnaire", {
           });
 
           // write data to questionnaire
-          questionnaire.answers[btn.question-1] = btn.rating;
-          if (questionnaire.answers.every(isntZero)) {
-            console.log("questionnaire complete!");
-
-            console.log(JSON.stringify(questionnaire));
-            var new_q = JSON.parse(JSON.stringify(questionnaire));
-            console.log(new_q);
+          $(".active-task").get(0).components.questionnaire.data.answers[btn.question-1] = btn.rating;
+          if ($(".active-task").get(0).components.questionnaire.data.answers.every(isntZero)) {
+            var new_q = JSON.parse(JSON.stringify($(".active-task").get(0).components.questionnaire.data));
             questionnaires.push(new_q);
 
             $(".questionnaire").remove();

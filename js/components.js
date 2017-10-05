@@ -54,12 +54,6 @@ var log = {
 // array with answers to quesitonnaire
 var questionnaires = [];
 
-// current questionnaire
-var questionnaire = {
-  "conditionId": LATIN_SQUARE[LATIN_SQUARE_ROW][0],
-  "answers": [0,0,0,0],
-}
-
 var test = {};
 test.s = [{}, {}, {}];
 
