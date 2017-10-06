@@ -153,7 +153,7 @@ function cardMouseup(e) {
         }, 1000);
     }
   }
-  e.target.components.card.data.scrollStartY = 0;
+  // e.target.components.card.data.scrollStartY = 0;
 
 }
 
