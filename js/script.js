@@ -23,9 +23,14 @@ function exportLogs() {
   var detailedLog = logs;
   var csvLog = convertArrayOfObjectsToCSV(logs);
 
+
   console.log("exporting logfiles", logs, csvLog);
   console.save(detailedLog, log.participant + "_detailed.json");
   console.save(csvLog, log.participant + "_simple.csv");
+
+  var csvQuestions = convertArrayOfObjectsToCSV(questionnaires);
+  console.log("exporting questionnaires", csvQuestions);
+  console.save(csvQuestions, log.participant + "_questions.csv");
 }
 
 function convertArrayOfObjectsToCSV(data) {
@@ -51,6 +56,12 @@ function convertArrayOfObjectsToCSV(data) {
 
       if (key === "errors") {
         result += item.errors.length;
+      }
+      if (item[key].constructor === Array) {
+        item[key].forEach(function(arrItem) {
+          result += arrItem + columnDelimiter;
+          console.log("result",result);
+        });
       }
       else {
         result += item[key];
