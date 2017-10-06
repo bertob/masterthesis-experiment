@@ -45,15 +45,15 @@ AFRAME.registerComponent("questionnaire", {
     q.appendChild(question4);
 
     var infoleft = document.createElement("a-entity");
-    infoleft.setAttribute("position", "-0.53 0.82 " + (BUTTON_Z + 0.12));
-    infoleft.setAttribute("material", "color: white");
-    infoleft.setAttribute("text-geometry", "value: 1 = not true at all; size: 0.03; height: 0.001;");
+    infoleft.setAttribute("position", "-0.76 1.88 " + (BUTTON_Z + 0.12));
+    infoleft.setAttribute("material", "color: yellow");
+    infoleft.setAttribute("text-geometry", "value: not true at all; size: 0.025; height: 0.001;");
     q.appendChild(infoleft);
 
     var inforight = document.createElement("a-entity");
-    inforight.setAttribute("position", "0.3 0.82 " + (BUTTON_Z + 0.12));
-    inforight.setAttribute("material", "color: white");
-    inforight.setAttribute("text-geometry", "value: 7 = very true; size: 0.03; height: 0.001;");
+    inforight.setAttribute("position", "0.54 1.88 " + (BUTTON_Z + 0.12));
+    inforight.setAttribute("material", "color: yellow");
+    inforight.setAttribute("text-geometry", "value: very true; size: 0.025; height: 0.001;");
     q.appendChild(inforight);
 
     for (var i=0; i<4; i++) {
@@ -71,11 +71,11 @@ AFRAME.registerComponent("questionnaire", {
         var ratingRect = document.createElement("a-box");
         ratingRect.setAttribute("scale", "0.12 0.12  0");
         ratingRect.setAttribute("position", "0 0 0");
-        ratingRect.setAttribute("material", "color: white; opacity: 0.8");
+        ratingRect.setAttribute("material", "color: yellow; opacity: 0.8");
         ratingButton.appendChild(ratingRect);
 
         var ratingNum = document.createElement("a-entity");
-        ratingNum.setAttribute("position", "-0.017 -0.018 0.018");
+        ratingNum.setAttribute("position", "-0.017 -0.018 0.01");
         ratingNum.setAttribute("material", "color: black");
         ratingNum.setAttribute("text-geometry", "value: " + (j+1) + "; size: 0.04; height: 0.001;");
         ratingButton.appendChild(ratingNum);
