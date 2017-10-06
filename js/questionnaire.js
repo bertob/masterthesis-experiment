@@ -1,8 +1,8 @@
 
 AFRAME.registerComponent("questionnaire", {
   schema: {
-    answers: {type: "array", default: [0,0,0,0]},
     conditionId: {type:"string"},
+    answers: {type: "array", default: [0,0,0,0]},
   },
   init: function () {
   },
@@ -11,8 +11,8 @@ AFRAME.registerComponent("questionnaire", {
     q.setAttribute("class", "questionnaire");
     hideControllerIcons();
 
-    this.data.answers = [0,0,0,0];
     this.data.conditionId = this.el.components.task.data.id;
+    this.data.answers = [0,0,0,0];
 
     var bgRect = document.createElement("a-box");
     bgRect.setAttribute("scale", "1.7 1.6 0.02");
