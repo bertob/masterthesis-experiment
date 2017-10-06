@@ -196,7 +196,7 @@ function testSelected(e) {
       test.currentId = test.stepIds[test.currentStep];
 
       var nextButton = document.createElement("a-entity");
-      nextButton.setAttribute("position", "0 1.03 0.6");
+      nextButton.setAttribute("position", "0 1.03 " + (BUTTON_Z + 0.2));
       nextButton.setAttribute("scale", "1 1 1");
       nextButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
       nextButton.setAttribute("material", "color: white; opacity: 0.01");

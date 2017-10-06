@@ -36,7 +36,7 @@ AFRAME.registerComponent("task", {
     $(this.el).addClass("active-task");
 
     showControllerIcons();
-    
+
     var colorOffset = 0;
     if (this.data.color) colorOffset = 150;
     // generate icons and targets
@@ -60,10 +60,10 @@ AFRAME.registerComponent("task", {
     // add button to start experiment
     var startButton = document.createElement("a-entity");
     startButton.setAttribute("class", "start-button");
-    startButton.setAttribute("position", "0 1.03 0.6");
+    startButton.setAttribute("position", "0 1.03 " + (BUTTON_Z + 0.1));
     startButton.setAttribute("scale", "1 1 1");
-    startButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
-    startButton.setAttribute("material", "color: white; opacity: 0.01");
+    startButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.042");
+    startButton.setAttribute("material", "color: white; opacity: 0");
     startButton.setAttribute("hoverable", "");
 
     var startRect = document.createElement("a-entity");
@@ -75,7 +75,7 @@ AFRAME.registerComponent("task", {
 
     var start = document.createElement("a-entity");
     start.setAttribute("class", "task-start-popup");
-    start.setAttribute("position", "-0.07 -0.03 0.03");
+    start.setAttribute("position", "-0.07 -0.03 0.02");
     start.setAttribute("material", "color: black");
     start.setAttribute("text-geometry", "value: Start; size: 0.05; height: 0.001;");
     startButton.appendChild(start);
@@ -135,19 +135,19 @@ AFRAME.registerComponent("task", {
     var doneRect = document.createElement("a-box");
     doneRect.setAttribute("class", "task-done-popup");
     doneRect.setAttribute("scale", "1.4 0.8 0.02");
-    doneRect.setAttribute("position", "0 1.23 0.5");
+    doneRect.setAttribute("position", "0 1.23 " + (BUTTON_Z + 0.03));
     doneRect.setAttribute("material", "color: black; opacity: 0.8");
     this.el.appendChild(doneRect);
 
     var done = document.createElement("a-entity");
     done.setAttribute("class", "task-done-popup");
-    done.setAttribute("position", "-0.45 1.26 0.54");
+    done.setAttribute("position", "-0.45 1.26 " + (BUTTON_Z + 0.04));
     done.setAttribute("material", "color: white");
     done.setAttribute("text-geometry", "value: Task complete; size: 0.1; height: 0.001;");
     this.el.appendChild(done);
 
     var nextButton = document.createElement("a-entity");
-    nextButton.setAttribute("position", "0 1.03 0.6");
+    nextButton.setAttribute("position", "0 1.03 " + (BUTTON_Z + 0.06));
     nextButton.setAttribute("scale", "1 1 1");
     nextButton.setAttribute("geometry", "primitive: box; width: 0.4; height: 0.2; depth: 0.08");
     nextButton.setAttribute("material", "color: white; opacity: 0.01");
