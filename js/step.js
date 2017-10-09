@@ -146,7 +146,7 @@ AFRAME.registerComponent("step", {
     number: {type: "int"},
   },
   init: function () {
-    this.el.setAttribute("position", new THREE.Vector3(this.data.number * STEP_DISTANCE, 0, -1));
+    this.el.setAttribute("position", new THREE.Vector3(this.data.number * STEP_DISTANCE, 0, -1.5));
 
     var floor = document.createElement("a-circle");
     floor.setAttribute("radius", "1.4");
