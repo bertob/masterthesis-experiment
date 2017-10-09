@@ -20,8 +20,11 @@ var LATIN_SQUARE = [[ 'c50',  's50c',  'p50',  'c150',  'p20c',  'p150',  'c150c
                     [ 's150',  'p150',  'c150',  'c20',  'c50c',  'p20',  'c20c',  'c150c',  'p20c',  'p50',  'c50',  's50c',  'p150c',  's50',  'p50c',  's20',  's20c',  's150c' ],
                     [ 'p150c',  'c150',  's150',  's20',  's50c',  'c20',  's20c',  's150c',  'c20c',  'c50',  's50',  'p50',  'c150c',  'p50c',  'c50c',  'p20c',  'p20',  'p150' ]];
 
-var LATIN_SQUARE_ROW = 8;
+// change first integer, -1 so it starts at 0
+var LATIN_SQUARE_ROW = (1 - 1);
 var PARTICIPANT_NO = 1;
+
+var BUTTON_Z = 0.1;
 
 // array with all log items
 var logs = [];

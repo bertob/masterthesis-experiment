@@ -1,11 +1,12 @@
 var STEP_DISTANCE = 5;
+var EXPERIMENT_Z = 0.2;
 
 AFRAME.registerComponent("stepcontainer", {
   schema: {
     currentStep: {type: "int", default: 0},
   },
   init: function () {
-    this.el.setAttribute("position", new THREE.Vector3(this.data.currentStep*(-STEP_DISTANCE), 0, -1));
+    this.el.setAttribute("position", new THREE.Vector3(this.data.currentStep*(-STEP_DISTANCE), 0, EXPERIMENT_Z));
 
     // scrolling tutorial
     var icons = [27,66,15,84,11,55,20,41,67,46,144,139,47,32];
@@ -135,7 +136,7 @@ AFRAME.registerComponent("stepcontainer", {
       "dir": "alternate",
       "dur": 700,
       "easing": "easeOutExpo",
-      "to": new THREE.Vector3( this.data.currentStep*(-STEP_DISTANCE), 0, -1 ),
+      "to": new THREE.Vector3( this.data.currentStep*(-STEP_DISTANCE), 0, 0 ),
     });
   }
 });
@@ -145,7 +146,7 @@ AFRAME.registerComponent("step", {
     number: {type: "int"},
   },
   init: function () {
-    this.el.setAttribute("position", new THREE.Vector3(this.data.number * STEP_DISTANCE, 0, -1));
+    this.el.setAttribute("position", new THREE.Vector3(this.data.number * STEP_DISTANCE, 0, -1.5));
 
     var floor = document.createElement("a-circle");
     floor.setAttribute("radius", "1.4");
