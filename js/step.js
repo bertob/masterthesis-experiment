@@ -1,5 +1,5 @@
 var STEP_DISTANCE = 5;
-var EXPERIMENT_Z = 0.2;
+var EXPERIMENT_Z = 1;
 
 AFRAME.registerComponent("stepcontainer", {
   schema: {
@@ -9,7 +9,7 @@ AFRAME.registerComponent("stepcontainer", {
     this.el.setAttribute("position", new THREE.Vector3(this.data.currentStep*(-STEP_DISTANCE), 0, EXPERIMENT_Z));
 
     // scrolling tutorial
-    var icons = [27,66,15,84,11,55,20,41,67,46,144,139,47,32];
+    var icons = [227,166,215,184,211,155,220,241,167,246,156,239,197,182];
     var testScroll = $(this.el).children("#tutorial-scroll").children("[card-stack]").get(0);
     testScroll.components["card-stack"].setup(icons);
 
